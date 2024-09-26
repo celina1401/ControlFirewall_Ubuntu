@@ -4,8 +4,11 @@
  */
 package Frame;
 
+import static Frame.LogIn.login;
+import Model.Infor;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import java.io.InputStream;
 import javax.swing.JFrame;
@@ -17,9 +20,6 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
     //khai báo dữ liệu menu
 //    String IP;
 //    public Menu(String IP){
@@ -27,21 +27,24 @@ public class Menu extends javax.swing.JFrame {
 //        initComponents();
 //        menuIp.setText(this.IP);
 //    }
-//    
+    
     private String host;
     private int port;
     private String username;
     private String password;
-    
-    public void showInfor(String host, int port, String username){
-        this.host = host;
-        this.port = port;
-        this.username = username;
-        initComponents();
-        menuIp.setText(host);
-        menuPort.setText(String.valueOf(port));
-        menuUserName.setText(username);
-    }   
+    public static JFrame menu = new Menu();
+    public LogIn login;
+
+    private Session session;
+//    
+//    public Menu(String host, int port, String username, String password){
+//        LogIn login = new LogIn(host, port, username, password);
+//        host = login.getHost();
+//        port = login.getPort();
+//        username = login.getUsername();
+//        password = login.getPassword();
+//    }
+
     public Menu() {
         initComponents();
     }
@@ -341,42 +344,22 @@ public class Menu extends javax.swing.JFrame {
         AddRule rule = new AddRule();
         rule.setVisible(true);
         rule.setLocation(500, 400);
+        System.out.println(this.getHost());
     }//GEN-LAST:event_btnAddRuleActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        
-        try {
-            JSch jsch = new JSch();
-            ChannelExec exec = new ChannelExec();
-            Session session = jsch.getSession(username, host, port);
-            session.setPassword(password);
-            if (session != null && session.isConnected()){
-                System.out.println("Frame.Menu.btnExitActionPerformed()");
-                exec = (ChannelExec) session.openChannel("exec");
-                exec.setCommand("exit");
-//                InputStream inputStream = exec.getInputStream();
-                exec.connect();
-                System.out.println("Frame.Menu.btnExitActionPerformed()");
-                exec.disconnect();
-                session.disconnect();
-                
-    //note: chưa có ngắt kết nối đc ssh; if chưa chạy
-                }
+
             JOptionPane.showMessageDialog(this, "Signed out");
-            LogIn login = new LogIn();
+//            LogIn login = new LogIn();
+            LogIn.session.disconnect();
+            LogIn.login.setVisible(true);
             this.dispose();             //Đóng cửa sổ đang làm việc
-            login.setVisible(true);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//            login.setVisible(true);
+
+
     }//GEN-LAST:event_btnExitActionPerformed
 
-//    private String host;
-//    private int port;
-//    private String username;
-//    private String password;
-    
+   
     //lay gia tri
     public String getHost(){
         return host;
@@ -428,44 +411,35 @@ public class Menu extends javax.swing.JFrame {
         this.password = password;
     }
     
-    
-    
-    public static JFrame menu = new Menu();
-    
-//    public void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
+
+//    public void disconnectSSH(String host, int port, String username, String password) {
 //        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
+//            // Khởi tạo JSch và tạo phiên kết nối SSH
+//            JSch jsch = new JSch();
+//            Session session = jsch.getSession(username, host, port);
+//            session.setPassword(password);
+//
+//            // Tắt kiểm tra khóa máy chủ để không yêu cầu xác nhận khóa
+//            session.setConfig("StrictHostKeyChecking", "no");
+//
+//            // Kết nối phiên
+//            session.connect();
+//
+//            // Kiểm tra xem phiên có đang kết nối hay không trước khi ngắt kết nối
+//            if (session != null && session.isConnected()) {
+//                session.disconnect(); // Ngắt kết nối
+//                System.out.println("Disconnected");
+//            } else {
+//                System.out.println("Session is not connected");
 //            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//
+//        } catch (JSchException e) {
+//            e.printStackTrace();
 //        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Menu().setVisible(true);
-//                
-//            }
-//        });
-//        
-//
 //    }
+    
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRule;

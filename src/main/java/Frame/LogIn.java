@@ -4,16 +4,15 @@
  */
 package Frame;
 
+import Model.Infor;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author User
- */
+
 public class LogIn extends javax.swing.JFrame {
 
     public LogIn() {
@@ -31,38 +30,63 @@ public class LogIn extends javax.swing.JFrame {
         this.username = username;
         this.password = password;
     }
-       
-    public String getHost(){
+    public static Session session; 
+//    public LogIn(Infor infor){
+//        this.host = infor.getHost();
+//        this.port = infor.getPort();
+//        this.username = infor.getUsername();
+//        this.password = infor.getPassword();
+//    }
+    
+    public String getHost() {
         return host;
     }
-    
-    public int getPort(){
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public int getPort() {
         return port;
     }
-    
-    public String getUsername(){
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public String getUsername() {
         return username;
     }
-    
-    public String getPassword(){
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
         return password;
     }
-    
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+   
     public LogIn ssh_login(){
         try{
             String host = ipText.getText();
             int port = Integer.parseInt(portText.getText());
             String username = usernameText.getText();
-            //xử lý password field
             String password = String.valueOf(passwdText.getPassword());
             return new LogIn(host, port, username, password);
-        }
-        
+        } 
         catch(NumberFormatException e){     //xử lý ngoại lệ
             e.printStackTrace();            //phat hien ngoai le?
-            return null;
+            return new LogIn(host, port, username, password);
         }
-    }   
+    }  
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -110,11 +134,6 @@ public class LogIn extends javax.swing.JFrame {
         usernameText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         usernameText.setForeground(new java.awt.Color(102, 102, 102));
         usernameText.setText("b2110941");
-        usernameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameTextActionPerformed(evt);
-            }
-        });
 
         passwdLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         passwdLabel.setText("Pass Word:");
@@ -225,54 +244,57 @@ public class LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConnectActionPerformed
-        // TODO add your handling code here:
-        LogIn connect = ssh_login();
-        if (connect == null){
+        LogIn login = ssh_login();
+        if (login == null){
             JOptionPane.showMessageDialog(this, "Please fill out this completely!");
         }
         else{
             try {
                 JSch jsch = new JSch();
-                //Tao 1 session luu tam thong tin vua nhap
-                Session session = jsch.getSession(connect.getUsername(),connect.getHost(), connect.getPort());
-                session.setPassword(connect.getPassword()); //Set mat khau
-                //Kiem tra host key khi kết nối SSH
-                session.setConfig("StrictHostKeyChecking", "no"); 
+                session = jsch.getSession(login.getUsername(), login.getHost(), login.getPort());
+                session.setPassword(login.getPassword());
+                session.setConfig("StrictHostKeyChecking", "no");
                 session.connect();
-                int result = JOptionPane.showConfirmDialog(this, "Connected","Connect SSH", JOptionPane.OK_CANCEL_OPTION);
+                int result = JOptionPane.showConfirmDialog(this, "Connected","Connection", 
+                        JOptionPane.OK_CANCEL_OPTION);
                 if (result == JOptionPane.OK_OPTION){
                    this.dispose();
                    Menu menu = new Menu();
-//                 menu.getInfor(host, port, username, password);
                    menu.setVisible(true);
-                   menu.setLocationRelativeTo(null); //Vi tri ra giua
-//                   login.setVisible(false);
-                
-                
-//                Menu menu = new Menu();
-                menu.updateInfor(connect.getHost(), connect.getPort(), connect.getUsername());
-                menu.checkActive("Active");
-                menu.setHost(connect.getHost());
-                menu.setPort(connect.getPort());
-                menu.setUsername(connect.getUsername());
-                menu.setVisible(true);           //Phuong thuc xuat hien man hinh ?
-                menu.setLocationRelativeTo(null);//Phuong thuc dat vi tri ra giua man hinh
-                }
-
-            } 
-            catch (JSchException e) {
-                JOptionPane.showMessageDialog(this, "Connect fail! Please check your information again");
-                e.printStackTrace();
+                   menu.setLocationRelativeTo(null);
+                   menu.updateInfor(login.getHost(), login.getPort(), login.getUsername());
+                   menu.checkActive("Connect");                     
                 }
             }
+            catch (JSchException e) {
+                try {
+                    Thread.sleep(2000);  
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(this, "Connect fail! Please check your information again");
+                e.printStackTrace();
+            }
+        }
+        
     }//GEN-LAST:event_BtnConnectActionPerformed
-    
-//    public void getInfor(String host, String username, int port){
-//        this.host = ipText.getText();
-//        this.username = usernameText.getText();
-//        this.port = Integer.parseInt(portText.getText());
+
+//        public static void disconnectSSH() {
+//        try {
+//            if (session != null && session.isConnected()) {
+//                session.disconnect(); // Ngắt kết nối phiên
+//                System.out.println("Disconnected from session");
+//                session = null; // Đặt session về null sau khi ngắt kết nối
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 //    }
-//    
+//        
+//        public static Session getSession() {
+//        return session; // Trả về phiên SSH hiện tại
+//    }
+    
     //thiet lap SSH
     public static Session establishSSH(String host, int port, String username, String password) throws JSchException{
         JSch jsch = new JSch();
@@ -294,6 +316,7 @@ public class LogIn extends javax.swing.JFrame {
     }
     
     public void disconnectSSH(String host, int port, String username, String password) throws JSchException{
+        
         JSch jsch = new JSch();
         Session session = jsch.getSession(username, host, port);
         session.setPassword(password);
@@ -322,10 +345,6 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0); 
     }//GEN-LAST:event_BtnCancelActionPerformed
-
-    private void usernameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,6 +382,8 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCancel;
