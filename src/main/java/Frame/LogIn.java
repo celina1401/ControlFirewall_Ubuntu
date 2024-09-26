@@ -4,7 +4,6 @@
  */
 package Frame;
 
-import Model.Infor;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -23,6 +22,8 @@ public class LogIn extends javax.swing.JFrame {
     private String username ;
     private String password ;
     
+    public static Session session; 
+    
     //phuong thuc xay dung class
     public LogIn(String host, int port, String username, String password){
         this.host = host;
@@ -30,14 +31,7 @@ public class LogIn extends javax.swing.JFrame {
         this.username = username;
         this.password = password;
     }
-    public static Session session; 
-//    public LogIn(Infor infor){
-//        this.host = infor.getHost();
-//        this.port = infor.getPort();
-//        this.username = infor.getUsername();
-//        this.password = infor.getPassword();
-//    }
-    
+
     public String getHost() {
         return host;
     }
@@ -85,9 +79,7 @@ public class LogIn extends javax.swing.JFrame {
             return new LogIn(host, port, username, password);
         }
     }  
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -118,7 +110,7 @@ public class LogIn extends javax.swing.JFrame {
 
         ipText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ipText.setForeground(new java.awt.Color(102, 102, 102));
-        ipText.setText("192.168.1.13");
+        ipText.setText("172.20.10.13");
         ipText.setToolTipText("");
 
         portLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -278,22 +270,6 @@ public class LogIn extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_BtnConnectActionPerformed
-
-//        public static void disconnectSSH() {
-//        try {
-//            if (session != null && session.isConnected()) {
-//                session.disconnect(); // Ngắt kết nối phiên
-//                System.out.println("Disconnected from session");
-//                session = null; // Đặt session về null sau khi ngắt kết nối
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//        
-//        public static Session getSession() {
-//        return session; // Trả về phiên SSH hiện tại
-//    }
     
     //thiet lap SSH
     public static Session establishSSH(String host, int port, String username, String password) throws JSchException{
