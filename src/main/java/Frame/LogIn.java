@@ -51,6 +51,7 @@ public class LogIn extends javax.swing.JFrame {
     public String getUsername() {
         return username;
     }
+    
 
     public void setUsername(String username) {
         this.username = username;
@@ -110,7 +111,7 @@ public class LogIn extends javax.swing.JFrame {
 
         ipText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ipText.setForeground(new java.awt.Color(102, 102, 102));
-        ipText.setText("172.20.10.13");
+        ipText.setText("192.168.88.230");
         ipText.setToolTipText("");
 
         portLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -246,7 +247,8 @@ public class LogIn extends javax.swing.JFrame {
                 session = jsch.getSession(login.getUsername(), login.getHost(), login.getPort());
                 session.setPassword(login.getPassword());
                 session.setConfig("StrictHostKeyChecking", "no");
-                session.connect();
+                session.connect(1000); //time out 1s
+                
                 int result = JOptionPane.showConfirmDialog(this, "Connected","Connection", 
                         JOptionPane.OK_CANCEL_OPTION);
                 if (result == JOptionPane.OK_OPTION){
@@ -325,7 +327,7 @@ public class LogIn extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static JFrame login = new LogIn();
+    public static LogIn login = new LogIn();
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -65,7 +65,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="addProtocol" pref="273" max="32767" attributes="0"/>
-                              <Component id="addPortText1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="addFromText" alignment="0" max="32767" attributes="0"/>
                               <Component id="addPortText" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -73,18 +73,19 @@
                   <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="110" pref="110" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="addDone" pref="100" max="32767" attributes="0"/>
-                      <Component id="radioAllow" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="addCancel" min="-2" pref="100" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="radioDeny" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="label" min="-2" pref="261" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="addDone" max="32767" attributes="0"/>
+                              <Component id="radioAllow" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="addCancel" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="radioDeny" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -103,7 +104,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="addPortText1" max="32767" attributes="0"/>
+                      <Component id="addFromText" max="32767" attributes="0"/>
                       <Component id="addFromLabel" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -111,7 +112,9 @@
                       <Component id="addProtocolLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="addProtocol" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <Component id="label" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="radioAllow" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="radioDeny" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -121,7 +124,7 @@
                       <Component id="addDone" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="addCancel" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -179,9 +182,14 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="22"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPortTextActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="addPortText1">
+        <Component class="javax.swing.JTextField" name="addFromText">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
@@ -189,6 +197,8 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="192.168.1.1"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="addProtocol">
@@ -200,15 +210,17 @@
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="FTP"/>
-                <StringItem index="1" value="TCP"/>
-                <StringItem index="2" value="UDP"/>
-                <StringItem index="3" value="ICMP"/>
-                <StringItem index="4" value="SSH"/>
+              <StringArray count="4">
+                <StringItem index="0" value="TCP"/>
+                <StringItem index="1" value="UDP"/>
+                <StringItem index="2" value=" "/>
+                <StringItem index="3" value=" "/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addProtocolActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -226,9 +238,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Allow"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioAllowActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioDeny">
           <Properties>
@@ -243,9 +252,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Deny"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioDenyActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="addDone">
           <Properties>
@@ -280,6 +286,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCancelActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="label">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

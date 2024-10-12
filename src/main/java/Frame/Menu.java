@@ -4,8 +4,16 @@
  */
 package Frame;
 
+import Model.Config_UFW;
+import com.jcraft.jsch.Session;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -27,7 +35,9 @@ public class Menu extends javax.swing.JFrame {
     private String password;
     public static JFrame menu = new Menu();
     public LogIn login;
-
+    Session session = LogIn.session;
+    Config_UFW configUFW = new Config_UFW(LogIn.login);
+    
     public Menu() {
         initComponents();
     }
@@ -52,13 +62,11 @@ public class Menu extends javax.swing.JFrame {
         menuControlTitle = new javax.swing.JLabel();
         menuInfoLabel = new java.awt.Label();
         in4Status = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        statusUFW = new javax.swing.JLabel();
         btnAddRule = new javax.swing.JButton();
         btnTurnOff = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         javax.swing.JTable tableUFW = new javax.swing.JTable();
-        jSeparator2 = new javax.swing.JSeparator();
         tableReset = new javax.swing.JButton();
         optionDelete = new javax.swing.JButton();
 
@@ -197,9 +205,9 @@ public class Menu extends javax.swing.JFrame {
         in4Status.setForeground(new java.awt.Color(0, 0, 102));
         in4Status.setText("Status:");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 153, 0));
-        jLabel1.setText("Active");
+        statusUFW.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        statusUFW.setForeground(new java.awt.Color(51, 153, 0));
+        statusUFW.setText("Active");
 
         btnAddRule.setBackground(new java.awt.Color(204, 0, 51));
         btnAddRule.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -215,14 +223,29 @@ public class Menu extends javax.swing.JFrame {
         btnTurnOff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnTurnOff.setForeground(new java.awt.Color(255, 255, 255));
         btnTurnOff.setText("Turn On/Off");
-
-        jSeparator1.setBackground(new java.awt.Color(255, 204, 204));
-        jSeparator1.setForeground(new java.awt.Color(255, 204, 204));
+        btnTurnOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTurnOffActionPerformed(evt);
+            }
+        });
 
         tableUFW.setBackground(new java.awt.Color(255, 204, 204));
-        tableUFW.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        tableUFW.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableUFW.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -231,15 +254,33 @@ public class Menu extends javax.swing.JFrame {
             new String [] {
                 "To", "Action", "From", "Select"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableUFW.setToolTipText("");
+        tableUFW.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tableUFW.setGridColor(new java.awt.Color(255, 255, 255));
-        tableUFW.setShowGrid(true);
+        tableUFW.setSelectionBackground(new java.awt.Color(255, 204, 204));
+        tableUFW.setShowGrid(false);
+        tableUFW.getTableHeader().setResizingAllowed(false);
         tableUFW.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableUFW);
-
-        jSeparator2.setBackground(new java.awt.Color(255, 204, 204));
-        jSeparator2.setForeground(new java.awt.Color(255, 204, 204));
+        if (tableUFW.getColumnModel().getColumnCount() > 0) {
+            tableUFW.getColumnModel().getColumn(3).setPreferredWidth(0);
+        }
 
         tableReset.setBackground(new java.awt.Color(0, 102, 102));
         tableReset.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -268,49 +309,40 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(in4Status, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(in4Status, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(statusUFW)
                         .addContainerGap())
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(0, 5, Short.MAX_VALUE)
+                                .addGap(60, 60, 60)
+                                .addComponent(btnAddRule, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnTurnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(81, 81, 81))
+                            .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addGap(60, 60, 60)
-                                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                                .addComponent(btnAddRule, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(113, 113, 113)
-                                                .addComponent(btnTurnOff)
-                                                .addGap(81, 81, 81))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                                .addComponent(menuControlTitle)
-                                                .addGap(238, 238, 238))))
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(417, 417, 417))))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(219, 219, 219)
+                                        .addComponent(menuControlTitle))
+                                    .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(238, 238, 238)))
+                        .addGap(0, 5, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119))))
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(122, 122, 122)
+                                .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(119, 119, 119))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,19 +358,15 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(in4Status)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(statusUFW))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(optionDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                    .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -349,13 +377,52 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void optionDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionDeleteActionPerformed
+    
+    }//GEN-LAST:event_optionDeleteActionPerformed
+
+    private void tableResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableResetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableResetActionPerformed
+
+    private void btnTurnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnOffActionPerformed
+
+  
+//    try {
+//        // Tắt tường lửa
+//        boolean result = configUFW.disableUFW();
+//        
+//        if(result) {
+//            System.out.println("Tường lửa đã được tắt thành cô ng.");
+//        } else {
+//            System.out.println("Có lỗi xảy ra khi tắt tường lửa.");
+//        }
+//        
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//        System.out.println("Không thể kết nối qua SSH để tắt tường lửa.");
+//    }
+    if(session.isConnected()){
+        try {
+            configUFW.disableUFW();
+            System.out.println("ngắt kết nối thành công");
+        } catch (Exception ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    int result = JOptionPane.showConfirmDialog(this, "Are you sure to turn off the firewall?",
+            "Confirm",JOptionPane.OK_CANCEL_OPTION);
+        menu.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        if (result == JOptionPane.OK_OPTION){
+            JOptionPane.showMessageDialog(this, "Firewall Inactive", "Notification", JOptionPane.OK_OPTION);
+        }
+    }//GEN-LAST:event_btnTurnOffActionPerformed
 
     private void btnAddRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRuleActionPerformed
         // TODO add your handling code here:
@@ -367,30 +434,20 @@ public class Menu extends javax.swing.JFrame {
         rule.setLocation(500, 400);
         System.out.println(this.getHost());
     }//GEN-LAST:event_btnAddRuleActionPerformed
-    
-    
+
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-               
-        int result = JOptionPane.showConfirmDialog(this, "Sign out", "Message", 
-                                                  JOptionPane.OK_CANCEL_OPTION);
-//            LogIn login = new LogIn();
+
+        int result = JOptionPane.showConfirmDialog(this, "Sign out", "Message",
+            JOptionPane.OK_CANCEL_OPTION);
+        //            LogIn login = new LogIn();
         if (result == JOptionPane.OK_OPTION){
-            LogIn.session.disconnect();
+            session.disconnect();
             LogIn.login.setVisible(true);
-            this.dispose(); 
+            this.dispose();
         }
-            //Đóng cửa sổ đang làm việc
+        //Đóng cửa sổ đang làm việc
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void tableResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableResetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tableResetActionPerformed
-
-    private void optionDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_optionDeleteActionPerformed
-
-   
     //lay gia tri
     public String getHost(){
         return host;
@@ -440,19 +497,45 @@ public class Menu extends javax.swing.JFrame {
         this.port = port;
         this.username = username;
         this.password = password;
+        
     }
 
+    
+    public void table(){
+        String[] columnNames = {"Name", "Occupation", "Age"};
+        Object[][] data = {
+            {"John Doe", "Developer", 30},
+            {"Jane Smith", "Designer", 28},
+            {"Mike Johnson", "Manager", 35}
+        };
+        JTable table = new JTable(data, columnNames);
+        
+        table.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+                int row = table.rowAtPoint(e.getPoint());
+                int col = table.columnAtPoint(e.getPoint());
+                
+                if (row >= 0 && col >= 0){
+                    JOptionPane.showMessageDialog(null, 
+                            "Value in clicked cell" + table.getValueAt(row, col).toString());
+                }
+            }
+        });
+        
+        JScrollPane jScrollPane = new JScrollPane(table);
+        menu.add(jScrollPane);
+        menu.setVisible(true);
+        
+    }
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRule;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnTurnOff;
     private javax.swing.JLabel in4Status;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private java.awt.Label menuAccountTitle;
     private javax.swing.JLabel menuControlTitle;
     private java.awt.Label menuInfoLabel;
@@ -466,6 +549,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel menuUserNameLabel;
     private javax.swing.JButton optionDelete;
     private java.awt.Panel panel1;
+    private javax.swing.JLabel statusUFW;
     private javax.swing.JButton tableReset;
     // End of variables declaration//GEN-END:variables
 }
