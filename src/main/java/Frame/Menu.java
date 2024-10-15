@@ -4,6 +4,7 @@
  */
 package Frame;
 
+//import Model.Config_UFW;
 import Model.Config_UFW;
 import com.jcraft.jsch.Session;
 import java.awt.event.MouseAdapter;
@@ -36,12 +37,65 @@ public class Menu extends javax.swing.JFrame {
     public static JFrame menu = new Menu();
     public LogIn login;
     Session session = LogIn.session;
-    Config_UFW configUFW = new Config_UFW(LogIn.login);
+    int status = 0; //off
+//    Config_UFW configUFW = new Config_UFW(LogIn.login);
     
     public Menu() {
         initComponents();
     }
 
+    
+    //lay gia tri
+    public String getHost(){
+        return host;
+    }
+    
+    public int getPort(){
+        return port;
+    }
+    
+    public String getUsername(){
+        return username;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
+    
+    //Thay doi gia tri cac thuoc tinh
+    public void setHost(String host){
+        this.host = host;
+    }
+    
+    public void setPort(int port){
+        this.port = port;
+    }
+    
+    public void setUsername(String username){
+        this.username = username;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
+    }
+    
+    public void updateInfor(String host, int port, String username){
+        menuIp.setText(host);
+        menuPort.setText("" + port);
+        menuUserName.setText(username);
+    }
+    
+    public void checkActive(String connect){
+        menuStatus.setText(connect.equals("Connect") ? "Active" : "Inactive");
+    }
+    
+    public void getInfor(String host, int port, String username, String password){
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -65,8 +119,6 @@ public class Menu extends javax.swing.JFrame {
         statusUFW = new javax.swing.JLabel();
         btnAddRule = new javax.swing.JButton();
         btnTurnOff = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        javax.swing.JTable tableUFW = new javax.swing.JTable();
         tableReset = new javax.swing.JButton();
         optionDelete = new javax.swing.JButton();
 
@@ -188,7 +240,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(menuStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addComponent(btnExit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         menuUserNameLabel.getAccessibleContext().setAccessibleName("");
@@ -229,59 +281,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        tableUFW.setBackground(new java.awt.Color(255, 204, 204));
-        tableUFW.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tableUFW.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "To", "Action", "From", "Select"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableUFW.setToolTipText("");
-        tableUFW.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tableUFW.setGridColor(new java.awt.Color(255, 255, 255));
-        tableUFW.setSelectionBackground(new java.awt.Color(255, 204, 204));
-        tableUFW.setShowGrid(false);
-        tableUFW.getTableHeader().setResizingAllowed(false);
-        tableUFW.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tableUFW);
-        if (tableUFW.getColumnModel().getColumnCount() > 0) {
-            tableUFW.getColumnModel().getColumn(3).setPreferredWidth(0);
-        }
-
         tableReset.setBackground(new java.awt.Color(0, 102, 102));
         tableReset.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         tableReset.setForeground(new java.awt.Color(255, 255, 255));
@@ -314,7 +313,7 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(in4Status, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(statusUFW)
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -333,16 +332,11 @@ public class Menu extends javax.swing.JFrame {
                                 .addGap(238, 238, 238)))
                         .addGap(0, 5, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(122, 122, 122)
-                                .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(119, 119, 119))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                        .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,14 +353,12 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(in4Status)
                     .addComponent(statusUFW))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+                .addGap(43, 43, 43))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -377,7 +369,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, Short.MAX_VALUE)
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -392,36 +384,27 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_tableResetActionPerformed
 
     private void btnTurnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnOffActionPerformed
-
-  
-//    try {
-//        // Tắt tường lửa
-//        boolean result = configUFW.disableUFW();
-//        
-//        if(result) {
-//            System.out.println("Tường lửa đã được tắt thành cô ng.");
-//        } else {
-//            System.out.println("Có lỗi xảy ra khi tắt tường lửa.");
-//        }
-//        
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        System.out.println("Không thể kết nối qua SSH để tắt tường lửa.");
-//    }
-    if(session.isConnected()){
-        try {
-            configUFW.disableUFW();
-            System.out.println("ngắt kết nối thành công");
-        } catch (Exception ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    int result = JOptionPane.showConfirmDialog(this, "Are you sure to turn off the firewall?",
+        Config_UFW config_UFW = new Config_UFW();
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure to turn off the firewall?",
             "Confirm",JOptionPane.OK_CANCEL_OPTION);
         menu.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        if (result == JOptionPane.OK_OPTION){
-            JOptionPane.showMessageDialog(this, "Firewall Inactive", "Notification", JOptionPane.OK_OPTION);
+        
+        if(status == 1){
+            //lenh off
+            String disable = config_UFW.disableUFW(host, port, username, password);
+            if (result == JOptionPane.OK_OPTION){
+                JOptionPane.showMessageDialog(this, disable, "Notification", JOptionPane.OK_OPTION);
+            }
+            status = 0;
+        }else{
+            String enable = config_UFW.enableUFW(host, port, username, password);
+            if (result == JOptionPane.OK_OPTION){
+                JOptionPane.showMessageDialog(this, enable, "Notification", JOptionPane.OK_OPTION);
+            }
+            status = 1;
         }
+        
+        
     }//GEN-LAST:event_btnTurnOffActionPerformed
 
     private void btnAddRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRuleActionPerformed
@@ -439,7 +422,6 @@ public class Menu extends javax.swing.JFrame {
 
         int result = JOptionPane.showConfirmDialog(this, "Sign out", "Message",
             JOptionPane.OK_CANCEL_OPTION);
-        //            LogIn login = new LogIn();
         if (result == JOptionPane.OK_OPTION){
             session.disconnect();
             LogIn.login.setVisible(true);
@@ -448,85 +430,34 @@ public class Menu extends javax.swing.JFrame {
         //Đóng cửa sổ đang làm việc
     }//GEN-LAST:event_btnExitActionPerformed
 
-    //lay gia tri
-    public String getHost(){
-        return host;
-    }
-    
-    public int getPort(){
-        return port;
-    }
-    
-    public String getUsername(){
-        return username;
-    }
-    
-    public String getPassword(){
-        return password;
-    }
-    
-    //Thay doi gia tri cac thuoc tinh
-    public void setHost(String host){
-        this.host = host;
-    }
-    
-    public void setPort(int port){
-        this.port = port;
-    }
-    
-    public void setUsername(String username){
-        this.username = username;
-    }
-    
-    public void setPassword(String password){
-        this.password = password;
-    }
-    
-    public void updateInfor(String host, int port, String username){
-        menuIp.setText(host);
-        menuPort.setText("" + port);
-        menuUserName.setText(username);
-    }
-    
-    public void checkActive(String connect){
-        menuStatus.setText(connect.equals("Connect") ? "Active" : "Inactive");
-    }
-    
-    public void getInfor(String host, int port, String username, String password){
-        this.host = host;
-        this.port = port;
-        this.username = username;
-        this.password = password;
-        
-    }
 
     
-    public void table(){
-        String[] columnNames = {"Name", "Occupation", "Age"};
-        Object[][] data = {
-            {"John Doe", "Developer", 30},
-            {"Jane Smith", "Designer", 28},
-            {"Mike Johnson", "Manager", 35}
-        };
-        JTable table = new JTable(data, columnNames);
-        
-        table.addMouseListener(new MouseAdapter(){
-            public void mouseClicked(MouseEvent e){
-                int row = table.rowAtPoint(e.getPoint());
-                int col = table.columnAtPoint(e.getPoint());
-                
-                if (row >= 0 && col >= 0){
-                    JOptionPane.showMessageDialog(null, 
-                            "Value in clicked cell" + table.getValueAt(row, col).toString());
-                }
-            }
-        });
-        
-        JScrollPane jScrollPane = new JScrollPane(table);
-        menu.add(jScrollPane);
-        menu.setVisible(true);
-        
-    }
+//    public void table(){
+//        String[] columnNames = {"Name", "Occupation", "Age"};
+//        Object[][] data = {
+//            {"John Doe", "Developer", 30},
+//            {"Jane Smith", "Designer", 28},
+//            {"Mike Johnson", "Manager", 35}
+//        };
+//        JTable table = new JTable(data, columnNames);
+//        
+//        table.addMouseListener(new MouseAdapter(){
+//            public void mouseClicked(MouseEvent e){
+//                int row = table.rowAtPoint(e.getPoint());
+//                int col = table.columnAtPoint(e.getPoint());
+//                
+//                if (row >= 0 && col >= 0){
+//                    JOptionPane.showMessageDialog(null, 
+//                            "Value in clicked cell" + table.getValueAt(row, col).toString());
+//                }
+//            }
+//        });
+//        
+//        JScrollPane jScrollPane = new JScrollPane(table);
+//        menu.add(jScrollPane);
+//        menu.setVisible(true);
+//        
+//    }
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRule;
@@ -535,7 +466,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel in4Status;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label menuAccountTitle;
     private javax.swing.JLabel menuControlTitle;
     private java.awt.Label menuInfoLabel;

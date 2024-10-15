@@ -5,9 +5,14 @@
 package Model;
 
 import Frame.LogIn;
+import static Frame.LogIn.login;
 import com.jcraft.jsch.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,92 +21,109 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class Config_UFW {
-    
-    public LogIn  login;
-    public Session session = LogIn.session;
-
-    public Config_UFW(LogIn login) {
-        this.login = login;
-    }
-
-    public Config_UFW() {
+    public String disableUFW (String host, int port, String username, String password){
         
-    }
-    
-    
-    private boolean executeUFWCommand(String command, String passwd) {
-        ChannelExec channel = new ChannelExec();
+        StringBuilder outputBuffer = new StringBuilder();
+        String command = "echo '" + password + "' | sudo -S ufw disable";
+
         try {
-            if(channel == null | !session.isConnected()){
-                throw new IllegalAccessException ("SSH session is not connect!");
-            }
             
-            //Mở channel exec
-            channel = (ChannelExec)session.openChannel("exec");
-            String fullCommand = "echo \'" + passwd + "\' | sudo -S" + command;
-            channel.setCommand(fullCommand);
+        //Step 1: Create Authentication
+            Session session =  LogIn.establishSSH (host, port, username, password);
+        //Step 2: Create channel
+            ChannelExec channel = (ChannelExec) session.openChannel("exec");
             
-            //Nhận kết quả đầu ra 
+        //Step 3: Execute command
+            channel.setCommand(command);
+            
+            
+            //Nhận kết quả đầu ra
             InputStream in = channel.getInputStream();
-            InputStream err_In = channel.getErrStream();
+            InputStream err_in = channel.getErrStream();
             
             //Thực thi
             channel.connect();
             
-            //Đọc kết quả đầu ra
-            String out = readStream(in);
-            String err_Out = readStream(err_In);
-            System.out.print(out);
-            System.out.print(err_Out);
-            if (err_Out.isEmpty()){
-                System.out.println("Execute command successfull"+command);
-                System.out.println("Output: " + out);
-                return true;
-            }else {
-                //check lai
-                JOptionPane.showMessageDialog(null,"Execution Error","Notification",JOptionPane.OK_OPTION);
-                return false;                
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            
+            String line;
+//            System.out.println("aaaaaaaaaa");
+            while ((line = reader.readLine()) != null) {
+                outputBuffer.append(line).append("\n");
+                
             }
-        } catch (JSchException e) {
-            e.printStackTrace();
-            return false;
-        }catch(Exception e){
-            e.printStackTrace();
-            return false;
+            channel.disconnect();
+            session.disconnect();
+            
+            //Đọc kết quả đầu ra 
+//            String out = readStream(in);
+//            String err_out = readStream(err_in);
+            
+//            if (err_out.isEmpty()){
+//                System.out.println("Execute command successfull" + command);
+//                System.out.println("Out: " + out); 
+//            }
+            
+            
+        } catch (Exception e) {
         }
-        finally{
-            if (channel != null && channel.isConnected()){
-                channel.disconnect();
-            }
-        }
+        return outputBuffer.toString();
     }
 
-    //Hàm đọc kết quả luồng - Nghiên cứu luồng I/O trong Java
-    private String readStream(InputStream in) throws IOException {
-        //Đọc theo từng mảng byte
-        byte[] buffer = new byte[1024];
-        StringBuilder output = new StringBuilder();
-        int bytesRead;
+    public String enableUFW (String host, int port, String username, String password){
         
-        while ((bytesRead = in.read(buffer)) != -1) {
-            output.append(new String(buffer, 0, bytesRead));
+        StringBuilder outputBuffer = new StringBuilder();
+        //Command may disrupt existing SSH connections. Proceed with operation (y/n)? Aborted
+        //Thêm "y" khi enable lại ufw
+        String command = "echo '" + password + "' | sudo -S sh -c \"echo 'y' | ufw enable\"";
+
+        try {
+            
+        //Step 1: Create Authentication
+            Session session =  LogIn.establishSSH (host, port, username, password);
+        //Step 2: Create channel
+            ChannelExec channel = (ChannelExec) session.openChannel("exec");
+            
+        //Step 3: Execute command
+            channel.setCommand(command);
+            
+            
+            //Nhận kết quả đầu ra
+            InputStream in = channel.getInputStream();
+            
+            //Thực thi
+            channel.connect();
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            
+            String line;
+//            System.out.println("aaaaaaaaaa");
+            while ((line = reader.readLine()) != null) {
+                outputBuffer.append(line).append("\n");
+                
+            }
+            channel.disconnect();
+            session.disconnect();
+            
+            //Đọc kết quả đầu ra 
+
+            
+            
+        } catch (Exception e) {
         }
-        return output.toString();
+        return outputBuffer.toString();
     }
+//    private String readStream(InputStream in) throws IOException {
+//        //Đọc theo từng mảng byte
+//        byte[] buffer = new byte[1024];
+//        StringBuilder output = new StringBuilder();
+//        int bytesRead;
+//        
+//        while ((bytesRead = in.read(buffer)) != -1){
+//            output.append(new String(buffer, 0, bytesRead));
+//        }
+//        return output.toString();
+//    }
     
-    public boolean enableUFW() throws Exception{
-        String command = "ufw enable";
-        String passwd = login.getPassword();
-        return executeUFWCommand(command,passwd);
-    }
-    
-    public boolean disableUFW() {
-        String command = "ufw disable";
-        String passwd = login.getPassword();
-        System.out.print("A");
-        System.out.print(passwd);
-        System.out.print("A");
-        return executeUFWCommand(command,passwd);
-    }
-        
+
 }

@@ -74,19 +74,14 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="label" min="-2" pref="261" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="addDone" max="32767" attributes="0"/>
-                              <Component id="radioAllow" min="-2" pref="100" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="addCancel" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="radioDeny" min="-2" pref="100" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="addDone" max="32767" attributes="0"/>
+                      <Component id="radioAllow" min="-2" pref="100" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="addCancel" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="radioDeny" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -112,9 +107,7 @@
                       <Component id="addProtocolLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="addProtocol" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
-                  <Component id="label" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="radioAllow" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="radioDeny" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -286,11 +279,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCancelActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="label">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel1"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

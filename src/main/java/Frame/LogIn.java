@@ -246,18 +246,27 @@ public class LogIn extends javax.swing.JFrame {
                 JSch jsch = new JSch();
                 session = jsch.getSession(login.getUsername(), login.getHost(), login.getPort());
                 session.setPassword(login.getPassword());
+                // sử dụng để chỉ định cách JSch xử lý kiểm tra host key khi thiết lập kết nối SSH
+                // "no" sẽ bỏ qua việc kiểm tra host key, không cần xác minh khi kết nối
                 session.setConfig("StrictHostKeyChecking", "no");
                 session.connect(1000); //time out 1s
                 
                 int result = JOptionPane.showConfirmDialog(this, "Connected","Connection", 
                         JOptionPane.OK_CANCEL_OPTION);
                 if (result == JOptionPane.OK_OPTION){
-                   this.dispose();
-                   Menu menu = new Menu();
-                   menu.setVisible(true);
-                   menu.setLocationRelativeTo(null);
-                   menu.updateInfor(login.getHost(), login.getPort(), login.getUsername());
-                   menu.checkActive("Connect");                     
+                    this.dispose();
+                    
+                    Menu menu = new Menu();
+                    menu.setVisible(true);
+                    menu.setLocationRelativeTo(null);
+                    menu.updateInfor(login.getHost(), login.getPort(), login.getUsername());
+                    menu.checkActive("Connect");  
+                  
+                    menu.setHost(login.getHost());
+                    menu.setPort(login.getPort());
+                    menu.setUsername(login.getUsername());
+                    menu.setPassword(login.getPassword());
+
                 }
             }
             catch (JSchException e) {
@@ -279,7 +288,7 @@ public class LogIn extends javax.swing.JFrame {
         Session session = jsch.getSession(username, host, port);
         session.setPassword(password);
         session.setConfig("StrictHostKeyChecking","no");
-        session.connect();
+        session.connect(1000);
         return session;
     }
     
