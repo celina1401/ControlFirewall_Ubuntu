@@ -4,11 +4,11 @@
  */
 package Frame;
 
+import Model.Config_UFW;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -23,6 +23,7 @@ public class LogIn extends javax.swing.JFrame {
     private String password ;
     
     public static Session session; 
+
     
     //phuong thuc xay dung class
     public LogIn(String host, int port, String username, String password){
@@ -260,8 +261,9 @@ public class LogIn extends javax.swing.JFrame {
                     menu.setVisible(true);
                     menu.setLocationRelativeTo(null);
                     menu.updateInfor(login.getHost(), login.getPort(), login.getUsername());
-                    menu.checkActive("Connect");  
-                  
+                    menu.checkActive("Connect");
+                    menu.checkStatus(login.getHost(), login.getPort(), login.getUsername(), login.getPassword());
+                    
                     menu.setHost(login.getHost());
                     menu.setPort(login.getPort());
                     menu.setUsername(login.getUsername());
@@ -366,6 +368,7 @@ public class LogIn extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 login.setVisible(true);
+
             }
         });
     }
