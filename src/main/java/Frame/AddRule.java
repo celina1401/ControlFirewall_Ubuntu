@@ -4,12 +4,9 @@
  */
 package Frame;
 
-import static Frame.LogIn.session;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
+import static Frame.Menu.menu;
+import Model.Config_UFW;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -17,16 +14,52 @@ import javax.swing.JTable;
  */
 public class AddRule extends javax.swing.JFrame {
    
+    private String host;
+    private int port;
+    private String username;
+    private String password;
+    
+    private int add_port;
+    private String add_from;
+    private String add_protocol;
+    private String action = "";
+    
     public AddRule() {
         initComponents();
     }
     //them rule, xoa rule, sua rule
-    public int port;
-    public String from;
-    public String action;
-    public String protocol;
-    public LogIn login;
-    Session session = LogIn.session;
+//    AddRule rule = new AddRule();
+
+//    public AddRule (int add_port, String add_from, String add_protocol, String action){
+//        this.add_port = 
+//    }
+
+    public AddRule(String host, int port, String username, String password, int add_port, String add_from, String add_protocol, String action) {
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+        this.add_port = add_port;
+        this.add_from = add_from;
+        this.add_protocol = add_protocol;
+        this.action = action;
+    }
+
+    public void getInfor(String host, int port, String username, String password) {
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+    }
+ 
+    public String getHost() {
+        return host;
+    }
+
+
+    public void setHost(String host) {
+        this.host = host;
+    }
 
     public int getPort() {
         return port;
@@ -36,20 +69,44 @@ public class AddRule extends javax.swing.JFrame {
         this.port = port;
     }
 
-    public String getFrom() {
-        return from;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getProtocol() {
-        return protocol;
+    public String getPassword() {
+        return password;
     }
 
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getAdd_port() {
+        return add_port;
+    }
+
+    public void setAdd_port(int add_port) {
+        this.add_port = add_port;
+    }
+
+    public String getAdd_from() {
+        return add_from;
+    }
+
+    public void setAdd_from(String add_from) {
+        this.add_from = add_from;
+    }
+
+    public String getAdd_protocol() {
+        return add_protocol;
+    }
+
+    public void setAdd_protocol(String add_protocol) {
+        this.add_protocol = add_protocol;
     }
 
     public String getAction() {
@@ -60,48 +117,13 @@ public class AddRule extends javax.swing.JFrame {
         this.action = action;
     }
     
-    public AddRule (int port, String from, String protocol, String action){
-        this.port = port;
-        this.from = from;
-        this.action = action;
-        this.protocol = protocol;
-    }
     
-    public AddRule addRule(){
-        int port = -1; // Giá trị mặc định cho port nếu có lỗi
-        String from = "";
-        String protocol = "";
-        String action = "";
-        try {
-            port = Integer.parseInt(addPortText.getText());
-            from = addFromText.getText();
-//            protocol = String.valueOf(addProtocol.getSelectedItem());
-            if (radioAllow.isSelected()){
-                action = "Allow";
-            } else if (radioDeny.isSelected()){
-                action = "Deny";
-            }else{
-                throw new IllegalAccessException("Not selected");
-            }
-            return new AddRule(port, from , protocol, action);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }catch (IllegalArgumentException e) {
-            System.err.println("Error: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Error: An unexpected error occurred.");
-            e.printStackTrace();
-        }
-        return null;
-    }   
+    public static AddRule rule = new AddRule();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup = new javax.swing.ButtonGroup();
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         addTitle = new javax.swing.JLabel();
         addPortLabel = new javax.swing.JLabel();
@@ -109,11 +131,10 @@ public class AddRule extends javax.swing.JFrame {
         addProtocolLabel = new javax.swing.JLabel();
         addPortText = new javax.swing.JTextField();
         addFromText = new javax.swing.JTextField();
-        radioAllow = new javax.swing.JRadioButton();
-        radioDeny = new javax.swing.JRadioButton();
         addDone = new javax.swing.JButton();
         addCancel = new javax.swing.JButton();
         addProtocol = new javax.swing.JTextField();
+        note = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,7 +158,6 @@ public class AddRule extends javax.swing.JFrame {
 
         addPortText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addPortText.setForeground(new java.awt.Color(102, 102, 102));
-        addPortText.setText("22");
         addPortText.setToolTipText("");
         addPortText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,28 +167,12 @@ public class AddRule extends javax.swing.JFrame {
 
         addFromText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addFromText.setForeground(new java.awt.Color(102, 102, 102));
-        addFromText.setText("192.168.1.1");
         addFromText.setToolTipText("");
         addFromText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addFromTextActionPerformed(evt);
             }
         });
-
-        buttonGroup.add(radioAllow);
-        radioAllow.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        radioAllow.setForeground(new java.awt.Color(102, 102, 102));
-        radioAllow.setText("Allow");
-        radioAllow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioAllowActionPerformed(evt);
-            }
-        });
-
-        buttonGroup.add(radioDeny);
-        radioDeny.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        radioDeny.setForeground(new java.awt.Color(102, 102, 102));
-        radioDeny.setText("Deny");
 
         addDone.setBackground(new java.awt.Color(51, 153, 0));
         addDone.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -192,14 +196,17 @@ public class AddRule extends javax.swing.JFrame {
 
         addProtocol.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addProtocol.setForeground(new java.awt.Color(102, 102, 102));
-        addProtocol.setText("TCP");
         addProtocol.setToolTipText("");
+
+        note.setFont(new java.awt.Font("Tahoma", 2, 16)); // NOI18N
+        note.setForeground(new java.awt.Color(204, 0, 0));
+        note.setText("Nếu không cần có thể bỏ qua");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addFromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,18 +221,19 @@ public class AddRule extends javax.swing.JFrame {
                 .addGap(54, 54, 54))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(101, 101, 101)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addDone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radioAllow, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioDeny, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(93, Short.MAX_VALUE)
-                .addComponent(addTitle)
-                .addGap(89, 89, 89))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(addTitle)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(note, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,18 +246,14 @@ public class AddRule extends javax.swing.JFrame {
                     .addComponent(addPortLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(addFromText)
-                        .addGap(0, 0, 0))
+                    .addComponent(addFromText)
                     .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addProtocol))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioAllow)
-                    .addComponent(radioDeny))
+                .addComponent(note, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,7 +265,7 @@ public class AddRule extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,36 +279,26 @@ public class AddRule extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_addCancelActionPerformed
+    
 
     private void addDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoneActionPerformed
-        AddRule addrule = addRule();
-        if (addrule == null){
-            JOptionPane.showMessageDialog(this, "Please fill out this completely",
-                "Notification", JOptionPane.OK_OPTION);
+        String add_host = addFromText.getText();
+        String add_port = addPortText.getText();
+        String add_protocol = addProtocol.getText();
+        String[] choices = {"Allow", "Deny"};
+        String action = (String) JOptionPane.showInputDialog(null,"Choose action","Notification", JOptionPane.INFORMATION_MESSAGE, null,choices, choices[0]);
+        Config_UFW add = new Config_UFW();
+        add.addRule(host, port, username, password, add_port, add_host, add_protocol, action);
+        if(!action.isEmpty()){
+            rule.setVisible(false);
         }
-        else try {
-            JSch jsch = new JSch();
-            session =jsch.getSession(login.getHost(), login.getUsername(), login.getPort());
-            session.setPassword(login.getPassword());
-            session.setConfig("StrictHostKeyChecking", "no");
-            session.connect(1000); //1s timeout
-
-            //Kênh Exec để mở lệnh
-
-            ChannelExec channel = (ChannelExec)session.openChannel("exec");
-
-        } catch (Exception e) {
-
-        }
+        System.out.println("ADD THÀNH CÔNG GÒI ĐÂY NÈ");
+//        AddRule rule = new AddRule();
     }//GEN-LAST:event_addDoneActionPerformed
 
     private void addPortTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPortTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addPortTextActionPerformed
-
-    private void radioAllowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioAllowActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioAllowActionPerformed
 
     private void addFromTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFromTextActionPerformed
         // TODO add your handling code here:
@@ -321,10 +315,7 @@ public class AddRule extends javax.swing.JFrame {
     private javax.swing.JTextField addProtocol;
     private javax.swing.JLabel addProtocolLabel;
     private javax.swing.JLabel addTitle;
-    private javax.swing.ButtonGroup buttonGroup;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton radioAllow;
-    private javax.swing.JRadioButton radioDeny;
+    private javax.swing.JLabel note;
     // End of variables declaration//GEN-END:variables
 }

@@ -89,7 +89,7 @@ public class Menu extends javax.swing.JFrame {
     
     public void checkStatus(String host, int port, String username, String password){
         
-        status = config_UFW.startUFW(host, port, username, password); 
+        status = config_UFW.status_UFW(host, port, username, password); 
         statusUFW.setText(status);
     }
     
@@ -123,7 +123,7 @@ public class Menu extends javax.swing.JFrame {
         statusUFW = new javax.swing.JLabel();
         btnAddRule = new javax.swing.JButton();
         btnTurnOff = new javax.swing.JButton();
-        tableReset = new javax.swing.JButton();
+        UFWReset = new javax.swing.JButton();
         optionDelete = new javax.swing.JButton();
         btnStatus = new javax.swing.JButton();
 
@@ -281,13 +281,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        tableReset.setBackground(new java.awt.Color(0, 102, 102));
-        tableReset.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        tableReset.setForeground(new java.awt.Color(255, 255, 255));
-        tableReset.setText("Reset");
-        tableReset.addActionListener(new java.awt.event.ActionListener() {
+        UFWReset.setBackground(new java.awt.Color(0, 102, 102));
+        UFWReset.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        UFWReset.setForeground(new java.awt.Color(255, 255, 255));
+        UFWReset.setText("Reset");
+        UFWReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tableResetActionPerformed(evt);
+                UFWResetActionPerformed(evt);
             }
         });
 
@@ -321,7 +321,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(117, 117, 117)
-                        .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UFWReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(113, 113, 113))
@@ -367,7 +367,7 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tableReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UFWReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
@@ -390,14 +390,17 @@ public class Menu extends javax.swing.JFrame {
     
     }//GEN-LAST:event_optionDeleteActionPerformed
 
-    private void tableResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableResetActionPerformed
+    private void UFWResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWResetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tableResetActionPerformed
+//          String reset = config_UFW.reset_UFW(host, port, username, password);
+//        JOptionPane.showMessageDialog(this, reset);
+        
+    }//GEN-LAST:event_UFWResetActionPerformed
 
     private void btnTurnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnOffActionPerformed
 
         String statusUpdate = "";
-        status = config_UFW.startUFW(host, port, username, password);
+        status = config_UFW.status_UFW(host, port, username, password);
                 
         if(status.equals("active")){
             //lenh off
@@ -406,12 +409,12 @@ public class Menu extends javax.swing.JFrame {
 //            result = JOptionPane.showConfirmDialog(this, "Are you sure to turn off the firewall?",
 //            "Confirm",JOptionPane.OK_CANCEL_OPTION);
 
-            statusUpdate = config_UFW.startUFW(host, port, username, password); //off
+            statusUpdate = config_UFW.status_UFW(host, port, username, password); //off
         }else{
             
             String enable = config_UFW.enableUFW(host, port, username, password);
             JOptionPane.showMessageDialog(this, enable);
-            statusUpdate = config_UFW.startUFW(host, port, username, password);
+            statusUpdate = config_UFW.status_UFW(host, port, username, password);
         }
         statusUFW.setText(statusUpdate);
     }//GEN-LAST:event_btnTurnOffActionPerformed
@@ -419,9 +422,9 @@ public class Menu extends javax.swing.JFrame {
     private void btnAddRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRuleActionPerformed
         // TODO add your handling code here:
         AddRule rule = new AddRule();
+        rule.getInfor(host, port, username, password);
         rule.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         rule.setVisible(true);
-
         rule.setLocation(500, 400);
 
     }//GEN-LAST:event_btnAddRuleActionPerformed
@@ -451,6 +454,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStatusActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton UFWReset;
     private javax.swing.JButton btnAddRule;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnStatus;
@@ -471,6 +475,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton optionDelete;
     private java.awt.Panel panel1;
     private javax.swing.JLabel statusUFW;
-    private javax.swing.JButton tableReset;
     // End of variables declaration//GEN-END:variables
 }

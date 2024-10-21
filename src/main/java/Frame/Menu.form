@@ -51,7 +51,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                          <Component id="tableReset" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="UFWReset" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="optionDelete" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
@@ -111,7 +111,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="optionDelete" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="tableReset" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="UFWReset" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
@@ -414,7 +414,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTurnOffActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="tableReset">
+        <Component class="javax.swing.JButton" name="UFWReset">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="0" type="rgb"/>
@@ -428,7 +428,7 @@
             <Property name="text" type="java.lang.String" value="Reset"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tableResetActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UFWResetActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="optionDelete">

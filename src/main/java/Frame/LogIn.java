@@ -268,6 +268,12 @@ public class LogIn extends javax.swing.JFrame {
                     menu.setPort(login.getPort());
                     menu.setUsername(login.getUsername());
                     menu.setPassword(login.getPassword());
+                    
+                    AddRule rule = new AddRule();
+                    rule.setHost(login.getHost());
+                    rule.setPort(login.getPort());
+                    rule.setUsername(login.getUsername());
+                    rule.setPassword(login.getPassword());
 
                 }
             }
