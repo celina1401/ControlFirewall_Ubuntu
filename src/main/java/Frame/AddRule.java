@@ -4,7 +4,6 @@
  */
 package Frame;
 
-import static Frame.Menu.menu;
 import Model.Config_UFW;
 import javax.swing.JOptionPane;
 
@@ -28,11 +27,6 @@ public class AddRule extends javax.swing.JFrame {
         initComponents();
     }
     //them rule, xoa rule, sua rule
-//    AddRule rule = new AddRule();
-
-//    public AddRule (int add_port, String add_from, String add_protocol, String action){
-//        this.add_port = 
-//    }
 
     public AddRule(String host, int port, String username, String password, int add_port, String add_from, String add_protocol, String action) {
         this.host = host;
@@ -159,20 +153,10 @@ public class AddRule extends javax.swing.JFrame {
         addPortText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addPortText.setForeground(new java.awt.Color(102, 102, 102));
         addPortText.setToolTipText("");
-        addPortText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addPortTextActionPerformed(evt);
-            }
-        });
 
         addFromText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addFromText.setForeground(new java.awt.Color(102, 102, 102));
         addFromText.setToolTipText("");
-        addFromText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addFromTextActionPerformed(evt);
-            }
-        });
 
         addDone.setBackground(new java.awt.Color(51, 153, 0));
         addDone.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -291,18 +275,11 @@ public class AddRule extends javax.swing.JFrame {
         add.addRule(host, port, username, password, add_port, add_host, add_protocol, action);
         if(!action.isEmpty()){
             rule.setVisible(false);
+            this.dispose();
         }
         System.out.println("ADD THÀNH CÔNG GÒI ĐÂY NÈ");
 //        AddRule rule = new AddRule();
     }//GEN-LAST:event_addDoneActionPerformed
-
-    private void addPortTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPortTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addPortTextActionPerformed
-
-    private void addFromTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFromTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addFromTextActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
