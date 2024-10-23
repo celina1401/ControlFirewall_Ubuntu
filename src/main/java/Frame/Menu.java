@@ -415,7 +415,7 @@ public class Menu extends javax.swing.JFrame {
         rule.getInfor(host, port, username, password);
         rule.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         rule.setVisible(true);
-        rule.setLocation(500, 400);
+        rule.setLocationRelativeTo(null);
 
     }//GEN-LAST:event_btnAddRuleActionPerformed
 

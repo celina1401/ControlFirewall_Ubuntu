@@ -136,7 +136,8 @@ public class Config_UFW {
         return status;
     }
 
-    public String addRule(String host, int port, String username, String password, String addPort, String addHost, String addProtocol, String action) {
+    public String addRule(String host, int port, String username, String password, 
+            String addPort, String addHost, String addProtocol, String action, String addTo, String addApp) {
         String result = "";
         StringBuilder outBuilder = new StringBuilder();
         String command = "";
