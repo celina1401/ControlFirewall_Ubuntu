@@ -5,7 +5,6 @@
 package Frame;
 
 import Model.Config_UFW;
-import java.awt.ComponentOrientation;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,20 +23,19 @@ public class AddRule extends javax.swing.JFrame {
     private String add_protocol;
     private String action = "";
     private String add_to;
-    private String add_app;
     
     public AddRule() {
         initComponents();
         addPortText.setVisible(false);
         addFromText.setVisible(false);
         addToText.setVisible(false);
-        addAppText.setVisible(false);
         addProtocol.setVisible(false);
+
     }
     //them rule, xoa rule, sua rule
 
     public AddRule(String host, int port, String username, String password, 
-            int add_port, String add_from, String add_protocol, String action, String add_to, String add_app) {
+            int add_port, String add_from, String add_protocol, String action, String add_to) {
         
         this.host = host;
         this.port = port;
@@ -49,7 +47,6 @@ public class AddRule extends javax.swing.JFrame {
         this.add_protocol = add_protocol;
         this.action = action;
         this.add_to = add_to;
-        this.add_app = add_app;
     }
 
     public void getInfor(String host, int port, String username, String password) {
@@ -131,14 +128,6 @@ public class AddRule extends javax.swing.JFrame {
     public void setAdd_to(String add_to) {
         this.add_to = add_to;
     }
-
-    public String getAdd_app() {
-        return add_app;
-    }
-
-    public void setAdd_app(String add_app) {
-        this.add_app = add_app;
-    }
     
     
     
@@ -157,22 +146,19 @@ public class AddRule extends javax.swing.JFrame {
         addFromText = new javax.swing.JTextField();
         addDone = new javax.swing.JButton();
         addCancel = new javax.swing.JButton();
-        addProtocol = new javax.swing.JTextField();
-        note = new javax.swing.JLabel();
         addToLabel = new javax.swing.JLabel();
         addToText = new javax.swing.JTextField();
-        addProtocolLabel1 = new javax.swing.JLabel();
-        addAppText = new javax.swing.JTextField();
         cbPort = new javax.swing.JCheckBox();
         cbFrom = new javax.swing.JCheckBox();
         cbTo = new javax.swing.JCheckBox();
         cbProtocol = new javax.swing.JCheckBox();
-        cbApplication = new javax.swing.JCheckBox();
+        test = new javax.swing.JLabel();
+        addProtocol = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setPreferredSize(new java.awt.Dimension(500, 450));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 440));
 
         addTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         addTitle.setForeground(new java.awt.Color(0, 0, 102));
@@ -218,14 +204,6 @@ public class AddRule extends javax.swing.JFrame {
             }
         });
 
-        addProtocol.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        addProtocol.setForeground(new java.awt.Color(102, 102, 102));
-        addProtocol.setToolTipText("");
-
-        note.setFont(new java.awt.Font("Tahoma", 2, 16)); // NOI18N
-        note.setForeground(new java.awt.Color(204, 0, 0));
-        note.setText("Protocol có thể là: TCP,UDP,HTTP,HTTPS");
-
         addToLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addToLabel.setForeground(new java.awt.Color(51, 51, 51));
         addToLabel.setText("To:");
@@ -234,65 +212,83 @@ public class AddRule extends javax.swing.JFrame {
         addToText.setForeground(new java.awt.Color(102, 102, 102));
         addToText.setToolTipText("");
 
-        addProtocolLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addProtocolLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        addProtocolLabel1.setText("Application:");
+        cbPort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPortActionPerformed(evt);
+            }
+        });
 
-        addAppText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        addAppText.setForeground(new java.awt.Color(102, 102, 102));
-        addAppText.setToolTipText("");
+        cbFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFromActionPerformed(evt);
+            }
+        });
+
+        cbTo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbToActionPerformed(evt);
+            }
+        });
+
+        cbProtocol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProtocolActionPerformed(evt);
+            }
+        });
+
+        addProtocol.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        addProtocol.setForeground(new java.awt.Color(102, 102, 102));
+        addProtocol.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cbApplication, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(addProtocolLabel1))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cbProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(addProtocolLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cbPort, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cbFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(addPortLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cbTo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(addToLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addFromText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(addPortText)
-                            .addComponent(addToText, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addAppText)
-                            .addComponent(addProtocol, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(addTitle)))
-                .addGap(51, 51, 51))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 105, Short.MAX_VALUE)
+                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(251, 251, 251))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(note, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 105, Short.MAX_VALUE)
                         .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93)
-                        .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(103, 103, 103))
+                        .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(addTitle)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbPort, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(addPortLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cbTo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(addToLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addFromText, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                    .addComponent(addPortText, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(addToText)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(addProtocol)))))
+                .addGap(51, 51, 51))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,40 +298,36 @@ public class AddRule extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addPortLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addPortText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(cbPort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbFrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0)))
+                        .addComponent(addPortText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addToLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addToText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbFrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addProtocolLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addAppText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cbApplication, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addToLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addToText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(cbProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(note, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47))
+                .addGap(54, 54, 54)
+                .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -346,7 +338,7 @@ public class AddRule extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, Short.MAX_VALUE)
         );
 
         pack();
@@ -358,15 +350,16 @@ public class AddRule extends javax.swing.JFrame {
     }//GEN-LAST:event_addCancelActionPerformed
 
     private void addDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoneActionPerformed
-        String add_host = addFromText.getText();
+
         String add_port = addPortText.getText();
-        String add_protocol = addProtocol.getText();
+        String add_from = addFromText.getText();
+        String add_protocol = this.addProtocol.getText();
         String add_to = addToText.getText();
-        String add_app = addAppText.getText();
         String[] choices = {"Allow", "Deny"};
-        String action = (String) JOptionPane.showInputDialog(null,"Choose action","Notification", JOptionPane.INFORMATION_MESSAGE, null,choices, choices[0]);
+        String action = (String) JOptionPane.showInputDialog(null,"Choose action","Notification", 
+                                           JOptionPane.INFORMATION_MESSAGE, null,choices, choices[0]);
         Config_UFW add = new Config_UFW();
-        add.addRule(host, port, username, password, add_port, add_host, add_protocol, action, add_to, add_app);
+        add.addRule(host, port, username, password, add_port, add_from, add_protocol, action, add_to);
         if(!action.isEmpty()){
             rule.setVisible(false);
             this.dispose();
@@ -374,11 +367,38 @@ public class AddRule extends javax.swing.JFrame {
         System.out.println("ADD THÀNH CÔNG GÒI ĐÂY NÈ");
         //        AddRule rule = new AddRule();
     }//GEN-LAST:event_addDoneActionPerformed
-    
+
+    private void cbPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPortActionPerformed
+        // TODO add your handling code here:
+        addPortText.setVisible(cbPort.isSelected());
+        invalidate();
+        validate();
+    }//GEN-LAST:event_cbPortActionPerformed
+
+    private void cbFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFromActionPerformed
+        // TODO add your handling code here:
+        addFromText.setVisible(cbFrom.isSelected());
+        invalidate();
+        validate();
+    }//GEN-LAST:event_cbFromActionPerformed
+
+    private void cbToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbToActionPerformed
+        // TODO add your handling code here:
+        addToText.setVisible(cbTo.isSelected());
+        //sap xep lai bo cuc
+        invalidate();
+        validate();
+    }//GEN-LAST:event_cbToActionPerformed
+
+    private void cbProtocolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProtocolActionPerformed
+        addProtocol.setVisible(cbProtocol.isSelected());
+        invalidate();
+        validate();
+    }//GEN-LAST:event_cbProtocolActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField addAppText;
     private javax.swing.JButton addCancel;
     private javax.swing.JButton addDone;
     private javax.swing.JLabel addFromLabel;
@@ -387,16 +407,14 @@ public class AddRule extends javax.swing.JFrame {
     private javax.swing.JTextField addPortText;
     private javax.swing.JTextField addProtocol;
     private javax.swing.JLabel addProtocolLabel;
-    private javax.swing.JLabel addProtocolLabel1;
     private javax.swing.JLabel addTitle;
     private javax.swing.JLabel addToLabel;
     private javax.swing.JTextField addToText;
-    private javax.swing.JCheckBox cbApplication;
     private javax.swing.JCheckBox cbFrom;
     private javax.swing.JCheckBox cbPort;
     private javax.swing.JCheckBox cbProtocol;
     private javax.swing.JCheckBox cbTo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel note;
+    private javax.swing.JLabel test;
     // End of variables declaration//GEN-END:variables
 }

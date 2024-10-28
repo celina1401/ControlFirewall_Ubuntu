@@ -287,7 +287,6 @@ public class Menu extends javax.swing.JFrame {
         btnStatus.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnStatus.setForeground(new java.awt.Color(255, 255, 255));
         btnStatus.setText("Status:");
-        btnStatus.setActionCommand("Status:");
         btnStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStatusActionPerformed(evt);
@@ -306,6 +305,8 @@ public class Menu extends javax.swing.JFrame {
 
         deleteText.setBackground(new java.awt.Color(255, 204, 204));
         deleteText.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        deleteText.setForeground(new java.awt.Color(153, 153, 153));
+        deleteText.setText("  VD: allow 80");
         deleteText.setToolTipText("");
         deleteText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 

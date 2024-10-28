@@ -137,7 +137,7 @@ public class Config_UFW {
     }
 
     public String addRule(String host, int port, String username, String password, 
-            String addPort, String addHost, String addProtocol, String action, String addTo, String addApp) {
+        String addPort, String addFrom, String addProtocol, String action, String addTo) {
         String result = "";
         StringBuilder outBuilder = new StringBuilder();
         String command = "";
@@ -147,36 +147,71 @@ public class Config_UFW {
             ChannelExec channel = (ChannelExec) session.openChannel("exec");
 
             if (action.equals("Allow")) {
-                //port
-                if (addHost.isEmpty() && addProtocol.isEmpty() && !addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw allow " + addPort;
-                    //Host
-                } else if (!addHost.isEmpty() && addProtocol.isEmpty() && addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw allow from " + addHost;
-                    //Host && Port
-                } else if (!addHost.isEmpty() && addProtocol.isEmpty() && !addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw allow from " + addHost + " to any port " + addPort;
-                    //Porotocol && port
-                } else if (addHost.isEmpty() && !addProtocol.isEmpty() && !addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw allow " + addPort + "/" + addProtocol;
-                } else if (!addHost.isEmpty() && !addProtocol.isEmpty() && !addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw allow from " + addHost + " to any port " + addPort + " proto " + addProtocol;
-                }
 
-            } else {
-                //port
-                if (addHost.isEmpty() && addProtocol.isEmpty() && !addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw deny " + addPort;
-                    //Host
-                } else if (!addHost.isEmpty() && addProtocol.isEmpty() && addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw deny from " + addHost;
-                    //Host && Port
-                } else if (!addHost.isEmpty() && addProtocol.isEmpty() && !addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw deny from " + addHost + " to any port " + addPort;
-                    //Porotocol && port
-                } else if (addHost.isEmpty() && !addProtocol.isEmpty() && !addPort.isEmpty()) {
-                    command = "echo '" + password + "' | sudo -S ufw deny " + addPort + "/" + addProtocol;
+                if (!addProtocol.isEmpty() && !addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,to,from,port
+                    command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from " + addFrom
+                            + " to " + addTo + " port " + addPort;
+                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,from,port
+                    command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from " + addFrom
+                            + " to any port " + addPort;                    
+                }else if(!addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,to,port
+                    command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from any " 
+                            + " to " + addTo + " port " + addPort;                    
+                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,port
+                    command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from any to any port " + addPort;                    
                 }
+                else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                    //from,port
+                    command = "echo '" + password + "' | sudo -S ufw allow from " + addFrom + " to any port " + addPort;                    
+                }else if(addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //to,port
+                    command = "echo '" + password + "' | sudo -S ufw allow from any" + " to " + addTo + " port " + addPort;                    
+                }
+                else if(addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //port
+                    command = "echo '" + password + "' | sudo -S ufw allow " + addPort;                    
+                }else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && addPort.isEmpty()){
+                    //from
+                    command = "echo '" + password + "' | sudo -S ufw allow from " + addFrom;                    
+                }
+                
+            } else {
+
+                if (!addProtocol.isEmpty() && !addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,to,from,port
+                    command = "echo '" + password + "' | sudo -S ufw deny proto " + addProtocol + " from " + addFrom
+                            + " to " + addTo + " port " + addPort;
+                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,from,port
+                    command = "echo '" + password + "' | sudo -S ufw deny proto " + addProtocol + " from " + addFrom
+                            + " to any port " + addPort;                    
+                }else if(!addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,to,port
+                    command = "echo '" + password + "' | sudo -S ufw deny proto " + addProtocol + " from any " 
+                            + " to " + addTo + " port " + addPort;                    
+                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //proto,port
+                    command = "echo '" + password + "' | sudo -S ufw deny proto " + addProtocol + " from any to any port " + addPort;                    
+                }
+                else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                    //from,port
+                    command = "echo '" + password + "' | sudo -S ufw deny from " + addFrom + " to any port " + addPort;                    
+                }else if(addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //to,port
+                    command = "echo '" + password + "' | sudo -S ufw deny from any" + " to " + addTo + " port " + addPort;                    
+                }
+                else if(addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                    //port
+                    command = "echo '" + password + "' | sudo -S ufw deny " + addPort;                    
+                }else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && addPort.isEmpty()){
+                    //from
+                    command = "echo '" + password + "' | sudo -S ufw deny from " + addFrom;                    
+                }
+                
             }
             channel.setCommand(command);
             InputStream in = channel.getInputStream();
