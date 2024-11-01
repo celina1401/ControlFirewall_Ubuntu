@@ -13,6 +13,7 @@ Model\Config_UFW.class
 Frame\Menu$2.class
 Frame\LogIn.class
 Frame\AddRule$1.class
+Model\TableUFW.class
 Frame\AddRule$3.class
 Frame\AddRule$6.class
 Frame\Menu$3.class

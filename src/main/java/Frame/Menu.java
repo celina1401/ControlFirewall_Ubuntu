@@ -6,9 +6,11 @@ package Frame;
 
 //import Model.Config_UFW;
 import Model.Config_UFW;
+import Model.TableUFW;
 import com.jcraft.jsch.Session;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author User
@@ -24,6 +26,7 @@ public class Menu extends javax.swing.JFrame {
     public LogIn login;
     Session session = LogIn.session;
     Config_UFW config_UFW = new Config_UFW();
+    TableUFW ufwmodel = new TableUFW();
     String status; 
     
     
@@ -87,9 +90,10 @@ public class Menu extends javax.swing.JFrame {
         this.host = host;
         this.port = port;
         this.username = username;
-        this.password = password;
-        
-        
+        this.password = password;        
+    }
+    
+    public void table(String host, int port, String username, String password){
     }
    
     @SuppressWarnings("unchecked")
@@ -114,10 +118,13 @@ public class Menu extends javax.swing.JFrame {
         statusUFW = new javax.swing.JLabel();
         btnAddRule = new javax.swing.JButton();
         btnTurnOff = new javax.swing.JButton();
-        UFWReset = new javax.swing.JButton();
+        UFWin4 = new javax.swing.JButton();
         btnStatus = new javax.swing.JButton();
         optionDelete = new javax.swing.JButton();
         deleteText = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ufwTable = new javax.swing.JTable();
+        btnReload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -273,13 +280,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        UFWReset.setBackground(new java.awt.Color(0, 102, 102));
-        UFWReset.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        UFWReset.setForeground(new java.awt.Color(255, 255, 255));
-        UFWReset.setText("Infor UFW");
-        UFWReset.addActionListener(new java.awt.event.ActionListener() {
+        UFWin4.setBackground(new java.awt.Color(0, 102, 102));
+        UFWin4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        UFWin4.setForeground(new java.awt.Color(255, 255, 255));
+        UFWin4.setText("Infor UFW");
+        UFWin4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UFWResetActionPerformed(evt);
+                UFWin4ActionPerformed(evt);
             }
         });
 
@@ -310,6 +317,36 @@ public class Menu extends javax.swing.JFrame {
         deleteText.setToolTipText("");
         deleteText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
+        ufwTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ufwTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "To", "Action", "From", "Edit", "Delete"
+            }
+        ));
+        ufwTable.setShowGrid(true);
+        ufwTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ufwTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(ufwTable);
+
+        btnReload.setBackground(new java.awt.Color(51, 0, 153));
+        btnReload.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        btnReload.setForeground(new java.awt.Color(255, 255, 255));
+        btnReload.setText("Reload");
+        btnReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -333,16 +370,21 @@ public class Menu extends javax.swing.JFrame {
                                 .addComponent(menuControlTitle))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(btnStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(UFWReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(statusUFW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(deleteText, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
-                        .addContainerGap(212, Short.MAX_VALUE))))
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(28, 28, 28)
+                                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(statusUFW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(deleteText, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(UFWin4)
+                                            .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(31, Short.MAX_VALUE))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,16 +398,19 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(statusUFW, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(UFWReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(deleteText)
-                    .addComponent(optionDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                        .addComponent(statusUFW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(UFWin4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
@@ -383,13 +428,13 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UFWResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWResetActionPerformed
+    private void UFWin4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWin4ActionPerformed
         
 //        String text = config_UFW.status_UFW_display(host, port, username, password);
 //        table_UFW_text.setText(text);
         String text = config_UFW.status_UFW_display(host, port, username, password);
         JOptionPane.showMessageDialog(this, text);
-    }//GEN-LAST:event_UFWResetActionPerformed
+    }//GEN-LAST:event_UFWin4ActionPerformed
 
     private void btnTurnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnOffActionPerformed
 
@@ -441,7 +486,6 @@ public class Menu extends javax.swing.JFrame {
             statusUFW.setVisible(false);
             flag = 0;
         }
-
     }//GEN-LAST:event_btnStatusActionPerformed
 
     private void optionDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionDeleteActionPerformed
@@ -449,16 +493,26 @@ public class Menu extends javax.swing.JFrame {
         String delText = config_UFW.delete_UFW(host, port, username, password, text);
         JOptionPane.showMessageDialog(this, delText);
     }//GEN-LAST:event_optionDeleteActionPerformed
+
+    private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+        
+    }//GEN-LAST:event_btnReloadActionPerformed
+
+    private void ufwTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ufwTableMouseClicked
+        // Đây là một event sẽ được phát sinh mỗi khi người dùng click chọn một dòng trong bảng
+    }//GEN-LAST:event_ufwTableMouseClicked
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton UFWReset;
+    private javax.swing.JButton UFWin4;
     private javax.swing.JButton btnAddRule;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnReload;
     private javax.swing.JButton btnStatus;
     private javax.swing.JButton btnTurnOff;
     private javax.swing.JTextField deleteText;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label menuAccountTitle;
     private javax.swing.JLabel menuControlTitle;
     private java.awt.Label menuInfoLabel;
@@ -473,5 +527,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton optionDelete;
     private java.awt.Panel panel1;
     private javax.swing.JLabel statusUFW;
+    private javax.swing.JTable ufwTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -283,7 +284,33 @@ public class Config_UFW {
         return outputBuffer.toString();
     }
     
-        public String delete_UFW(String host, int port, String username, String password, String text) {
+    public String ufw_reload(String host, int port, String username, String password){
+        StringBuilder outpBuilder = new StringBuilder();
+        String command = "echo '" + password + "' | sudo -S ufw reload";
+        
+        try {
+            Session session = LogIn.establishSSH(host, port, username, password);
+            ChannelExec channel = (ChannelExec) session.openChannel("exec");
+            channel.setCommand(command);
+            
+            InputStream in = channel.getInputStream();
+            channel.connect();
+            
+            BufferedReader reader =  new BufferedReader(new InputStreamReader(in));
+            String line;
+            while((line = reader.readLine()) != null){
+                outpBuilder.append(line);
+            }
+            
+            channel.disconnect();
+            session.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return outpBuilder.toString();
+    }
+    
+    public String delete_UFW(String host, int port, String username, String password, String text) {
 
         StringBuilder outputBuffer = new StringBuilder();
 //        String status = "";
@@ -319,4 +346,12 @@ public class Config_UFW {
         }
         return outputBuffer.toString();
     }
+    
+    public DefaultTableModel ufwTableModel (String host, int port, String username, String password){
+        DefaultTableModel ufwTable = new DefaultTableModel();
+        
+        return ufwTable;
+    }
+        
+        
 }
