@@ -29,8 +29,8 @@ public class TableUFW {
         ufwTable.addColumn("             To");
         ufwTable.addColumn("    Action");
         ufwTable.addColumn("                     From");
-        ufwTable.addColumn("  Edit");
-        ufwTable.addColumn(" Delete");
+//        ufwTable.addColumn("  Edit");
+//        ufwTable.addColumn(" Delete");
         
         String command = "echo '" + password + "' | sudo -S ufw verbose numbered";
         try {
@@ -60,7 +60,7 @@ public class TableUFW {
                         String action = parts[2];
                         String from = parts[3].replace("IN  ","");
                         if(v6.contains("(v6)")){
-                            ufwTable.addRow(new Object[]{id,to,action,from,"Edit","Delete"});
+                            ufwTable.addRow(new Object[]{id,to,action,from});
                         }
                         System.out.println(parts[1]);
                 }
@@ -68,7 +68,7 @@ public class TableUFW {
             channel.disconnect();
             session.disconnect();
             }
-        } catch (IOException | JSchException ioEx) {
+        } catch (IOException | JSchException | ArrayIndexOutOfBoundsException ioEx) {
             ioEx.printStackTrace();
         }
         return ufwTable;
@@ -80,8 +80,8 @@ public class TableUFW {
         ufwTable.getColumnModel().getColumn(1).setPreferredWidth(90);
         ufwTable.getColumnModel().getColumn(2).setPreferredWidth(50);
         ufwTable.getColumnModel().getColumn(3).setPreferredWidth(150);
-        ufwTable.getColumnModel().getColumn(4).setPreferredWidth(30);
-        ufwTable.getColumnModel().getColumn(5).setPreferredWidth(30);
+//        ufwTable.getColumnModel().getColumn(4).setPreferredWidth(30);
+//        ufwTable.getColumnModel().getColumn(5).setPreferredWidth(30);
         
         ufwTable.setRowHeight(25);
         
