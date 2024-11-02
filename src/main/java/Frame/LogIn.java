@@ -5,11 +5,13 @@
 package Frame;
 
 import Model.Config_UFW;
+import Model.TableUFW;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 
 public class LogIn extends javax.swing.JFrame {
@@ -112,7 +114,7 @@ public class LogIn extends javax.swing.JFrame {
 
         ipText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ipText.setForeground(new java.awt.Color(102, 102, 102));
-        ipText.setText("192.168.88.230");
+        ipText.setText("172.17.239.12");
         ipText.setToolTipText("");
 
         portLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -127,7 +129,7 @@ public class LogIn extends javax.swing.JFrame {
 
         usernameText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         usernameText.setForeground(new java.awt.Color(102, 102, 102));
-        usernameText.setText("b2110941");
+        usernameText.setText("celina1401");
 
         passwdLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         passwdLabel.setText("Pass Word:");
@@ -154,7 +156,7 @@ public class LogIn extends javax.swing.JFrame {
 
         passwdText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         passwdText.setForeground(new java.awt.Color(102, 102, 102));
-        passwdText.setText("1234");
+        passwdText.setText("14012003");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -274,6 +276,9 @@ public class LogIn extends javax.swing.JFrame {
                     rule.setPort(login.getPort());
                     rule.setUsername(login.getUsername());
                     rule.setPassword(login.getPassword());
+                    
+//                    TableUFW table = new TableUFW();
+//                    table.ufwTableModel(login.getHost(), login.getPort(), login.getUsername(), login.getPassword());
 
                 }
             }
