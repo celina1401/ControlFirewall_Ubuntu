@@ -25,10 +25,10 @@ import javax.swing.table.TableColumn;
 public class TableUFW {
     public DefaultTableModel ufwTableModel (String host, int port, String username, String password){
         DefaultTableModel ufwTable = new DefaultTableModel();
-        ufwTable.addColumn("  ID");
-        ufwTable.addColumn("             To");
-        ufwTable.addColumn("    Action");
-        ufwTable.addColumn("                     From");
+        ufwTable.addColumn("       ID");
+        ufwTable.addColumn("                 To");
+        ufwTable.addColumn("         Action");
+        ufwTable.addColumn("                        From");
 //        ufwTable.addColumn("  Edit");
 //        ufwTable.addColumn(" Delete");
         
@@ -62,7 +62,7 @@ public class TableUFW {
                         if(v6.contains("(v6)")){
                             ufwTable.addRow(new Object[]{id,to,action,from});
                         }
-                        System.out.println(parts[1]);
+//                        System.out.println(parts[1]);
                 }
             }
             channel.disconnect();
@@ -86,7 +86,7 @@ public class TableUFW {
         ufwTable.setRowHeight(25);
         
     }
-    
+   
     
     
 }

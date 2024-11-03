@@ -4,14 +4,11 @@
  */
 package Frame;
 
-import Model.Config_UFW;
-import Model.TableUFW;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class LogIn extends javax.swing.JFrame {
@@ -345,7 +342,6 @@ public class LogIn extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0); 
     }//GEN-LAST:event_BtnCancelActionPerformed
-
     /**
      * @param args the command line arguments
      */
