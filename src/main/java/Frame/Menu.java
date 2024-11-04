@@ -24,6 +24,7 @@ public class Menu extends javax.swing.JFrame {
     private int flag = 0;
     public static JFrame menu = new Menu();
     public LogIn login;
+    private boolean isV4;
     Session session = LogIn.session;
     Config_UFW config_UFW = new Config_UFW();
     TableUFW ufwmodel = new TableUFW();
@@ -70,7 +71,7 @@ public class Menu extends javax.swing.JFrame {
     }
     
     public void checkActive(String connect){
-        menuStatus.setText(connect.equals("Connect") ? "Active" : "Inactive");
+        menuStatus.setText(connect.equals("Connect") ? "Connected" : "Disconnected");
     }
     
     public void checkStatus(String host, int port, String username, String password){
@@ -90,7 +91,7 @@ public class Menu extends javax.swing.JFrame {
         statusUFW.setVisible(false);
         ufwTable.setVisible(false);
     }
-   
+       
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -113,7 +114,7 @@ public class Menu extends javax.swing.JFrame {
         statusUFW = new javax.swing.JLabel();
         btnAddRule = new javax.swing.JButton();
         btnTurnOff = new javax.swing.JButton();
-        UFWin4 = new javax.swing.JButton();
+        UFWin4v6 = new javax.swing.JButton();
         btnStatus = new javax.swing.JButton();
         optionDelete = new javax.swing.JButton();
         deleteText = new javax.swing.JTextField();
@@ -122,7 +123,7 @@ public class Menu extends javax.swing.JFrame {
         btnReload = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        UFWin4v4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -256,7 +257,7 @@ public class Menu extends javax.swing.JFrame {
 
         menuInfoLabel.setFont(new java.awt.Font("Tahoma", 3, 20)); // NOI18N
         menuInfoLabel.setForeground(new java.awt.Color(51, 0, 102));
-        menuInfoLabel.setText("Information:");
+        menuInfoLabel.setText("Information UFW:");
 
         statusUFW.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         statusUFW.setForeground(new java.awt.Color(51, 153, 0));
@@ -288,13 +289,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        UFWin4.setBackground(new java.awt.Color(0, 153, 153));
-        UFWin4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        UFWin4.setForeground(new java.awt.Color(255, 255, 255));
-        UFWin4.setText("Infor UFW (v6)");
-        UFWin4.addActionListener(new java.awt.event.ActionListener() {
+        UFWin4v6.setBackground(new java.awt.Color(0, 153, 153));
+        UFWin4v6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        UFWin4v6.setForeground(new java.awt.Color(255, 255, 255));
+        UFWin4v6.setText("Infor UFW (v6)");
+        UFWin4v6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UFWin4ActionPerformed(evt);
+                UFWin4v6ActionPerformed(evt);
             }
         });
 
@@ -336,6 +337,7 @@ public class Menu extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -352,14 +354,10 @@ public class Menu extends javax.swing.JFrame {
         });
         ufwTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ufwTable.setMinimumSize(new java.awt.Dimension(90, 175));
+        ufwTable.setRequestFocusEnabled(false);
         ufwTable.setRowHeight(25);
         ufwTable.setRowSelectionAllowed(false);
         ufwTable.setShowGrid(true);
-        ufwTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ufwTableMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(ufwTable);
         if (ufwTable.getColumnModel().getColumnCount() > 0) {
             ufwTable.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -398,8 +396,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton1.setText("IPV4");
+        UFWin4v4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        UFWin4v4.setText("Infor UFW (v4)");
+        UFWin4v4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UFWin4v4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -413,66 +416,67 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(menuControlTitle))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(UFWin4v4, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                                    .addComponent(btnStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(UFWin4v6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnTurnOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(UFWin4)
-                                    .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panel1Layout.createSequentialGroup()
-                                    .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(btnTurnOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panel1Layout.createSequentialGroup()
-                                    .addGap(23, 23, 23)
-                                    .addComponent(btnAddRule, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(62, 62, 62)
-                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(62, 62, 62)
-                                    .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(25, 25, 25)
+                                .addComponent(btnAddRule, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+            .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(menuControlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTurnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UFWin4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                    .addComponent(UFWin4v4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UFWin4v6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 27, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddRule, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTurnOff, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -516,19 +520,20 @@ public class Menu extends javax.swing.JFrame {
             config_UFW.delete_UFW(host, port, username, password, index);
             model.removeRow(ufwTable.getSelectedRow());
         }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
         ufwTable.setVisible(true);
-        DefaultTableModel result = ufwmodel.ufwTableModel(host, port, username, password);
-        ufwTable.setModel(result);
+        if(isV4 == true){
+            DefaultTableModel result1 = ufwmodel.ufwTableModelv4(host, port, username, password);
+            ufwTable.setModel(result1);    
+        }else{
+            DefaultTableModel result = ufwmodel.ufwTableModel(host, port, username, password);
+            ufwTable.setModel(result);
+        }
         ufwmodel.setupTable(ufwTable);
-
     }//GEN-LAST:event_btnReloadActionPerformed
-
-    private void ufwTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ufwTableMouseClicked
-
-    }//GEN-LAST:event_ufwTableMouseClicked
 
     private void optionDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionDeleteActionPerformed
         String text = deleteText.getText();
@@ -547,17 +552,13 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnStatusActionPerformed
 
-    private void UFWin4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWin4ActionPerformed
-
-        //        String text = config_UFW.status_UFW_display(host, port, username, password);
-        //        table_UFW_text.setText(text);
-        //        String text = config_UFW.status_UFW_display(host, port, username, password);
-        //        JOptionPane.showMessageDialog(this, text);
+    private void UFWin4v6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWin4v6ActionPerformed
         ufwTable.setVisible(true);
         DefaultTableModel result = ufwmodel.ufwTableModel(host, port, username, password);
         ufwTable.setModel(result);
         ufwmodel.setupTable(ufwTable);
-    }//GEN-LAST:event_UFWin4ActionPerformed
+        isV4 = false;
+    }//GEN-LAST:event_UFWin4v6ActionPerformed
 
     private void btnTurnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnOffActionPerformed
 
@@ -598,9 +599,18 @@ public class Menu extends javax.swing.JFrame {
         }
         //Đóng cửa sổ đang làm việc
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void UFWin4v4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWin4v4ActionPerformed
+        ufwTable.setVisible(true);
+        DefaultTableModel result = ufwmodel.ufwTableModelv4(host, port, username, password);
+        ufwTable.setModel(result);
+        ufwmodel.setupTable(ufwTable);
+        isV4 = true;
+    }//GEN-LAST:event_UFWin4v4ActionPerformed
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton UFWin4;
+    private javax.swing.JButton UFWin4v4;
+    private javax.swing.JButton UFWin4v6;
     private javax.swing.JButton btnAddRule;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
@@ -609,7 +619,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnStatus;
     private javax.swing.JButton btnTurnOff;
     private javax.swing.JTextField deleteText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
