@@ -88,7 +88,7 @@ public class Menu extends javax.swing.JFrame {
     }
     public Menu() {
         initComponents();
-        statusUFW.setVisible(false);
+//        statusUFW.setVisible(false);
         ufwTable.setVisible(false);
     }
        
@@ -115,7 +115,6 @@ public class Menu extends javax.swing.JFrame {
         btnAddRule = new javax.swing.JButton();
         btnTurnOff = new javax.swing.JButton();
         UFWin4v6 = new javax.swing.JButton();
-        btnStatus = new javax.swing.JButton();
         optionDelete = new javax.swing.JButton();
         deleteText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -273,10 +272,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnTurnOff.setBackground(new java.awt.Color(255, 204, 204));
+        btnTurnOff.setBackground(new java.awt.Color(255, 102, 102));
         btnTurnOff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnTurnOff.setForeground(new java.awt.Color(255, 255, 255));
         btnTurnOff.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\on-off.png")); // NOI18N
+        btnTurnOff.setText("ON-OFF UFW");
         btnTurnOff.setBorder(null);
         btnTurnOff.setContentAreaFilled(false);
         btnTurnOff.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -296,17 +295,6 @@ public class Menu extends javax.swing.JFrame {
         UFWin4v6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UFWin4v6ActionPerformed(evt);
-            }
-        });
-
-        btnStatus.setBackground(new java.awt.Color(255, 51, 153));
-        btnStatus.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        btnStatus.setForeground(new java.awt.Color(255, 255, 255));
-        btnStatus.setText("Status UFW:");
-        btnStatus.setVerifyInputWhenFocusTarget(false);
-        btnStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStatusActionPerformed(evt);
             }
         });
 
@@ -419,16 +407,13 @@ public class Menu extends javax.swing.JFrame {
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(UFWin4v4, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                    .addComponent(btnStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(UFWin4v4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnTurnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(UFWin4v6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnTurnOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
@@ -456,14 +441,14 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTurnOff, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UFWin4v4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UFWin4v6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(UFWin4v6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(UFWin4v4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 27, Short.MAX_VALUE)
@@ -496,7 +481,7 @@ public class Menu extends javax.swing.JFrame {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
 //        DefaultTableModel model = (DefaultTableModel) ufwTable.getModel();
         int selectRow = ufwTable.getSelectedRow();
-        if (selectRow >= -1){
+        if (selectRow > -1){
 //            menu.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             String index = ufwTable.getValueAt(selectRow, 0).toString();
             int confirm = JOptionPane.showConfirmDialog(this, "You want to update this rule, don't you?",
@@ -505,6 +490,8 @@ public class Menu extends javax.swing.JFrame {
                 btnAddRule.doClick();                
                 config_UFW.delete_UFW(host, port, username, password, index);
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "Please select row which you want to edit!");
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -512,13 +499,14 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) ufwTable.getModel();
         int row = ufwTable.getSelectedRow();
-        System.out.println(row);
-        if (row >= -1){
+        if (row > -1){
             String index = ufwTable.getValueAt(row, 0).toString();
             //            String id_ufw = String.valueOf(index);
             //            System.out.println(index);
             config_UFW.delete_UFW(host, port, username, password, index);
             model.removeRow(ufwTable.getSelectedRow());
+        }else{
+            JOptionPane.showMessageDialog(this, "Please select row which you want to delete!");
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -528,7 +516,7 @@ public class Menu extends javax.swing.JFrame {
         if(isV4 == true){
             DefaultTableModel result1 = ufwmodel.ufwTableModelv4(host, port, username, password);
             ufwTable.setModel(result1);    
-        }else{
+        }else if(isV4 == false){
             DefaultTableModel result = ufwmodel.ufwTableModel(host, port, username, password);
             ufwTable.setModel(result);
         }
@@ -540,17 +528,6 @@ public class Menu extends javax.swing.JFrame {
         String delText = config_UFW.delete_UFW(host, port, username, password, text);
         JOptionPane.showMessageDialog(this, delText);
     }//GEN-LAST:event_optionDeleteActionPerformed
-
-    private void btnStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusActionPerformed
-        // TODO add your handling code here:
-        if (flag == 0){
-            statusUFW.setVisible(true);
-            flag = 1;
-        } else if (flag == 1){
-            statusUFW.setVisible(false);
-            flag = 0;
-        }
-    }//GEN-LAST:event_btnStatusActionPerformed
 
     private void UFWin4v6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWin4v6ActionPerformed
         ufwTable.setVisible(true);
@@ -616,7 +593,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnReload;
-    private javax.swing.JButton btnStatus;
     private javax.swing.JButton btnTurnOff;
     private javax.swing.JTextField deleteText;
     private javax.swing.JLabel jLabel2;

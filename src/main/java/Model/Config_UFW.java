@@ -347,11 +347,4 @@ public class Config_UFW {
         return outputBuffer.toString();
     }
     
-//    public DefaultTableModel ufwTableModel (String host, int port, String username, String password){
-//        DefaultTableModel ufwTable = new DefaultTableModel();
-//        
-//        return ufwTable;
-//    }
-//        
-        
 }
