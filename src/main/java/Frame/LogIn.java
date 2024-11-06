@@ -8,7 +8,6 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 
 public class LogIn extends javax.swing.JFrame {

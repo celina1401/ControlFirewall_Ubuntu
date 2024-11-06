@@ -24,10 +24,10 @@ import javax.swing.table.DefaultTableModel;
 public class TableUFW {
     public DefaultTableModel ufwTableModel (String host, int port, String username, String password){
         DefaultTableModel ufwTable = new DefaultTableModel();
-        ufwTable.addColumn("       ID");
-        ufwTable.addColumn("                 To");
-        ufwTable.addColumn("         Action");
-        ufwTable.addColumn("                        From");
+        ufwTable.addColumn("      ID");
+        ufwTable.addColumn("                           To");
+        ufwTable.addColumn("        Action");
+        ufwTable.addColumn("                From");
 //        ufwTable.addColumn("  Edit");
 //        ufwTable.addColumn(" Delete");
         
@@ -75,10 +75,10 @@ public class TableUFW {
     
     public DefaultTableModel ufwTableModelv4 (String host, int port, String username, String password){
         DefaultTableModel ufwTable = new DefaultTableModel();
-        ufwTable.addColumn("       ID");
-        ufwTable.addColumn("                 To");
-        ufwTable.addColumn("         Action");
-        ufwTable.addColumn("                        From");
+        ufwTable.addColumn("      ID");
+        ufwTable.addColumn("                           To");
+        ufwTable.addColumn("        Action");
+        ufwTable.addColumn("                From");
 //        ufwTable.addColumn("  Edit");
 //        ufwTable.addColumn(" Delete");
         
@@ -136,14 +136,12 @@ public class TableUFW {
         
     public void setupTable(JTable ufwTable){
                 
-        ufwTable.getColumnModel().getColumn(0).setPreferredWidth(20);
-        ufwTable.getColumnModel().getColumn(1).setPreferredWidth(90);
+        ufwTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+        ufwTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         ufwTable.getColumnModel().getColumn(2).setPreferredWidth(50);
-        ufwTable.getColumnModel().getColumn(3).setPreferredWidth(150);
-//        ufwTable.getColumnModel().getColumn(4).setPreferredWidth(30);
-//        ufwTable.getColumnModel().getColumn(5).setPreferredWidth(30);
+        ufwTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         
-        ufwTable.setRowHeight(25);
+        ufwTable.setRowHeight(30);
         
     }
    
