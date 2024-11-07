@@ -138,7 +138,7 @@ public class Config_UFW {
     }
 
     public String addRule(String host, int port, String username, String password, 
-        String addPort, String addFrom, String addProtocol, String action, String addTo) {
+        String addPort, String addFrom, String addProtocol, String action, String addTo, String addApp) {
         String result = "";
         StringBuilder outBuilder = new StringBuilder();
         String command = "";
@@ -149,35 +149,38 @@ public class Config_UFW {
 
             if (action.equals("Allow")) {
 
-                if (!addProtocol.isEmpty() && !addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                if (!addProtocol.isEmpty() && !addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty() && addApp.isEmpty()){
                     //proto,to,from,port
                     command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from " + addFrom
                             + " to " + addTo + " port " + addPort;
-                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty() && addApp.isEmpty()){
                     //proto,from,port
                     command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from " + addFrom
                             + " to any port " + addPort;                    
-                }else if(!addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                }else if(!addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty() && addApp.isEmpty()){
                     //proto,to,port
                     command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from any " 
                             + " to " + addTo + " port " + addPort;                    
-                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                }else if(!addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty() && addApp.isEmpty()){
                     //proto,port
                     command = "echo '" + password + "' | sudo -S ufw allow proto " + addProtocol + " from any to any port " + addPort;                    
                 }
-                else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty()){
+                else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && !addPort.isEmpty() && addApp.isEmpty()){
                     //from,port
                     command = "echo '" + password + "' | sudo -S ufw allow from " + addFrom + " to any port " + addPort;                    
-                }else if(addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                }else if(addProtocol.isEmpty() && !addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty() && addApp.isEmpty()){
                     //to,port
                     command = "echo '" + password + "' | sudo -S ufw allow from any" + " to " + addTo + " port " + addPort;                    
                 }
-                else if(addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty()){
+                else if(addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && !addPort.isEmpty() && addApp.isEmpty()){
                     //port
                     command = "echo '" + password + "' | sudo -S ufw allow " + addPort;                    
-                }else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && addPort.isEmpty()){
+                }else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && addPort.isEmpty() && addApp.isEmpty()){
                     //from
                     command = "echo '" + password + "' | sudo -S ufw allow from " + addFrom;                    
+                }else if(addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && addPort.isEmpty() && !addApp.isEmpty()){
+                    //from
+                    command = "echo '" + password + "' | sudo -S ufw allow \"" + addApp + "\"";                    
                 }
                 
             } else {
@@ -211,6 +214,9 @@ public class Config_UFW {
                 }else if(addProtocol.isEmpty() && addTo.isEmpty() && !addFrom.isEmpty() && addPort.isEmpty()){
                     //from
                     command = "echo '" + password + "' | sudo -S ufw deny from " + addFrom;                    
+                }else if(addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && addPort.isEmpty() && !addApp.isEmpty()){
+                    //from
+                    command = "echo '" + password + "' | sudo -S ufw deny \"" + addApp + "\"";                    
                 }
                 
             }
@@ -347,4 +353,42 @@ public class Config_UFW {
         return outputBuffer.toString();
     }
     
+    public String listApp_UFW(String host, int port, String username, String password) {
+
+        StringBuilder outputBuffer = new StringBuilder();
+//        String status = "";
+        String command = "echo '" + password + "' | sudo -S ufw app list";
+
+        try {
+            //Step 1: Create Authentication
+            Session session = LogIn.establishSSH(host, port, username, password);
+            //Step 2: Create channel
+            ChannelExec channel = (ChannelExec) session.openChannel("exec");
+
+            //Step 3: Execute command
+            channel.setCommand(command);
+
+            //Nhận kết quả đầu ra
+            InputStream in = channel.getInputStream();
+
+            //Thực thi
+            channel.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                outputBuffer.append(line).append("\n");
+            }
+
+            channel.disconnect();
+            session.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return outputBuffer.toString();
+    }
+         
+        
 }
