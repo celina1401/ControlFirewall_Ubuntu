@@ -383,7 +383,8 @@ public class AddRule extends javax.swing.JFrame {
         Config_UFW add = new Config_UFW();
         add.addRule(host, port, username, password, add_port, add_from, add_protocol, action, add_to, add_app);
         if(!action.isEmpty()){
-            rule.setVisible(false);
+//            rule.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Add rule successfully!");
             this.dispose();
         }
     }//GEN-LAST:event_addDoneActionPerformed

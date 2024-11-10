@@ -79,7 +79,7 @@
                                                   <Component id="deleteText" min="-2" pref="164" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                                          <EmptySpace pref="25" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="btnListApp" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
                                               <Group type="102" alignment="1" attributes="0">
@@ -90,9 +90,9 @@
                                       </Group>
                                       <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="UFWin4v4" pref="230" max="32767" attributes="0"/>
-                                              <Component id="btnTurnOff" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="UFWin4v4" min="-2" pref="230" max="-2" attributes="0"/>
+                                              <Component id="btnTurnOff" min="-2" pref="194" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">

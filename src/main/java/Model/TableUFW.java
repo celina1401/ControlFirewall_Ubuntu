@@ -52,7 +52,7 @@ public class TableUFW {
                     //remove những khoảng trống không cần thiết
                     String id_cleanspace = line.replaceFirst("^\\[\\s*\\d+\\]", "").trim();
                     
-                    String[] parts = id_cleanspace.split("\\s+", 5);
+                    String[] parts = id_cleanspace.split("\\s+");
                     if (parts.length >= 5){
                         String to = parts[0];
                         String v6 = parts[1];
@@ -61,7 +61,16 @@ public class TableUFW {
                         if(v6.contains("(v6)")){
                             ufwTable.addRow(new Object[]{id,to,action,from});
                         }
-//                        System.out.println(parts[1]);
+                        if(parts.length > 5){
+                            to = parts[0] + " " + parts[1];
+                            v6 = parts[2];
+                            action = parts[3]+" "+parts[4];
+                            from = parts[5].replace("IN  ","");
+                        }
+                        if(v6.contains("(v6)")){
+                            ufwTable.addRow(new Object[]{id,to,action,from});
+                        }
+                        
                 }
             }
             channel.disconnect();
