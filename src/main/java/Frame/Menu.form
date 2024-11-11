@@ -579,12 +579,14 @@
                 </Property>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
                 <Property name="rowHeight" type="int" value="25"/>
-                <Property name="rowSelectionAllowed" type="boolean" value="false"/>
                 <Property name="showGrid" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ufwTableMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

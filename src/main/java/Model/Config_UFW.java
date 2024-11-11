@@ -6,12 +6,13 @@ package Model;
 
 import Frame.LogIn;
 import com.jcraft.jsch.*;
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -179,7 +180,7 @@ public class Config_UFW {
                     //from
                     command = "echo '" + password + "' | sudo -S ufw allow from " + addFrom;                    
                 }else if(addProtocol.isEmpty() && addTo.isEmpty() && addFrom.isEmpty() && addPort.isEmpty() && !addApp.isEmpty()){
-                    //from
+                    //app
                     command = "echo '" + password + "' | sudo -S ufw allow \"" + addApp + "\"";                    
                 }
                 
@@ -388,6 +389,53 @@ public class Config_UFW {
             e.printStackTrace();
         }
         return outputBuffer.toString();
+    }
+    
+    public String[] getListApp(String host, int port, String username, String password){
+        List<String> appList = new ArrayList<>();
+
+        try {
+            // Thiết lập kết nối SSH
+            JSch jsch = new JSch();
+            Session session = jsch.getSession(username, host, port);
+            session.setPassword(password);
+            session.setConfig("StrictHostKeyChecking", "no");
+            session.connect();
+
+            // Thực thi lệnh "sudo ufw app list"
+            String command = "echo '" + password + "' | sudo -S ufw app list";
+            Channel channel = session.openChannel("exec");
+            ((ChannelExec) channel).setCommand(command);
+
+            // Đọc đầu ra của lệnh
+            InputStream in = channel.getInputStream();
+            channel.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            boolean startAdding = false;
+
+            while ((line = reader.readLine()) != null) {
+                // Bỏ qua các dòng không cần thiết, chỉ thêm tên ứng dụng sau khi gặp "Available applications:"
+                if (startAdding) {
+                    appList.add(line.trim());
+                }
+                if (line.contains("Available applications:")) {
+                    startAdding = true;
+                }
+            }
+
+            // Đóng kết nối
+            reader.close();
+            channel.disconnect();
+            session.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Chuyển đổi List<String> sang String[] để trả về
+        return appList.toArray(new String[0]);
     }
          
         

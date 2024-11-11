@@ -343,8 +343,12 @@ public class Menu extends javax.swing.JFrame {
         ufwTable.setMinimumSize(new java.awt.Dimension(90, 175));
         ufwTable.setRequestFocusEnabled(false);
         ufwTable.setRowHeight(25);
-        ufwTable.setRowSelectionAllowed(false);
         ufwTable.setShowGrid(true);
+        ufwTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ufwTableMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(ufwTable);
         if (ufwTable.getColumnModel().getColumnCount() > 0) {
             ufwTable.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -526,7 +530,9 @@ public class Menu extends javax.swing.JFrame {
             //            String id_ufw = String.valueOf(index);
             //            System.out.println(index);
             config_UFW.delete_UFW(host, port, username, password, index);
+            
             model.removeRow(ufwTable.getSelectedRow());
+            btnReload.doClick();
         }else{
             JOptionPane.showMessageDialog(this, "Please select row which you want to delete!");
         }
@@ -614,6 +620,14 @@ public class Menu extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, result);
         
     }//GEN-LAST:event_btnListAppActionPerformed
+
+    private void ufwTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ufwTableMousePressed
+        //khong cho sua
+        boolean edit = ufwTable.isEditing();
+        if(edit == false && evt.getClickCount() == 2 && !evt.isConsumed()){
+            JOptionPane.showMessageDialog(null, "You can not edit this table");
+        }
+    }//GEN-LAST:event_ufwTableMousePressed
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UFWin4v4;

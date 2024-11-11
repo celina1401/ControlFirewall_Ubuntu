@@ -8,12 +8,14 @@ import Frame.LogIn;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -149,11 +151,10 @@ public class TableUFW {
         ufwTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         ufwTable.getColumnModel().getColumn(2).setPreferredWidth(50);
         ufwTable.getColumnModel().getColumn(3).setPreferredWidth(100);
-        
         ufwTable.setRowHeight(30);
+        DefaultCellEditor cellEditor = (DefaultCellEditor) ufwTable.getDefaultEditor(Object.class);
+        cellEditor.setClickCountToStart(3);     //xu ly so lan nhan
         
     }
-   
-    
-    
+  
 }

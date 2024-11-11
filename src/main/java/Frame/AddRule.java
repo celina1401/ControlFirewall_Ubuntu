@@ -156,7 +156,7 @@ public class AddRule extends javax.swing.JFrame {
         addProtocol = new javax.swing.JTextField();
         cbApp = new javax.swing.JCheckBox();
         addAppLabel = new javax.swing.JLabel();
-        addApp = new javax.swing.JTextField();
+        addApp = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -253,10 +253,6 @@ public class AddRule extends javax.swing.JFrame {
         addAppLabel.setForeground(new java.awt.Color(51, 51, 51));
         addAppLabel.setText("App:");
 
-        addApp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        addApp.setForeground(new java.awt.Color(102, 102, 102));
-        addApp.setToolTipText("");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -297,7 +293,7 @@ public class AddRule extends javax.swing.JFrame {
                                     .addComponent(addFromText, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                                     .addComponent(addPortText, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(addToText)
-                                    .addComponent(addApp, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(addApp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cbProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -320,11 +316,10 @@ public class AddRule extends javax.swing.JFrame {
                         .addGap(0, 1, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addAppLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addAppLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                        .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -333,14 +328,14 @@ public class AddRule extends javax.swing.JFrame {
                         .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbTo, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(cbTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addToLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addToText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(cbProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -371,19 +366,20 @@ public class AddRule extends javax.swing.JFrame {
     }//GEN-LAST:event_addCancelActionPerformed
 
     private void addDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoneActionPerformed
-
         String add_port = addPortText.getText();
         String add_from = addFromText.getText();
         String add_protocol = this.addProtocol.getText();
         String add_to = addToText.getText();
-        String add_app = addApp.getText();
+        String add_app = "";
+        if(cbApp.isSelected()){
+            add_app = (String) addApp.getSelectedItem();   
+        }
         String[] choices = {"Allow", "Deny"};
         String action = (String) JOptionPane.showInputDialog(null,"Choose action","Notification", 
                                            JOptionPane.INFORMATION_MESSAGE, null,choices, choices[0]);
         Config_UFW add = new Config_UFW();
         add.addRule(host, port, username, password, add_port, add_from, add_protocol, action, add_to, add_app);
         if(!action.isEmpty()){
-//            rule.setVisible(false);
             JOptionPane.showMessageDialog(this, "Add rule successfully!");
             this.dispose();
         }
@@ -419,6 +415,13 @@ public class AddRule extends javax.swing.JFrame {
 
     private void cbAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAppActionPerformed
         // TODO add your handling code here:
+        Config_UFW config_UFW = new Config_UFW();
+        String[] get_list_app = config_UFW.getListApp(host, port, username, password);
+        addApp.removeAllItems();
+//        addApp.addItem("");
+        for (String app : get_list_app) {
+            addApp.addItem(app);
+        }
         addApp.setVisible(cbApp.isSelected());
         invalidate();
         validate();
@@ -427,7 +430,7 @@ public class AddRule extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField addApp;
+    private javax.swing.JComboBox<String> addApp;
     private javax.swing.JLabel addAppLabel;
     private javax.swing.JButton addCancel;
     private javax.swing.JButton addDone;
