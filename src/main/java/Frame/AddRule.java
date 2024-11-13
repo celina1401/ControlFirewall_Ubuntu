@@ -160,23 +160,23 @@ public class AddRule extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(248, 249, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 440));
 
         addTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        addTitle.setForeground(new java.awt.Color(0, 0, 102));
+        addTitle.setForeground(new java.awt.Color(0, 64, 133));
         addTitle.setText("ADD RULE FOR FIREWALL");
 
         addPortLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addPortLabel.setForeground(new java.awt.Color(51, 51, 51));
+        addPortLabel.setForeground(new java.awt.Color(242, 92, 5));
         addPortLabel.setText("Port:");
 
         addFromLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addFromLabel.setForeground(new java.awt.Color(51, 51, 51));
+        addFromLabel.setForeground(new java.awt.Color(242, 92, 5));
         addFromLabel.setText("From:");
 
         addProtocolLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addProtocolLabel.setForeground(new java.awt.Color(51, 51, 51));
+        addProtocolLabel.setForeground(new java.awt.Color(242, 92, 5));
         addProtocolLabel.setText("Protocol:");
 
         addPortText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -187,7 +187,7 @@ public class AddRule extends javax.swing.JFrame {
         addFromText.setForeground(new java.awt.Color(102, 102, 102));
         addFromText.setToolTipText("");
 
-        addDone.setBackground(new java.awt.Color(51, 153, 0));
+        addDone.setBackground(new java.awt.Color(76, 176, 44));
         addDone.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addDone.setForeground(new java.awt.Color(255, 255, 255));
         addDone.setText("Done");
@@ -197,7 +197,7 @@ public class AddRule extends javax.swing.JFrame {
             }
         });
 
-        addCancel.setBackground(new java.awt.Color(204, 0, 0));
+        addCancel.setBackground(new java.awt.Color(166, 166, 166));
         addCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addCancel.setForeground(new java.awt.Color(255, 255, 255));
         addCancel.setText("Cancel");
@@ -208,7 +208,7 @@ public class AddRule extends javax.swing.JFrame {
         });
 
         addToLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addToLabel.setForeground(new java.awt.Color(51, 51, 51));
+        addToLabel.setForeground(new java.awt.Color(242, 92, 5));
         addToLabel.setText("To:");
 
         addToText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -250,7 +250,7 @@ public class AddRule extends javax.swing.JFrame {
         });
 
         addAppLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addAppLabel.setForeground(new java.awt.Color(51, 51, 51));
+        addAppLabel.setForeground(new java.awt.Color(242, 92, 5));
         addAppLabel.setText("App:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -313,12 +313,12 @@ public class AddRule extends javax.swing.JFrame {
                     .addComponent(cbPort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(addPortText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addAppLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                        .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,6 +366,7 @@ public class AddRule extends javax.swing.JFrame {
     }//GEN-LAST:event_addCancelActionPerformed
 
     private void addDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoneActionPerformed
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         String add_port = addPortText.getText();
         String add_from = addFromText.getText();
         String add_protocol = this.addProtocol.getText();
@@ -383,6 +384,7 @@ public class AddRule extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Add rule successfully!");
             this.dispose();
         }
+        
     }//GEN-LAST:event_addDoneActionPerformed
 
     private void cbPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPortActionPerformed

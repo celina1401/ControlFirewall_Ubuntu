@@ -99,13 +99,14 @@ public class LogIn extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(248, 249, 250));
 
         Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        Title.setForeground(new java.awt.Color(0, 0, 102));
+        Title.setForeground(new java.awt.Color(0, 64, 133));
         Title.setText("REMOTE FIREWALL CONNECTION");
 
         ipLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        ipLabel.setForeground(new java.awt.Color(242, 92, 5));
         ipLabel.setText("IP Address:");
 
         ipText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -114,6 +115,7 @@ public class LogIn extends javax.swing.JFrame {
         ipText.setToolTipText("");
 
         portLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        portLabel.setForeground(new java.awt.Color(242, 92, 5));
         portLabel.setText("Port:");
 
         portText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -121,6 +123,7 @@ public class LogIn extends javax.swing.JFrame {
         portText.setText("22");
 
         usernameLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(242, 92, 5));
         usernameLabel.setText("User Name:");
 
         usernameText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -128,9 +131,10 @@ public class LogIn extends javax.swing.JFrame {
         usernameText.setText("celina1401");
 
         passwdLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        passwdLabel.setForeground(new java.awt.Color(242, 92, 5));
         passwdLabel.setText("Pass Word:");
 
-        BtnConnect.setBackground(new java.awt.Color(0, 204, 102));
+        BtnConnect.setBackground(new java.awt.Color(76, 176, 44));
         BtnConnect.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         BtnConnect.setForeground(new java.awt.Color(255, 255, 255));
         BtnConnect.setText("Connect");
@@ -140,7 +144,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        BtnCancel.setBackground(new java.awt.Color(204, 51, 0));
+        BtnCancel.setBackground(new java.awt.Color(166, 166, 166));
         BtnCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         BtnCancel.setForeground(new java.awt.Color(255, 255, 255));
         BtnCancel.setText("Cancel");
@@ -167,36 +171,31 @@ public class LogIn extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(passwdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(portLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(portLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ipLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usernameText)
-                            .addComponent(ipText, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                            .addComponent(portText)
-                            .addComponent(passwdText)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(usernameText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(portText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ipText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwdText, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ipText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,7 +211,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(passwdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BtnConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,9 +272,6 @@ public class LogIn extends javax.swing.JFrame {
                     rule.setUsername(login.getUsername());
                     rule.setPassword(login.getPassword());
                     
-//                    TableUFW table = new TableUFW();
-//                    table.ufwTableModel(login.getHost(), login.getPort(), login.getUsername(), login.getPassword());
-
                 }
             }
             catch (JSchException e) {

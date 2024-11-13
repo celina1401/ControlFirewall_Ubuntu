@@ -125,48 +125,49 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel1.setBackground(new java.awt.Color(255, 204, 204));
+        panel1.setBackground(new java.awt.Color(242, 242, 242));
         panel1.setPreferredSize(new java.awt.Dimension(900, 700));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(243, 165, 86));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(345, 768));
 
-        menuAccountTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        menuAccountTitle.setForeground(new java.awt.Color(0, 0, 102));
+        menuAccountTitle.setBackground(new java.awt.Color(243, 165, 86));
+        menuAccountTitle.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
+        menuAccountTitle.setForeground(new java.awt.Color(242, 242, 242));
         menuAccountTitle.setText("Account");
 
-        menuIpLabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        menuIpLabel.setForeground(new java.awt.Color(0, 0, 102));
+        menuIpLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuIpLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuIpLabel.setText("IP: ");
 
-        menuIp.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        menuIp.setForeground(new java.awt.Color(102, 102, 102));
+        menuIp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuIp.setForeground(new java.awt.Color(255, 255, 228));
         menuIp.setText("10.0.0.1");
 
-        menuUserNameLabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        menuUserNameLabel.setForeground(new java.awt.Color(0, 0, 102));
+        menuUserNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuUserNameLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuUserNameLabel.setText("User name:");
 
-        menuUserName.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        menuUserName.setForeground(new java.awt.Color(102, 102, 102));
+        menuUserName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuUserName.setForeground(new java.awt.Color(255, 255, 228));
         menuUserName.setText("Celina");
 
         menuPortLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        menuPortLabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        menuPortLabel.setForeground(new java.awt.Color(0, 0, 102));
+        menuPortLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuPortLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuPortLabel.setText("Port:");
 
-        menuPort.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        menuPort.setForeground(new java.awt.Color(102, 102, 102));
+        menuPort.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuPort.setForeground(new java.awt.Color(255, 255, 228));
         menuPort.setText("22");
 
-        menuStatusLabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        menuStatusLabel.setForeground(new java.awt.Color(0, 0, 102));
+        menuStatusLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuStatusLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuStatusLabel.setText("Status:");
 
-        menuStatus.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        menuStatus.setForeground(new java.awt.Color(51, 153, 0));
+        menuStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuStatus.setForeground(new java.awt.Color(255, 255, 228));
         menuStatus.setName(""); // NOI18N
         menuStatus.setText("Active");
 
@@ -187,37 +188,30 @@ public class Menu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(menuUserNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(menuIpLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(menuPortLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(menuStatusLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(menuPortLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(menuUserNameLabel)
-                                .addComponent(menuIpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(menuStatusLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(menuPort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(menuUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(menuIp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(menuStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(46, 46, 46))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(menuPort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(menuUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(menuIp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(menuStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnExit)
+                        .addGap(147, 147, 147))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(menuAccountTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)))
+                            .addComponent(menuAccountTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(99, 99, 99))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(btnExit)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +220,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(menuAccountTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addGap(52, 52, 52)
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(menuIpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(menuIp, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,26 +236,26 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menuStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(menuStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
+                .addGap(81, 81, 81)
                 .addComponent(btnExit)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menuUserNameLabel.getAccessibleContext().setAccessibleName("");
 
-        menuControlTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        menuControlTitle.setForeground(new java.awt.Color(0, 0, 102));
+        menuControlTitle.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
+        menuControlTitle.setForeground(new java.awt.Color(242, 92, 5));
         menuControlTitle.setText("Control UFW");
 
         menuInfoLabel.setFont(new java.awt.Font("Tahoma", 3, 20)); // NOI18N
-        menuInfoLabel.setForeground(new java.awt.Color(51, 0, 102));
+        menuInfoLabel.setForeground(new java.awt.Color(0, 64, 133));
         menuInfoLabel.setText("Information UFW:");
 
         statusUFW.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         statusUFW.setForeground(new java.awt.Color(51, 153, 0));
         statusUFW.setText("active");
 
-        btnAddRule.setBackground(new java.awt.Color(213, 213, 213));
+        btnAddRule.setBackground(new java.awt.Color(255, 255, 204));
         btnAddRule.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAddRule.setForeground(new java.awt.Color(255, 255, 255));
         btnAddRule.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\add.png")); // NOI18N
@@ -273,6 +267,7 @@ public class Menu extends javax.swing.JFrame {
 
         btnTurnOff.setBackground(new java.awt.Color(255, 204, 153));
         btnTurnOff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnTurnOff.setForeground(new java.awt.Color(242, 92, 5));
         btnTurnOff.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\on-off.png")); // NOI18N
         btnTurnOff.setText("ON-OFF UFW");
         btnTurnOff.setBorder(null);
@@ -287,7 +282,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        UFWin4v6.setBackground(new java.awt.Color(51, 153, 0));
+        UFWin4v6.setBackground(new java.awt.Color(242, 92, 5));
         UFWin4v6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         UFWin4v6.setForeground(new java.awt.Color(255, 255, 255));
         UFWin4v6.setText("Infor UFW (v6)");
@@ -297,7 +292,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        optionDelete.setBackground(new java.awt.Color(153, 0, 0));
+        optionDelete.setBackground(new java.awt.Color(242, 92, 5));
         optionDelete.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         optionDelete.setForeground(new java.awt.Color(255, 255, 255));
         optionDelete.setText("Delete option");
@@ -307,14 +302,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        deleteText.setBackground(new java.awt.Color(255, 204, 204));
+        deleteText.setBackground(new java.awt.Color(242, 242, 242));
         deleteText.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         deleteText.setForeground(new java.awt.Color(153, 153, 153));
         deleteText.setText("VD: allow 80");
         deleteText.setToolTipText("");
         deleteText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
-        ufwTable.setBackground(new java.awt.Color(255, 204, 204));
+        ufwTable.setBackground(new java.awt.Color(242, 242, 242));
         ufwTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ufwTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -357,7 +352,7 @@ public class Menu extends javax.swing.JFrame {
             ufwTable.getColumnModel().getColumn(3).setPreferredWidth(150);
         }
 
-        btnReload.setBackground(new java.awt.Color(213, 213, 213));
+        btnReload.setBackground(new java.awt.Color(255, 255, 204));
         btnReload.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnReload.setForeground(new java.awt.Color(255, 255, 255));
         btnReload.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\reload.png")); // NOI18N
@@ -367,7 +362,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setBackground(new java.awt.Color(213, 213, 213));
+        btnDelete.setBackground(new java.awt.Color(255, 255, 204));
         btnDelete.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\delete.png")); // NOI18N
@@ -377,7 +372,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnEdit.setBackground(new java.awt.Color(213, 213, 213));
+        btnEdit.setBackground(new java.awt.Color(255, 255, 204));
         btnEdit.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\edit.png")); // NOI18N
@@ -387,7 +382,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        UFWin4v4.setBackground(new java.awt.Color(51, 153, 0));
+        UFWin4v4.setBackground(new java.awt.Color(242, 92, 5));
         UFWin4v4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         UFWin4v4.setForeground(new java.awt.Color(255, 255, 255));
         UFWin4v4.setText("Infor UFW (v4)");
@@ -397,7 +392,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnListApp.setBackground(new java.awt.Color(0, 102, 153));
+        btnListApp.setBackground(new java.awt.Color(242, 92, 5));
         btnListApp.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnListApp.setForeground(new java.awt.Color(255, 255, 255));
         btnListApp.setText("List app");
@@ -412,14 +407,14 @@ public class Menu extends javax.swing.JFrame {
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
+                        .addGap(195, 195, 195)
                         .addComponent(menuControlTitle)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(30, 30, 30)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(menuInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -439,7 +434,7 @@ public class Menu extends javax.swing.JFrame {
                                                 .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnListApp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
@@ -454,11 +449,10 @@ public class Menu extends javax.swing.JFrame {
                                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(statusUFW, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(UFWin4v6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(31, 31, 31))))))
+                                .addGap(27, 27, 27))))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(menuControlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -476,7 +470,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(1, 1, 1)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 38, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -487,18 +481,24 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnListApp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -555,6 +555,7 @@ public class Menu extends javax.swing.JFrame {
         String text = deleteText.getText();
         String delText = config_UFW.delete_UFW(host, port, username, password, text);
         JOptionPane.showMessageDialog(this, delText);
+        btnReload.doClick();
     }//GEN-LAST:event_optionDeleteActionPerformed
 
     private void UFWin4v6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UFWin4v6ActionPerformed
