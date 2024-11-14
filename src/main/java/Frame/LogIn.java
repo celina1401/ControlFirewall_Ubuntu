@@ -102,11 +102,11 @@ public class LogIn extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(248, 249, 250));
 
         Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        Title.setForeground(new java.awt.Color(0, 64, 133));
+        Title.setForeground(new java.awt.Color(242, 92, 5));
         Title.setText("REMOTE FIREWALL CONNECTION");
 
         ipLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        ipLabel.setForeground(new java.awt.Color(242, 92, 5));
+        ipLabel.setForeground(new java.awt.Color(0, 64, 133));
         ipLabel.setText("IP Address:");
 
         ipText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -115,7 +115,7 @@ public class LogIn extends javax.swing.JFrame {
         ipText.setToolTipText("");
 
         portLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        portLabel.setForeground(new java.awt.Color(242, 92, 5));
+        portLabel.setForeground(new java.awt.Color(0, 64, 133));
         portLabel.setText("Port:");
 
         portText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -123,7 +123,7 @@ public class LogIn extends javax.swing.JFrame {
         portText.setText("22");
 
         usernameLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        usernameLabel.setForeground(new java.awt.Color(242, 92, 5));
+        usernameLabel.setForeground(new java.awt.Color(0, 64, 133));
         usernameLabel.setText("User Name:");
 
         usernameText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -131,7 +131,7 @@ public class LogIn extends javax.swing.JFrame {
         usernameText.setText("celina1401");
 
         passwdLabel.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        passwdLabel.setForeground(new java.awt.Color(242, 92, 5));
+        passwdLabel.setForeground(new java.awt.Color(0, 64, 133));
         passwdLabel.setText("Pass Word:");
 
         BtnConnect.setBackground(new java.awt.Color(76, 176, 44));
@@ -144,7 +144,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        BtnCancel.setBackground(new java.awt.Color(166, 166, 166));
+        BtnCancel.setBackground(new java.awt.Color(220, 0, 0));
         BtnCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         BtnCancel.setForeground(new java.awt.Color(255, 255, 255));
         BtnCancel.setText("Cancel");

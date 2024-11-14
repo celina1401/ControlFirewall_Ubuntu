@@ -164,19 +164,19 @@ public class AddRule extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 440));
 
         addTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        addTitle.setForeground(new java.awt.Color(0, 64, 133));
+        addTitle.setForeground(new java.awt.Color(242, 92, 5));
         addTitle.setText("ADD RULE FOR FIREWALL");
 
         addPortLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addPortLabel.setForeground(new java.awt.Color(242, 92, 5));
+        addPortLabel.setForeground(new java.awt.Color(0, 64, 133));
         addPortLabel.setText("Port:");
 
         addFromLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addFromLabel.setForeground(new java.awt.Color(242, 92, 5));
+        addFromLabel.setForeground(new java.awt.Color(0, 64, 133));
         addFromLabel.setText("From:");
 
         addProtocolLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addProtocolLabel.setForeground(new java.awt.Color(242, 92, 5));
+        addProtocolLabel.setForeground(new java.awt.Color(0, 64, 133));
         addProtocolLabel.setText("Protocol:");
 
         addPortText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -197,7 +197,7 @@ public class AddRule extends javax.swing.JFrame {
             }
         });
 
-        addCancel.setBackground(new java.awt.Color(166, 166, 166));
+        addCancel.setBackground(new java.awt.Color(220, 0, 0));
         addCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addCancel.setForeground(new java.awt.Color(255, 255, 255));
         addCancel.setText("Cancel");
@@ -208,7 +208,7 @@ public class AddRule extends javax.swing.JFrame {
         });
 
         addToLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addToLabel.setForeground(new java.awt.Color(242, 92, 5));
+        addToLabel.setForeground(new java.awt.Color(0, 64, 133));
         addToLabel.setText("To:");
 
         addToText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -250,7 +250,7 @@ public class AddRule extends javax.swing.JFrame {
         });
 
         addAppLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addAppLabel.setForeground(new java.awt.Color(242, 92, 5));
+        addAppLabel.setForeground(new java.awt.Color(0, 64, 133));
         addAppLabel.setText("App:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -313,7 +313,7 @@ public class AddRule extends javax.swing.JFrame {
                     .addComponent(cbPort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(addPortText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 4, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -322,26 +322,26 @@ public class AddRule extends javax.swing.JFrame {
                     .addComponent(cbApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(cbFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbTo, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addToLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addToText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(addProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
