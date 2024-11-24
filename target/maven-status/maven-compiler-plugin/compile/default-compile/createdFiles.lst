@@ -3,8 +3,10 @@ Frame\Menu$5.class
 Frame\Logging$1.class
 Frame\LogIn$1.class
 Frame\AddRule.class
+Frame\AddRule$10.class
 Frame\AddRule$2.class
 Frame\Menu$2.class
+Frame\AddRule$11.class
 Frame\Menu$12.class
 Model\Logging_UFW.class
 Frame\Logging.class
