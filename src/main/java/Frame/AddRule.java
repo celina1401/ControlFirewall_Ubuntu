@@ -21,23 +21,16 @@ public class AddRule extends javax.swing.JFrame {
     private int add_port;
     private String add_from;
     private String add_protocol;
-    private String action = "";
+    private String add_action = "";
     private String add_to;
     
     public AddRule() {
         initComponents();
-//        addPortText.setVisible(false);
-//        addFromText.setVisible(false);
-//        addToText.setVisible(false);
-//        addProtocol.setVisible(false);
-//        addApp.setVisible(false);
-//        rangePanel.setVisible(false);
-
     }
     //them rule, xoa rule, sua rule
 
     public AddRule(String host, int port, String username, String password, 
-            int add_port, String add_from, String add_protocol, String action, String add_to) {
+            int add_port, String add_from, String add_protocol, String add_action, String add_to) {
         
         this.host = host;
         this.port = port;
@@ -47,7 +40,7 @@ public class AddRule extends javax.swing.JFrame {
         this.add_port = add_port;
         this.add_from = add_from;
         this.add_protocol = add_protocol;
-        this.action = action;
+        this.add_action = add_action;
         this.add_to = add_to;
     }
 
@@ -115,13 +108,14 @@ public class AddRule extends javax.swing.JFrame {
         this.add_protocol = add_protocol;
     }
 
-    public String getAction() {
-        return action;
+    public String getAdd_action() {
+        return add_action;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setAdd_action(String add_action) {
+        this.add_action = add_action;
     }
+
 
     public String getAdd_to() {
         return add_to;
@@ -130,8 +124,6 @@ public class AddRule extends javax.swing.JFrame {
     public void setAdd_to(String add_to) {
         this.add_to = add_to;
     }
-    
-    
     
     public static AddRule rule = new AddRule();
 
@@ -167,8 +159,8 @@ public class AddRule extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         ufwTableSample = new javax.swing.JTable();
         fromIP = new javax.swing.JLabel();
-        addAction = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        addActionLabel = new javax.swing.JLabel();
+        addAction = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,15 +199,12 @@ public class AddRule extends javax.swing.JFrame {
         addPortText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addPortText.setForeground(new java.awt.Color(102, 102, 102));
         addPortText.setToolTipText("");
+        addPortText.setEnabled(false);
 
         addFromText.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addFromText.setForeground(new java.awt.Color(102, 102, 102));
         addFromText.setToolTipText("");
-        addFromText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addFromTextActionPerformed(evt);
-            }
-        });
+        addFromText.setEnabled(false);
 
         addDone.setBackground(new java.awt.Color(76, 176, 44));
         addDone.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -248,6 +237,7 @@ public class AddRule extends javax.swing.JFrame {
         });
 
         cbAnywhere.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbAnywhere.setSelected(true);
         cbAnywhere.setText("    Anywhere");
         cbAnywhere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,6 +254,7 @@ public class AddRule extends javax.swing.JFrame {
         addProtocol.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addProtocol.setForeground(new java.awt.Color(102, 102, 102));
         addProtocol.setToolTipText("");
+        addProtocol.setEnabled(false);
 
         cbApp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,11 +267,7 @@ public class AddRule extends javax.swing.JFrame {
         addAppLabel.setText("Name App:");
 
         addApp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        addApp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addAppActionPerformed(evt);
-            }
-        });
+        addApp.setEnabled(false);
 
         cbRange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,14 +281,12 @@ public class AddRule extends javax.swing.JFrame {
 
         rangePanel.setBackground(new java.awt.Color(248, 249, 250));
 
-        range1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                range1ActionPerformed(evt);
-            }
-        });
+        range1.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel1.setText("   :");
+        jLabel1.setText("  :");
+
+        range2.setEnabled(false);
 
         javax.swing.GroupLayout rangePanelLayout = new javax.swing.GroupLayout(rangePanel);
         rangePanel.setLayout(rangePanelLayout);
@@ -310,10 +295,10 @@ public class AddRule extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rangePanelLayout.createSequentialGroup()
                 .addComponent(range1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(range2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(range2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         rangePanelLayout.setVerticalGroup(
             rangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,8 +338,6 @@ public class AddRule extends javax.swing.JFrame {
         ufwTableSample.setRequestFocusEnabled(false);
         ufwTableSample.setRowHeight(25);
         ufwTableSample.setShowGrid(true);
-        ufwTableSample.setShowHorizontalLines(true);
-        ufwTableSample.setShowVerticalLines(true);
         jScrollPane2.setViewportView(ufwTableSample);
         if (ufwTableSample.getColumnModel().getColumnCount() > 0) {
             ufwTableSample.getColumnModel().getColumn(0).setResizable(false);
@@ -371,12 +354,12 @@ public class AddRule extends javax.swing.JFrame {
         fromIP.setForeground(new java.awt.Color(0, 64, 133));
         fromIP.setText("IP:");
 
-        addAction.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addAction.setForeground(new java.awt.Color(0, 64, 133));
-        addAction.setText("Action:");
+        addActionLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addActionLabel.setForeground(new java.awt.Color(0, 64, 133));
+        addActionLabel.setText("Action:");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allow", "Deny" }));
+        addAction.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        addAction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allow", "Deny" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -389,7 +372,7 @@ public class AddRule extends javax.swing.JFrame {
                 .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(118, 118, 118))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +388,7 @@ public class AddRule extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(addPortLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(addPortText, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                                             .addComponent(addProtocol)))
@@ -413,36 +396,35 @@ public class AddRule extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(fromIP, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cbApp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(cbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(3, 3, 3)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(addRangeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(addAppLabel))))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(addAppLabel)
+                                                    .addComponent(addRangeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
-                                                .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(addAction, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(rangePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(rangePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(24, 24, 24)
-                                                .addComponent(cbAnywhere, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addComponent(cbAnywhere, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                        .addContainerGap(49, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addAction, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                            .addComponent(addActionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(129, 129, 129)
                 .addComponent(addTitle)
@@ -457,44 +439,37 @@ public class AddRule extends javax.swing.JFrame {
                 .addComponent(addToLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addPortText, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addPortLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbPort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(6, 6, 6))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addPortText, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addPortLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbPort, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addProtocolLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbRange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(rangePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addRangeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(addRangeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbApp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addAppLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(addAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addAction, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(addActionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addFromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAnywhere, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(fromIP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -506,7 +481,7 @@ public class AddRule extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addGap(69, 69, 69))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -531,86 +506,117 @@ public class AddRule extends javax.swing.JFrame {
     }//GEN-LAST:event_addCancelActionPerformed
 
     private void addDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoneActionPerformed
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        String add_port = addPortText.getText();
-        String add_from = addFromText.getText();
-        String add_protocol = this.addProtocol.getText();
-//        String add_to = addToText.getText();
-        String add_app = "";
-        int intRange1 = Integer.parseInt(range1.getText());
-        int intRange2 = Integer.parseInt(range2.getText());
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        String add_port = addPortText.isEnabled() ? addPortText.getText() : "";
+        String add_from = addFromText.isEnabled() ? addFromText.getText() : "";
+        String add_protocol = addProtocol.isEnabled() ? addProtocol.getText() : "";
+        String add_action = (String) addAction.getSelectedItem();
+        String add_app = cbApp.isSelected() ? (String) addApp.getSelectedItem() : "";
+        
+        String range1Text = range1.getText();
+        String range2Text = range2.getText();
+        int intRange1 = 0;
+        int intRange2 = 0;
+            System.out.println("add_port: " + add_port);
+    System.out.println("add_from: " + add_from);
+    System.out.println("add_protocol: " + add_protocol);
+    System.out.println("add_action: " + add_action);
+    System.out.println("add_app: " + add_app);
+    System.out.println("range1: " + range1Text);
+    System.out.println("range2: " + range2Text);
+        if (add_port.isEmpty() && add_from.isEmpty() && add_protocol.isEmpty() && add_app.isEmpty() && range1Text.isEmpty() && range2Text.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập ít nhất một thông số để thêm quy tắc!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+        if (!range1Text.isEmpty()) {
+            intRange1 = Integer.parseInt(range1Text);
+        }
+        if (!range2Text.isEmpty()) {
+            intRange2 = Integer.parseInt(range2Text);
+        }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
         if(cbApp.isSelected()){
             add_app = (String) addApp.getSelectedItem();   
         }
-        String[] choices = {"Allow", "Deny"};
-        String action = (String) JOptionPane.showInputDialog(null,"Choose action","Notification", 
-                                           JOptionPane.INFORMATION_MESSAGE, null,choices, choices[0]);
+//        String[] choices = {"Allow", "Deny"};
+//        String action = (String) JOptionPane.showInputDialog(null,"Choose action","Notification", 
+//                                           JOptionPane.INFORMATION_MESSAGE, null,choices, choices[0]);
+        
         Config_UFW add = new Config_UFW();
-        add.addRule(host, port, username, password, add_port, add_from, add_protocol, action, add_to, add_app, intRange1, intRange2);
-        if(!action.isEmpty()){
+//        add.addRule(host, port, username, password, add_port, add_from, add_protocol, add_action, add_app, intRange1, intRange2);
+
+        String result = add.addRule(host, port, username, password, add_port, add_from, add_protocol, add_action, add_app, intRange1, intRange2);
+        System.out.println("Result from addrule: " + result);
+        if (result.contains("successfull")) {
             JOptionPane.showMessageDialog(this, "Add rule successfully!");
             this.dispose();
+        } else if (result.contains("fault")) {
+            JOptionPane.showMessageDialog(this, "Fail: " + result, "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "This rule is invalid! Please check your information again.", "Warning Notification", JOptionPane.WARNING_MESSAGE);
         }
-        
     }//GEN-LAST:event_addDoneActionPerformed
 
     private void cbPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPortActionPerformed
-        // TODO add your handling code here:
-        addPortText.setVisible(cbPort.isSelected());
-        invalidate();
-        validate();
+        addPortText.setEnabled(cbPort.isSelected()); // Bật hoặc tắt theo trạng thái checkbox
+        if (!cbPort.isSelected()) {
+//            addPortText.setText(""); // Xóa giá trị nếu checkbox bị bỏ chọn
+        }
     }//GEN-LAST:event_cbPortActionPerformed
 
     private void cbAnywhereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnywhereActionPerformed
-        // TODO add your handling code here:
-//        addFromText.setVisible(cbAnywhere.isSelected());
-//        invalidate();
-//        validate();
+        if (cbAnywhere.isSelected()) {
+            addFromText.setEnabled(false); // Vô hiệu hóa nếu checkbox được chọn
+//            addFromText.setText("");      // Xóa nội dung nếu cần
+        } else {
+            addFromText.setEnabled(true); // Bật trường văn bản nếu checkbox không được chọn
+        }
     }//GEN-LAST:event_cbAnywhereActionPerformed
 
     private void cbProtocolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProtocolActionPerformed
-        addProtocol.setVisible(cbProtocol.isSelected());
-        invalidate();
-        validate();
+        if (cbProtocol.isSelected()) {
+            addProtocol.setEnabled(true); // Vô hiệu hóa nếu checkbox được chọn
+        } else {
+            addProtocol.setEnabled(false); // Bật trường văn bản nếu checkbox không được chọn
+        }
     }//GEN-LAST:event_cbProtocolActionPerformed
 
     private void cbAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAppActionPerformed
         // TODO add your handling code here:
-        Config_UFW config_UFW = new Config_UFW();
-        String[] get_list_app = config_UFW.getListApp(host, port, username, password);
-        addApp.removeAllItems();
+        if (cbApp.isSelected()) {
+            addApp.setEnabled(true); // Vô hiệu hóa nếu checkbox được chọn
+            Config_UFW config_UFW = new Config_UFW();
+            String[] get_list_app = config_UFW.getListApp(host, port, username, password);
+            addApp.removeAllItems();
 //        addApp.addItem("");
-        for (String app : get_list_app) {
-            addApp.addItem(app);
-        }
-        addApp.setVisible(cbApp.isSelected());
-        invalidate();
-        validate();
+            for (String app : get_list_app) {
+                addApp.addItem(app);
+            }
+        } else {
+            addApp.setEnabled(false); // Bật trường văn bản nếu checkbox không được chọn
+        }      
     }//GEN-LAST:event_cbAppActionPerformed
 
     private void cbRangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRangeActionPerformed
         // TODO add your handling code here:
-        rangePanel.setVisible(cbRange.isSelected());
-        invalidate();
-        validate();
+        boolean isSelected = cbRange.isSelected();
+        range1.setEnabled(isSelected);
+        range2.setEnabled(isSelected);
+//        if (!isSelected) {
+//            range1.setText("");
+//            range2.setText("");
+//        }
     }//GEN-LAST:event_cbRangeActionPerformed
-
-    private void range1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_range1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_range1ActionPerformed
-
-    private void addAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addAppActionPerformed
-
-    private void addFromTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFromTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addFromTextActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addAction;
+    private javax.swing.JComboBox<String> addAction;
+    private javax.swing.JLabel addActionLabel;
     private javax.swing.JComboBox<String> addApp;
     private javax.swing.JLabel addAppLabel;
     private javax.swing.JButton addCancel;
@@ -630,7 +636,6 @@ public class AddRule extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbProtocol;
     private javax.swing.JCheckBox cbRange;
     private javax.swing.JLabel fromIP;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
