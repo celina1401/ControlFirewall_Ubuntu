@@ -6,6 +6,7 @@ package Frame;
 
 import Model.Config_UFW;
 import Model.TableUFW;
+import Model.Logging_UFW;
 import com.jcraft.jsch.Session;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,8 +26,11 @@ public class Menu extends javax.swing.JFrame {
     private boolean isV4;
     Session session = LogIn.session;
     Config_UFW config_UFW = new Config_UFW();
+    Logging_UFW logging_UFW = new Logging_UFW();
     TableUFW ufwmodel = new TableUFW();
     String status; 
+    String log_status;
+    String log_level;
         
     //lay gia tri
     public String getHost(){
@@ -73,9 +77,15 @@ public class Menu extends javax.swing.JFrame {
     }
     
     public void checkStatus(String host, int port, String username, String password){
-        
         status = config_UFW.status_UFW(host, port, username, password); 
         statusUFW.setText(status);
+    }
+    
+    public void checkLogging(String host, int port, String username, String password){
+        log_status = logging_UFW.logging_status(host, port, username, password);
+        log_level = logging_UFW.logging_level(host, port, username, password);
+        menuLogging.setText(log_status);
+        loggingLevel.setText(log_level);
     }
     
     public void getInfor(String host, int port, String username, String password){
@@ -192,15 +202,13 @@ public class Menu extends javax.swing.JFrame {
         menuLoggingLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuLoggingLabel.setText("Logging:");
 
-        menuLogging.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuLogging.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         menuLogging.setForeground(new java.awt.Color(255, 255, 228));
         menuLogging.setName(""); // NOI18N
-        menuLogging.setText("on ");
 
-        loggingLevel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        loggingLevel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         loggingLevel.setForeground(new java.awt.Color(255, 255, 228));
         loggingLevel.setName(""); // NOI18N
-        loggingLevel.setText("(low)");
 
         jButton1.setBackground(new java.awt.Color(243, 165, 86));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -238,10 +246,10 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(menuStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(menuLogging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(loggingLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(menuLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loggingLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addGap(15, 15, 15))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -530,7 +538,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(1, 1, 1)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -541,7 +549,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnListApp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
 
@@ -624,7 +632,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_UFWin4v6ActionPerformed
 
     private void btnTurnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnOffActionPerformed
-
+        
         String statusUpdate = "";
         status = config_UFW.status_UFW(host, port, username, password);
 
@@ -691,7 +699,6 @@ public class Menu extends javax.swing.JFrame {
         Logging logging = new Logging();
         logging.setVisible(true);
         logging.setLocationRelativeTo(null);
-        this.setVisible(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

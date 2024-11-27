@@ -260,7 +260,8 @@ public class LogIn extends javax.swing.JFrame {
                     menu.updateInfor(login.getHost(), login.getPort(), login.getUsername());
                     menu.checkActive("Connect");
                     menu.checkStatus(login.getHost(), login.getPort(), login.getUsername(), login.getPassword());
-                    
+                    menu.checkLogging(login.getHost(), login.getPort(), login.getUsername(), login.getPassword());
+                    System.out.println("test");
                     menu.setHost(login.getHost());
                     menu.setPort(login.getPort());
                     menu.setUsername(login.getUsername());
@@ -270,7 +271,7 @@ public class LogIn extends javax.swing.JFrame {
                     rule.setHost(login.getHost());
                     rule.setPort(login.getPort());
                     rule.setUsername(login.getUsername());
-                    rule.setPassword(login.getPassword());
+                    rule.setPassword(login.getPassword());                 
                     
                 }
             }
