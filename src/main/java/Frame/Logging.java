@@ -79,6 +79,7 @@ public class Logging extends javax.swing.JFrame {
         this.password = password;
     }
     
+    
     public Logging() {
         initComponents();
     }
@@ -89,6 +90,7 @@ public class Logging extends javax.swing.JFrame {
         logStatus.setText(log_status);
         logLevel.setText(log_level);
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -104,7 +106,7 @@ public class Logging extends javax.swing.JFrame {
         btnOk = new javax.swing.JButton();
         logStatus = new javax.swing.JLabel();
         logLevel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        logLevelEdit = new javax.swing.JButton();
         on_off_log = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,9 +131,15 @@ public class Logging extends javax.swing.JFrame {
                 "TIME", "ACTION", "SOURCE", "DESTINATION"
             }
         ));
+        logTable.setEnabled(false);
         logTable.setFillsViewportHeight(true);
         logTable.setRowHeight(25);
         logTable.setShowGrid(true);
+        logTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(logTable);
 
         javax.swing.GroupLayout logTablePanelLayout = new javax.swing.GroupLayout(logTablePanel);
@@ -175,10 +183,15 @@ public class Logging extends javax.swing.JFrame {
         logLevel.setForeground(new java.awt.Color(255, 102, 0));
         logLevel.setText("level");
 
-        jButton1.setBackground(new java.awt.Color(248, 249, 250));
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\log_edit.png")); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
+        logLevelEdit.setBackground(new java.awt.Color(248, 249, 250));
+        logLevelEdit.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\log_edit.png")); // NOI18N
+        logLevelEdit.setBorder(null);
+        logLevelEdit.setContentAreaFilled(false);
+        logLevelEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logLevelEditActionPerformed(evt);
+            }
+        });
 
         on_off_log.setBackground(new java.awt.Color(248, 249, 250));
         on_off_log.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\log_power.png")); // NOI18N
@@ -219,27 +232,28 @@ public class Logging extends javax.swing.JFrame {
                             .addComponent(logStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(logLevelEdit)
                             .addComponent(on_off_log))
-                        .addGap(184, 184, 184))))
+                        .addGap(211, 211, 211))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(LogTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(logStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(on_off_log, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(on_off_log, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(logStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(logStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(logLevelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(logLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                        .addComponent(logLevelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addComponent(logTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,7 +276,19 @@ public class Logging extends javax.swing.JFrame {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+//        String logstt = logStatus.getText();
+//        String loglvl = logLevel.getText();
+//               
+//        Menu menu = new Menu();
+////        menu.setVisible(true);
+////        menu.setLocationRelativeTo(null);
+//        menu.setLog_level(loglvl);
+//        menu.setLog_status(logstt);
+//        menu.updateLog(logstt, loglvl);
+//        
+//        System.out.println(logstt);
+//        System.out.println(loglvl);
+        this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void on_off_logActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_on_off_logActionPerformed
@@ -300,13 +326,28 @@ public class Logging extends javax.swing.JFrame {
         logLevel.setText(levelLogUpdate);
     }//GEN-LAST:event_on_off_logActionPerformed
 
+    private void logLevelEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logLevelEditActionPerformed
+        String[] choices = {"low","medium","high"};
+        String level = (String) JOptionPane.showInputDialog(null, "Choose level", "Change log level",
+                JOptionPane.INFORMATION_MESSAGE,null,choices, choices[0]);
+        logLevel.setText(logging_UFW.logLevel(host, port, username, password, level));
+        
+    }//GEN-LAST:event_logLevelEditActionPerformed
+
+    private void logTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logTableMouseClicked
+        boolean edit = logTable.isEditing();
+        if(edit == false && evt.getClickCount() == 2 && !evt.isConsumed()){
+            JOptionPane.showMessageDialog(null, "You can not edit this table");
+        }
+    }//GEN-LAST:event_logTableMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label LogTitle;
     private javax.swing.JButton btnOk;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logLevel;
+    private javax.swing.JButton logLevelEdit;
     private javax.swing.JLabel logLevelLabel;
     private javax.swing.JLabel logStatus;
     private javax.swing.JLabel logStatusLabel;

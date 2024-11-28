@@ -31,7 +31,7 @@ public class Menu extends javax.swing.JFrame {
     String status; 
     String log_status;
     String log_level;
-        
+       
     //lay gia tri
     public String getHost(){
         return host;
@@ -65,11 +65,39 @@ public class Menu extends javax.swing.JFrame {
     public void setPassword(String password){
         this.password = password;
     }
+
+    public String getLog_status() {
+        return log_status;
+    }
+
+    public void setLog_status(String log_status) {
+        this.log_status = log_status;
+    }
+
+    public String getLog_level() {
+        return log_level;
+    }
+
+    public void setLog_level(String log_level) {
+        this.log_level = log_level;
+    }
+    
+    public void getInfor(String host, int port, String username, String password){
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;        
+    }
     
     public void updateInfor(String host, int port, String username){
         menuIp.setText(host);
         menuPort.setText("" + port);
         menuUserName.setText(username);
+    }
+    
+    public void updateLog(String logstt, String loglvl){
+        menuLogging.setText(logstt);
+        loggingLevel.setText(loglvl);
     }
     
     public void checkActive(String connect){
@@ -87,18 +115,28 @@ public class Menu extends javax.swing.JFrame {
         menuLogging.setText(log_status);
         loggingLevel.setText(log_level);
     }
-    
-    public void getInfor(String host, int port, String username, String password){
-        this.host = host;
-        this.port = port;
-        this.username = username;
-        this.password = password;        
-    }
+//    
+//    public void updateLogging(String host, int port, String username, String password, String logstt, String loglvl){
+//        menuLogging.setText(logstt);
+//        loggingLevel.setText(loglvl);
+//    }
+//    
+//    public void set_logstt(String logstt){
+//        menuLogging.setText(logstt);
+//    }
+//    
+//    public void set_loglvl(String loglvl){
+//        menuLogging.setText(loglvl);
+//    }
+
     public Menu() {
         initComponents();
-//        statusUFW.setVisible(false);
-        ufwTable.setVisible(false);
-        //thanh panel, cho bang nằm trên thanh panel, ẩn panel
+    }
+    
+    public Menu(DefaultTableModel result){
+        result = ufwmodel.ufwTableModelv4(host, port, username, password);
+        ufwTable.setModel(result); 
+        initComponents();
     }
        
     @SuppressWarnings("unchecked")
@@ -580,6 +618,8 @@ public class Menu extends javax.swing.JFrame {
             if (confirm == JOptionPane.YES_OPTION){
                 btnAddRule.doClick();                
                 config_UFW.delete_UFW(host, port, username, password, index);
+            }else{
+                JOptionPane.showMessageDialog(this, "No rule has changed");
             }
         }else{
             JOptionPane.showMessageDialog(this, "Please select row which you want to edit!");
@@ -592,8 +632,6 @@ public class Menu extends javax.swing.JFrame {
         int row = ufwTable.getSelectedRow();
         if (row > -1){
             String index = ufwTable.getValueAt(row, 0).toString();
-            //            String id_ufw = String.valueOf(index);
-            //            System.out.println(index);
             config_UFW.delete_UFW(host, port, username, password, index);
             
             model.removeRow(ufwTable.getSelectedRow());
@@ -614,6 +652,8 @@ public class Menu extends javax.swing.JFrame {
             ufwTable.setModel(result);
         }
         ufwmodel.setupTable(ufwTable);
+        menuLogging.setText(logging_UFW.logging_status(host, port, username, password));
+        loggingLevel.setText(logging_UFW.logging_level(host, port, username, password));
     }//GEN-LAST:event_btnReloadActionPerformed
 
     private void optionDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionDeleteActionPerformed
@@ -696,6 +736,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_ufwTableMousePressed
 
     private void logDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logDetailsActionPerformed
+//        this.setVisible(false);
         Logging logging = new Logging();
         logging.getInfor(host, port, username, password);
         logging.checkLogging(host, port, username, password);

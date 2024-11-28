@@ -261,7 +261,7 @@ public class LogIn extends javax.swing.JFrame {
                     menu.checkActive("Connect");
                     menu.checkStatus(login.getHost(), login.getPort(), login.getUsername(), login.getPassword());
                     menu.checkLogging(login.getHost(), login.getPort(), login.getUsername(), login.getPassword());
-                    System.out.println("test");
+                                        
                     menu.setHost(login.getHost());
                     menu.setPort(login.getPort());
                     menu.setUsername(login.getUsername());

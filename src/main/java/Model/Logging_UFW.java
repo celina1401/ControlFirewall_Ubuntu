@@ -22,6 +22,10 @@ import javax.swing.table.JTableHeader;
  * @author User
  */
 public class Logging_UFW {
+
+    public Logging_UFW() {
+    }
+    
     public String logging_status (String host, int port, String username, String password){
 
         String command = "echo '" + password + "' | sudo -S ufw status verbose";
@@ -135,7 +139,7 @@ public class Logging_UFW {
         return outBuilder.toString();
     }
     
-        public String logUFW_disable(String host, int port, String username, String password){
+    public String logUFW_disable(String host, int port, String username, String password){
         String command = "echo '" + password + "' | sudo -S ufw logging off";
         StringBuilder outBuilder = new StringBuilder();
         try {
@@ -160,4 +164,38 @@ public class Logging_UFW {
         }
         return outBuilder.toString();
     }
+    
+    public String logLevel (String host, int port, String username, String password, String level){
+        //Thuc hien thay doi level
+        String command = "echo '" + password + "' | sudo -S ufw logging " + level;
+        StringBuilder outBuilder = new StringBuilder();
+        try {
+            Session session = LogIn.establishSSH(host, port, username, password);
+            ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+            channelExec.setCommand(command);
+            
+            InputStream in = channelExec.getInputStream();
+            channelExec.connect();
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            
+            String line;
+            while((line = reader.readLine()) != null){
+                outBuilder.append(line);
+            }
+            
+            channelExec.disconnect();
+            session.disconnect();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //cat chuoi nhan level
+        String logLevel = logging_level(host, port, username, password);
+//        System.out.println(logLevel);
+        return logLevel;
+    }
+    
+//    DefaultTableModel logModel ()
+              
 }
