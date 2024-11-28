@@ -13,11 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-
-/**
- *
- * @author User
- */
 public class Config_UFW {
 
     public String disableUFW(String host, int port, String username, String password) {
@@ -94,6 +89,7 @@ public class Config_UFW {
             session.disconnect();
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return outputBuffer.toString();
     }

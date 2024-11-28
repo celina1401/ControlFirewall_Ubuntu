@@ -506,8 +506,7 @@ public class AddRule extends javax.swing.JFrame {
     }//GEN-LAST:event_addCancelActionPerformed
 
     private void addDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoneActionPerformed
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+      
         String add_port = addPortText.isEnabled() ? addPortText.getText() : "";
         String add_from = addFromText.isEnabled() ? addFromText.getText() : "";
         String add_protocol = addProtocol.isEnabled() ? addProtocol.getText() : "";
@@ -518,15 +517,15 @@ public class AddRule extends javax.swing.JFrame {
         String range2Text = range2.getText();
         int intRange1 = 0;
         int intRange2 = 0;
-            System.out.println("add_port: " + add_port);
-    System.out.println("add_from: " + add_from);
-    System.out.println("add_protocol: " + add_protocol);
-    System.out.println("add_action: " + add_action);
-    System.out.println("add_app: " + add_app);
-    System.out.println("range1: " + range1Text);
-    System.out.println("range2: " + range2Text);
+        System.out.println("add_port: " + add_port);
+        System.out.println("add_from: " + add_from);
+        System.out.println("add_protocol: " + add_protocol);
+        System.out.println("add_action: " + add_action);
+        System.out.println("add_app: " + add_app);
+        System.out.println("range1: " + range1Text);
+        System.out.println("range2: " + range2Text);
         if (add_port.isEmpty() && add_from.isEmpty() && add_protocol.isEmpty() && add_app.isEmpty() && range1Text.isEmpty() && range2Text.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập ít nhất một thông số để thêm quy tắc!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please fill at least 1 rule!", "Warning Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
         try {
@@ -606,13 +605,7 @@ public class AddRule extends javax.swing.JFrame {
         boolean isSelected = cbRange.isSelected();
         range1.setEnabled(isSelected);
         range2.setEnabled(isSelected);
-//        if (!isSelected) {
-//            range1.setText("");
-//            range2.setText("");
-//        }
     }//GEN-LAST:event_cbRangeActionPerformed
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> addAction;

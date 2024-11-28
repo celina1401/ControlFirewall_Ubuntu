@@ -121,7 +121,7 @@ public class Menu extends javax.swing.JFrame {
         menuLoggingLabel = new java.awt.Label();
         menuLogging = new java.awt.Label();
         loggingLevel = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
+        logDetails = new javax.swing.JButton();
         menuControlTitle = new javax.swing.JLabel();
         menuInfoLabel = new java.awt.Label();
         statusUFW = new javax.swing.JLabel();
@@ -152,36 +152,36 @@ public class Menu extends javax.swing.JFrame {
         menuAccountTitle.setForeground(new java.awt.Color(242, 242, 242));
         menuAccountTitle.setText("Account");
 
-        menuIpLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuIpLabel.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         menuIpLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuIpLabel.setText("IP: ");
 
-        menuIp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuIp.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         menuIp.setForeground(new java.awt.Color(255, 255, 228));
         menuIp.setText("10.0.0.1");
 
-        menuUserNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuUserNameLabel.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         menuUserNameLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuUserNameLabel.setText("User name:");
 
-        menuUserName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuUserName.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         menuUserName.setForeground(new java.awt.Color(255, 255, 228));
         menuUserName.setText("Celina");
 
         menuPortLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        menuPortLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuPortLabel.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         menuPortLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuPortLabel.setText("Port:");
 
-        menuPort.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuPort.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         menuPort.setForeground(new java.awt.Color(255, 255, 228));
         menuPort.setText("22");
 
-        menuStatusLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuStatusLabel.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         menuStatusLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuStatusLabel.setText("Status:");
 
-        menuStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        menuStatus.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         menuStatus.setForeground(new java.awt.Color(255, 255, 228));
         menuStatus.setName(""); // NOI18N
         menuStatus.setText("Active");
@@ -198,28 +198,28 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        menuLoggingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        menuLoggingLabel.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         menuLoggingLabel.setForeground(new java.awt.Color(242, 242, 242));
         menuLoggingLabel.setText("Logging:");
 
-        menuLogging.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menuLogging.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         menuLogging.setForeground(new java.awt.Color(255, 255, 228));
         menuLogging.setName(""); // NOI18N
 
-        loggingLevel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        loggingLevel.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         loggingLevel.setForeground(new java.awt.Color(255, 255, 228));
         loggingLevel.setName(""); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(243, 165, 86));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\details.png")); // NOI18N
-        jButton1.setToolTipText("");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logDetails.setBackground(new java.awt.Color(243, 165, 86));
+        logDetails.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        logDetails.setForeground(new java.awt.Color(255, 255, 255));
+        logDetails.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\details.png")); // NOI18N
+        logDetails.setToolTipText("");
+        logDetails.setBorder(null);
+        logDetails.setContentAreaFilled(false);
+        logDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logDetailsActionPerformed(evt);
             }
         });
 
@@ -228,7 +228,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(menuUserNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -236,7 +236,7 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(menuPortLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(menuStatusLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(menuLoggingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -246,11 +246,11 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(menuStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(menuLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                        .addComponent(menuLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loggingLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(loggingLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(logDetails)
                         .addGap(15, 15, 15))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -271,7 +271,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(menuAccountTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addGap(40, 40, 40)
+                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(menuIpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(menuIp, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -294,12 +294,12 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(menuStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(menuLogging, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(loggingLevel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(69, 69, 69)
                         .addComponent(btnExit)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(116, Short.MAX_VALUE))))
         );
 
         menuUserNameLabel.getAccessibleContext().setAccessibleName("");
@@ -538,7 +538,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(1, 1, 1)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,7 +549,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnListApp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
 
@@ -695,12 +695,17 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ufwTableMousePressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void logDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logDetailsActionPerformed
         Logging logging = new Logging();
+        logging.getInfor(host, port, username, password);
+        logging.checkLogging(host, port, username, password);
         logging.setVisible(true);
         logging.setLocationRelativeTo(null);
+        logging.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        
+    }//GEN-LAST:event_logDetailsActionPerformed
 
     private void deleteTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_deleteTextFocusGained
         // TODO add your handling code here:
@@ -718,10 +723,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnReload;
     private javax.swing.JButton btnTurnOff;
     private javax.swing.JTextField deleteText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logDetails;
     private java.awt.Label loggingLevel;
     private java.awt.Label menuAccountTitle;
     private javax.swing.JLabel menuControlTitle;

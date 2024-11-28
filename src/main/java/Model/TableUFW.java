@@ -8,6 +8,7 @@ import Frame.LogIn;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +18,7 @@ import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -25,10 +27,10 @@ import javax.swing.table.DefaultTableModel;
 public class TableUFW {
     public DefaultTableModel ufwTableModel (String host, int port, String username, String password){
         DefaultTableModel ufwTable = new DefaultTableModel();
-        ufwTable.addColumn("      ID");
-        ufwTable.addColumn("                           To");
-        ufwTable.addColumn("        Action");
-        ufwTable.addColumn("                From");
+        ufwTable.addColumn("    ID");
+        ufwTable.addColumn("                      To");
+        ufwTable.addColumn("     Action");
+        ufwTable.addColumn("            From");
 //        ufwTable.addColumn("  Edit");
 //        ufwTable.addColumn(" Delete");
         
@@ -85,10 +87,10 @@ public class TableUFW {
     
     public DefaultTableModel ufwTableModelv4 (String host, int port, String username, String password){
         DefaultTableModel ufwTable = new DefaultTableModel();
-        ufwTable.addColumn("      ID");
-        ufwTable.addColumn("                           To");
-        ufwTable.addColumn("        Action");
-        ufwTable.addColumn("                From");
+        ufwTable.addColumn("    ID");
+        ufwTable.addColumn("                      To");
+        ufwTable.addColumn("     Action");
+        ufwTable.addColumn("            From");
 //        ufwTable.addColumn("  Edit");
 //        ufwTable.addColumn(" Delete");
         
@@ -145,7 +147,9 @@ public class TableUFW {
     }
         
     public void setupTable(JTable ufwTable){
-                
+        
+        JTableHeader header = ufwTable.getTableHeader();
+        header.setFont(new Font("Tahoma",Font.BOLD,14));
         ufwTable.getColumnModel().getColumn(0).setPreferredWidth(10);
         ufwTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         ufwTable.getColumnModel().getColumn(2).setPreferredWidth(50);
