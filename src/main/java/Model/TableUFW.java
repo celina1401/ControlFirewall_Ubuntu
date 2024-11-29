@@ -31,8 +31,6 @@ public class TableUFW {
         ufwTable.addColumn("                      To");
         ufwTable.addColumn("     Action");
         ufwTable.addColumn("            From");
-//        ufwTable.addColumn("  Edit");
-//        ufwTable.addColumn(" Delete");
         
         String command = "echo '" + password + "' | sudo -S ufw verbose numbered";
         try {

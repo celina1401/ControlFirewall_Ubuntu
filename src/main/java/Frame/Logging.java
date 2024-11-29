@@ -275,19 +275,6 @@ public class Logging extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        // TODO add your handling code here:
-//        String logstt = logStatus.getText();
-//        String loglvl = logLevel.getText();
-//               
-//        Menu menu = new Menu();
-////        menu.setVisible(true);
-////        menu.setLocationRelativeTo(null);
-//        menu.setLog_level(loglvl);
-//        menu.setLog_status(logstt);
-//        menu.updateLog(logstt, loglvl);
-//        
-//        System.out.println(logstt);
-//        System.out.println(loglvl);
         this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
 

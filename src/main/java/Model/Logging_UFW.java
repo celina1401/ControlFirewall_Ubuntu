@@ -196,6 +196,15 @@ public class Logging_UFW {
         return logLevel;
     }
     
-//    DefaultTableModel logModel ()
+    DefaultTableModel logUFWTable (String host, int port, String username, String password){
+        DefaultTableModel logModel = new DefaultTableModel();
+        logModel.addColumn("TIME");
+        logModel.addColumn("ACTION");
+        logModel.addColumn("SOURCE");
+        logModel.addColumn("DESTINATION");
+        
+        String command = "echo '" + password + "' | sudo -S ufw verbose numbered";
+        return logModel;
+    }
               
 }

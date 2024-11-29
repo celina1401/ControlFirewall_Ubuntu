@@ -6,6 +6,7 @@ package Frame;
 
 import Model.Config_UFW;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -161,6 +162,7 @@ public class AddRule extends javax.swing.JFrame {
         fromIP = new javax.swing.JLabel();
         addActionLabel = new javax.swing.JLabel();
         addAction = new javax.swing.JComboBox<>();
+        btnView = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -210,6 +212,7 @@ public class AddRule extends javax.swing.JFrame {
         addDone.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addDone.setForeground(new java.awt.Color(255, 255, 255));
         addDone.setText("Done");
+        addDone.setBorder(null);
         addDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addDoneActionPerformed(evt);
@@ -220,6 +223,7 @@ public class AddRule extends javax.swing.JFrame {
         addCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addCancel.setForeground(new java.awt.Color(255, 255, 255));
         addCancel.setText("Cancel");
+        addCancel.setBorder(null);
         addCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCancelActionPerformed(evt);
@@ -313,7 +317,7 @@ public class AddRule extends javax.swing.JFrame {
         ufwTableSample.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ufwTableSample.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "TO", "ACTION", "FROM"
@@ -361,16 +365,28 @@ public class AddRule extends javax.swing.JFrame {
         addAction.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         addAction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allow", "Deny" }));
 
+        btnView.setBackground(new java.awt.Color(0, 115, 179));
+        btnView.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnView.setForeground(new java.awt.Color(255, 255, 255));
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
                 .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(71, 71, 71)
                 .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
+                .addGap(66, 66, 66))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,9 +438,9 @@ public class AddRule extends javax.swing.JFrame {
                             .addComponent(addActionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(129, 129, 129)
                 .addComponent(addTitle)
@@ -476,11 +492,12 @@ public class AddRule extends javax.swing.JFrame {
                         .addComponent(addFromText)
                         .addGap(3, 3, 3)))
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69))
         );
 
@@ -506,7 +523,7 @@ public class AddRule extends javax.swing.JFrame {
     }//GEN-LAST:event_addCancelActionPerformed
 
     private void addDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoneActionPerformed
-      
+     
         String add_port = addPortText.isEnabled() ? addPortText.getText() : "";
         String add_from = addFromText.isEnabled() ? addFromText.getText() : "";
         String add_protocol = addProtocol.isEnabled() ? addProtocol.getText() : "";
@@ -607,6 +624,89 @@ public class AddRule extends javax.swing.JFrame {
         range2.setEnabled(isSelected);
     }//GEN-LAST:event_cbRangeActionPerformed
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        DefaultTableModel tableSample = (DefaultTableModel) ufwTableSample.getModel();
+        if(tableSample.getRowCount() != -1){
+            tableSample.setRowCount(0);
+        }
+        if(addPortText.isEnabled() && addProtocol.isEnabled() 
+                && !addFromText.isEnabled() && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+            //port,proto
+            tableSample.addRow(new Object[]{
+                1,
+                addPortText.getText() + "/"+ addProtocol.getText(),
+                addAction.getSelectedItem(),
+                "Anywhere"
+            });            
+        }else if(range1.isEnabled() && range2.isEnabled() && addProtocol.isEnabled()
+                && !addPortText.isEnabled() && !addFromText.isEnabled() && !addApp.isEnabled()){
+            //range, proto
+            tableSample.addRow(new Object[]{
+                1,
+                range1.getText()+ ":" + range2.getText() + "/"+ addProtocol.getText(),
+                addAction.getSelectedItem(),
+                "Anywhere"
+            }); 
+        }else if(addPortText.isEnabled()
+                && !addProtocol.isEnabled() && !addFromText.isEnabled() && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+            //port
+            tableSample.addRow(new Object[]{
+                1,
+                addPortText.getText(),
+                addAction.getSelectedItem(),
+                "Anywhere"
+            }); 
+        }else if(addApp.isEnabled()
+                && !addProtocol.isEnabled() && !addFromText.isEnabled() && !addPortText.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+            //app
+            tableSample.addRow(new Object[]{
+                1,
+                addApp.getSelectedItem(),
+                addAction.getSelectedItem(),
+                "Anywhere"
+            }); 
+        }else if(addPortText.isEnabled() && addProtocol.isEnabled()  && addFromText.isEnabled()
+                && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+            //port,proto,from
+            tableSample.addRow(new Object[]{
+                1,
+                addPortText.getText() + "/"+ addProtocol.getText(),
+                addAction.getSelectedItem(),
+                addFromText.getText()
+            });            
+        }else if(range1.isEnabled() && range2.isEnabled() && addProtocol.isEnabled()  && addFromText.isEnabled()
+                && !addPortText.isEnabled() && !addApp.isEnabled()){
+            //range, proto,from
+            tableSample.addRow(new Object[]{
+                1,
+                range1.getText()+ ":" + range2.getText() + "/"+ addProtocol.getText(),
+                addAction.getSelectedItem(),
+                addFromText.getText()
+            }); 
+        }else if(addPortText.isEnabled()  && addFromText.isEnabled()
+                && !addProtocol.isEnabled() && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+            //port,from
+            tableSample.addRow(new Object[]{
+                1,
+                addPortText.getText(),
+                addAction.getSelectedItem(),
+                addFromText.getText()
+            }); 
+        }else if(addFromText.isEnabled()
+                && !addApp.isEnabled()  && !addProtocol.isEnabled() && !addPortText.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+            //from
+            tableSample.addRow(new Object[]{
+                1,
+                "Anywhere",
+                addAction.getSelectedItem(),
+                addFromText.getText()
+            }); 
+        }else{
+            JOptionPane.showMessageDialog(this, "This rule is invalid!");
+        }
+
+    }//GEN-LAST:event_btnViewActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> addAction;
     private javax.swing.JLabel addActionLabel;
@@ -623,6 +723,7 @@ public class AddRule extends javax.swing.JFrame {
     private javax.swing.JLabel addRangeLabel;
     private javax.swing.JLabel addTitle;
     private javax.swing.JLabel addToLabel;
+    private javax.swing.JButton btnView;
     private javax.swing.JCheckBox cbAnywhere;
     private javax.swing.JCheckBox cbApp;
     private javax.swing.JCheckBox cbPort;

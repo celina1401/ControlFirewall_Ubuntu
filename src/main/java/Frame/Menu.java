@@ -115,30 +115,15 @@ public class Menu extends javax.swing.JFrame {
         menuLogging.setText(log_status);
         loggingLevel.setText(log_level);
     }
-//    
-//    public void updateLogging(String host, int port, String username, String password, String logstt, String loglvl){
-//        menuLogging.setText(logstt);
-//        loggingLevel.setText(loglvl);
-//    }
-//    
-//    public void set_logstt(String logstt){
-//        menuLogging.setText(logstt);
-//    }
-//    
-//    public void set_loglvl(String loglvl){
-//        menuLogging.setText(loglvl);
-//    }
-
+                                                                                                                  
     public Menu() {
         initComponents();
+//        DefaultTableModel initUFWtable = ufwmodel.ufwTableModelv4(host, port, username, password);
+//        DefaultTableModel initTableModel = ufwmodel.ufwTableModelv4(host, port, username, password);
+//        ufwTable.setModel(initTableModel);
+//        ufwTable.setModel(initUFWtable);
     }
-    
-    public Menu(DefaultTableModel result){
-        result = ufwmodel.ufwTableModelv4(host, port, username, password);
-        ufwTable.setModel(result); 
-        initComponents();
-    }
-       
+           
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -608,15 +593,13 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-//        DefaultTableModel model = (DefaultTableModel) ufwTable.getModel();
         int selectRow = ufwTable.getSelectedRow();
         if (selectRow > -1){
-//            menu.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             String index = ufwTable.getValueAt(selectRow, 0).toString();
             int confirm = JOptionPane.showConfirmDialog(this, "You want to update this rule, don't you?",
                     "Confirmation",JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION){
-                btnAddRule.doClick();                
+                btnAddRule.doClick();               
                 config_UFW.delete_UFW(host, port, username, password, index);
             }else{
                 JOptionPane.showMessageDialog(this, "No rule has changed");
