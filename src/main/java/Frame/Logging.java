@@ -6,6 +6,7 @@ package Frame;
 
 import Model.Logging_UFW;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Logging extends javax.swing.JFrame {
     private String status;
     
     Logging_UFW logging_UFW = new Logging_UFW();
-
+    
     public String getHost() {
         return host;
     }
@@ -84,6 +85,7 @@ public class Logging extends javax.swing.JFrame {
         initComponents();
     }
     
+    
     public void checkLogging(String host, int port, String username, String password){
         log_status = logging_UFW.logging_status(host, port, username, password);
         log_level = logging_UFW.logging_level(host, port, username, password);
@@ -108,12 +110,14 @@ public class Logging extends javax.swing.JFrame {
         logLevel = new javax.swing.JLabel();
         logLevelEdit = new javax.swing.JButton();
         on_off_log = new javax.swing.JButton();
+        reloadLog = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(248, 249, 250));
 
         jPanel2.setBackground(new java.awt.Color(248, 249, 250));
 
+        logTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         logTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -130,8 +134,15 @@ public class Logging extends javax.swing.JFrame {
             new String [] {
                 "TIME", "ACTION", "SOURCE", "DESTINATION"
             }
-        ));
-        logTable.setEnabled(false);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         logTable.setFillsViewportHeight(true);
         logTable.setRowHeight(25);
         logTable.setShowGrid(true);
@@ -141,6 +152,12 @@ public class Logging extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(logTable);
+        if (logTable.getColumnModel().getColumnCount() > 0) {
+            logTable.getColumnModel().getColumn(0).setResizable(false);
+            logTable.getColumnModel().getColumn(1).setResizable(false);
+            logTable.getColumnModel().getColumn(2).setResizable(false);
+            logTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout logTablePanelLayout = new javax.swing.GroupLayout(logTablePanel);
         logTablePanel.setLayout(logTablePanelLayout);
@@ -203,16 +220,27 @@ public class Logging extends javax.swing.JFrame {
             }
         });
 
+        reloadLog.setBackground(new java.awt.Color(255, 204, 204));
+        reloadLog.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\reload.png")); // NOI18N
+        reloadLog.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        reloadLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reloadLogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(reloadLog)
+                        .addGap(18, 18, 18)
                         .addComponent(logTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))
+                        .addGap(39, 39, 39))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(305, 305, 305))
@@ -253,9 +281,11 @@ public class Logging extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(logLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(logLevelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
-                .addComponent(logTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reloadLog))
+                .addGap(29, 29, 29)
                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -317,7 +347,7 @@ public class Logging extends javax.swing.JFrame {
         String[] choices = {"low","medium","high"};
         String level = (String) JOptionPane.showInputDialog(null, "Choose level", "Change log level",
                 JOptionPane.INFORMATION_MESSAGE,null,choices, choices[0]);
-        logLevel.setText(logging_UFW.logLevel(host, port, username, password, level));
+        logLevel.setText(logging_UFW.logLevel(host, port, username, password, level));    
         
     }//GEN-LAST:event_logLevelEditActionPerformed
 
@@ -327,6 +357,14 @@ public class Logging extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You can not edit this table");
         }
     }//GEN-LAST:event_logTableMouseClicked
+
+    private void reloadLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reloadLogActionPerformed
+        // TODO add your handling code here:
+        Logging_UFW logModel = new Logging_UFW();
+        DefaultTableModel result = logging_UFW.logUFWTable(host, port, username, password);
+        logTable.setModel(result);
+        logModel.setLogTable(logTable);
+    }//GEN-LAST:event_reloadLogActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label LogTitle;
@@ -341,5 +379,6 @@ public class Logging extends javax.swing.JFrame {
     private javax.swing.JTable logTable;
     private javax.swing.JPanel logTablePanel;
     private javax.swing.JButton on_off_log;
+    private javax.swing.JButton reloadLog;
     // End of variables declaration//GEN-END:variables
 }

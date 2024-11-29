@@ -10,6 +10,7 @@ import Model.Logging_UFW;
 import com.jcraft.jsch.Session;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -31,6 +32,7 @@ public class Menu extends javax.swing.JFrame {
     String status; 
     String log_status;
     String log_level;
+    private JTable logTable;
        
     //lay gia tri
     public String getHost(){
@@ -118,12 +120,8 @@ public class Menu extends javax.swing.JFrame {
                                                                                                                   
     public Menu() {
         initComponents();
-//        DefaultTableModel initUFWtable = ufwmodel.ufwTableModelv4(host, port, username, password);
-//        DefaultTableModel initTableModel = ufwmodel.ufwTableModelv4(host, port, username, password);
-//        ufwTable.setModel(initTableModel);
-//        ufwTable.setModel(initUFWtable);
     }
-           
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -725,9 +723,7 @@ public class Menu extends javax.swing.JFrame {
         logging.checkLogging(host, port, username, password);
         logging.setVisible(true);
         logging.setLocationRelativeTo(null);
-        logging.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
-        
+        logging.setDefaultCloseOperation(DISPOSE_ON_CLOSE);      
         
     }//GEN-LAST:event_logDetailsActionPerformed
 

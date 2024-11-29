@@ -6,14 +6,22 @@ package Model;
 
 import Frame.LogIn;
 import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -196,15 +204,63 @@ public class Logging_UFW {
         return logLevel;
     }
     
-    DefaultTableModel logUFWTable (String host, int port, String username, String password){
+    public DefaultTableModel logUFWTable (String host, int port, String username, String password){
         DefaultTableModel logModel = new DefaultTableModel();
         logModel.addColumn("TIME");
         logModel.addColumn("ACTION");
         logModel.addColumn("SOURCE");
         logModel.addColumn("DESTINATION");
-        
-        String command = "echo '" + password + "' | sudo -S ufw verbose numbered";
+                
+        String command = "echo '" + password + "' | sudo -S tac /var/log/ufw.log | head -n 10";
+            try {
+                Session session = LogIn.establishSSH(host, port, username, password);
+
+                ChannelExec channel = (ChannelExec)session.openChannel("exec");
+                channel.setCommand(command);
+                InputStream in = channel.getInputStream();
+                channel.connect();
+
+                BufferedReader buff = new BufferedReader(new InputStreamReader(in));
+                String line;
+                while((line = buff.readLine())!= null){                  
+                    String[] parts = line.split("\\s+");
+                    if (parts.length >= 20){
+                        String time = parts[0].replace("T", "    ").split("\\.")[0];
+                        String action = parts[4].split("\\]")[0];
+                        String src = parts[8].split("=")[1];
+                        String dst = parts[9].split("=")[1];
+                        logModel.addRow(new Object[]{time,action,src,dst});
+
+                    }else{
+                        String time = parts[0].replace("T", "    ").split("\\.")[0];
+                        String action = parts[4].split("\\]")[0];
+                        String src = parts[7].split("=")[1];
+                        String dst = parts[8].split("=")[1];
+                        logModel.addRow(new Object[]{time,action,src,dst});
+                    }
+                channel.disconnect();
+                session.disconnect();
+            }
+        } catch (IOException | JSchException | ArrayIndexOutOfBoundsException ioEx) {
+            ioEx.printStackTrace();
+        }
         return logModel;
+    }
+    
+    public void setLogTable(JTable logTable){
+        JTableHeader header = logTable.getTableHeader();
+        header.setFont(new Font("Tahoma",Font.BOLD,14));
+        //header ra giua
+        DefaultTableCellRenderer centerHeader = (DefaultTableCellRenderer) header.getDefaultRenderer();
+        centerHeader.setHorizontalAlignment(JLabel.CENTER);
+        logTable.setRowHeight(30);
+        
+        logTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+        logTable.getColumnModel().getColumn(1).setPreferredWidth(65);
+        logTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+        logTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+        
+        
     }
               
 }

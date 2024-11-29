@@ -16,7 +16,9 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -27,10 +29,10 @@ import javax.swing.table.JTableHeader;
 public class TableUFW {
     public DefaultTableModel ufwTableModel (String host, int port, String username, String password){
         DefaultTableModel ufwTable = new DefaultTableModel();
-        ufwTable.addColumn("    ID");
-        ufwTable.addColumn("                      To");
-        ufwTable.addColumn("     Action");
-        ufwTable.addColumn("            From");
+        ufwTable.addColumn("ID");
+        ufwTable.addColumn("To");
+        ufwTable.addColumn("Action");
+        ufwTable.addColumn("From");
         
         String command = "echo '" + password + "' | sudo -S ufw verbose numbered";
         try {
@@ -85,12 +87,10 @@ public class TableUFW {
     
     public DefaultTableModel ufwTableModelv4 (String host, int port, String username, String password){
         DefaultTableModel ufwTable = new DefaultTableModel();
-        ufwTable.addColumn("    ID");
-        ufwTable.addColumn("                      To");
-        ufwTable.addColumn("     Action");
-        ufwTable.addColumn("            From");
-//        ufwTable.addColumn("  Edit");
-//        ufwTable.addColumn(" Delete");
+        ufwTable.addColumn("ID");
+        ufwTable.addColumn("To");
+        ufwTable.addColumn("Action");
+        ufwTable.addColumn("From");
         
         String command = "echo '" + password + "' | sudo -S ufw verbose numbered";
         try {
@@ -148,13 +148,17 @@ public class TableUFW {
         
         JTableHeader header = ufwTable.getTableHeader();
         header.setFont(new Font("Tahoma",Font.BOLD,14));
+        //header ra giua
+        DefaultTableCellRenderer centerHeader = (DefaultTableCellRenderer) header.getDefaultRenderer();
+        centerHeader.setHorizontalAlignment(JLabel.CENTER);
+        
         ufwTable.getColumnModel().getColumn(0).setPreferredWidth(10);
         ufwTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         ufwTable.getColumnModel().getColumn(2).setPreferredWidth(50);
         ufwTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         ufwTable.setRowHeight(30);
-        DefaultCellEditor cellEditor = (DefaultCellEditor) ufwTable.getDefaultEditor(Object.class);
-        cellEditor.setClickCountToStart(3);     //xu ly so lan nhan
+//        DefaultCellEditor cellEditor = (DefaultCellEditor) ufwTable.getDefaultEditor(Object.class);
+//        cellEditor.setClickCountToStart(3);     //xu ly so lan nhan
         
     }
   
