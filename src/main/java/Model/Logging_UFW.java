@@ -260,6 +260,8 @@ public class Logging_UFW {
         logTable.getColumnModel().getColumn(2).setPreferredWidth(150);
         logTable.getColumnModel().getColumn(3).setPreferredWidth(150);
         
+        DefaultCellEditor cellEditor = (DefaultCellEditor) logTable.getDefaultEditor(Object.class);
+        cellEditor.setClickCountToStart(3);     //xu ly so lan nhan
         
     }
               

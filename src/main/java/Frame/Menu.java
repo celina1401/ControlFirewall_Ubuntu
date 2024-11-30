@@ -8,6 +8,11 @@ import Model.Config_UFW;
 import Model.TableUFW;
 import Model.Logging_UFW;
 import com.jcraft.jsch.Session;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -137,12 +142,13 @@ public class Menu extends javax.swing.JFrame {
         menuPort = new java.awt.Label();
         menuStatusLabel = new java.awt.Label();
         menuStatus = new java.awt.Label();
-        jLabel2 = new javax.swing.JLabel();
+        avt = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         menuLoggingLabel = new java.awt.Label();
         menuLogging = new java.awt.Label();
         loggingLevel = new java.awt.Label();
         logDetails = new javax.swing.JButton();
+        updateAvt = new javax.swing.JButton();
         menuControlTitle = new javax.swing.JLabel();
         menuInfoLabel = new java.awt.Label();
         statusUFW = new javax.swing.JLabel();
@@ -207,7 +213,7 @@ public class Menu extends javax.swing.JFrame {
         menuStatus.setName(""); // NOI18N
         menuStatus.setText("Active");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\user.png")); // NOI18N
+        avt.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\user.png")); // NOI18N
 
         btnExit.setBackground(new java.awt.Color(204, 255, 204));
         btnExit.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\shutdown.png")); // NOI18N
@@ -244,6 +250,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        updateAvt.setBackground(new java.awt.Color(255, 255, 204));
+        updateAvt.setIcon(new javax.swing.ImageIcon("D:\\.Mon_hoc\\NLCS\\FireWalltuxa\\src\\main\\java\\image\\update.png")); // NOI18N
+        updateAvt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateAvtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -267,20 +281,22 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(menuStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(menuLogging, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addComponent(menuLogging, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(loggingLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(logDetails)
                         .addGap(15, 15, 15))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(105, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(menuAccountTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(99, 99, 99))
+                            .addComponent(avt))
+                        .addGap(30, 30, 30)
+                        .addComponent(updateAvt, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnExit)
                         .addGap(147, 147, 147))))
@@ -291,8 +307,10 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(menuAccountTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(jLabel2)
-                .addGap(70, 70, 70)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(avt)
+                    .addComponent(updateAvt))
+                .addGap(73, 73, 73)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(menuIpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(menuIp, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -320,7 +338,7 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(loggingLevel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(69, 69, 69)
                         .addComponent(btnExit)
-                        .addContainerGap(116, Short.MAX_VALUE))))
+                        .addContainerGap(81, Short.MAX_VALUE))))
         );
 
         menuUserNameLabel.getAccessibleContext().setAccessibleName("");
@@ -750,10 +768,28 @@ public class Menu extends javax.swing.JFrame {
                    + ufwTable.getValueAt(selected, 1).toString());
        }
     }//GEN-LAST:event_ufwTableMouseClicked
+
+    private void updateAvtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAvtActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); //chi hien thị file
+        int returnValue = fileChooser.showOpenDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION){
+            File file = fileChooser.getSelectedFile();
+            //lay duong dan file
+            String pathFile = file.getAbsolutePath();
+            BufferedImage b;
+            try {
+                b = ImageIO.read(file);
+                avt.setIcon(new ImageIcon(b));
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_updateAvtActionPerformed
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UFWin4v4;
     private javax.swing.JButton UFWin4v6;
+    private javax.swing.JLabel avt;
     private javax.swing.JButton btnAddRule;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
@@ -762,7 +798,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnReload;
     private javax.swing.JButton btnTurnOff;
     private javax.swing.JTextField deleteText;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logDetails;
@@ -784,5 +819,6 @@ public class Menu extends javax.swing.JFrame {
     private java.awt.Panel panel1;
     private javax.swing.JLabel statusUFW;
     private javax.swing.JTable ufwTable;
+    private javax.swing.JButton updateAvt;
     // End of variables declaration//GEN-END:variables
 }
