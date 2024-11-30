@@ -371,6 +371,43 @@ public class Config_UFW {
         return outputBuffer.toString();
     }
     
+        public String delete_App_UFW(String host, int port, String username, String password, String action, String app) {
+
+        StringBuilder outputBuffer = new StringBuilder();
+//        String status = "";
+        String command = "echo '" + password + "' | sudo -S bash -c 'echo \"y\" | ufw delete " + action + " \"" + app + "\"'";
+
+        try {
+            //Step 1: Create Authentication
+            Session session = LogIn.establishSSH(host, port, username, password);
+            //Step 2: Create channel
+            ChannelExec channel = (ChannelExec) session.openChannel("exec");
+
+            //Step 3: Execute command
+            channel.setCommand(command);
+
+            //Nhận kết quả đầu ra
+            InputStream in = channel.getInputStream();
+
+            //Thực thi
+            channel.connect();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                outputBuffer.append(line).append("\n");
+            }
+
+            channel.disconnect();
+            session.disconnect();
+            System.out.println(command);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return outputBuffer.toString();
+    }
+    
     public String listApp_UFW(String host, int port, String username, String password) {
 
         StringBuilder outputBuffer = new StringBuilder();

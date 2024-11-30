@@ -157,8 +157,8 @@ public class TableUFW {
         ufwTable.getColumnModel().getColumn(2).setPreferredWidth(50);
         ufwTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         ufwTable.setRowHeight(30);
-//        DefaultCellEditor cellEditor = (DefaultCellEditor) ufwTable.getDefaultEditor(Object.class);
-//        cellEditor.setClickCountToStart(3);     //xu ly so lan nhan
+        DefaultCellEditor cellEditor = (DefaultCellEditor) ufwTable.getDefaultEditor(Object.class);
+        cellEditor.setClickCountToStart(3);     //xu ly so lan nhan
         
     }
   

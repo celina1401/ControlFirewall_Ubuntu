@@ -325,6 +325,8 @@ public class Logging extends javax.swing.JFrame {
                 statusLogUpdate = logging_UFW.logging_status(host, port, username, password);  
                 levelLogUpdate = logging_UFW.logging_level(host, port, username, password);
             }
+            DefaultTableModel setLogTable = (DefaultTableModel) logTable.getModel();
+            setLogTable.setRowCount(0);
             
         }else{
             String enable = logging_UFW.logUFW_enable(host, port, username, password);
@@ -338,9 +340,13 @@ public class Logging extends javax.swing.JFrame {
                 statusLogUpdate = logging_UFW.logging_status(host, port, username, password);
                 levelLogUpdate = logging_UFW.logging_level(host, port, username, password);
             }
+            reloadLog.doClick();
         }
         logStatus.setText(statusLogUpdate);
         logLevel.setText(levelLogUpdate);
+        
+
+        
     }//GEN-LAST:event_on_off_logActionPerformed
 
     private void logLevelEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logLevelEditActionPerformed

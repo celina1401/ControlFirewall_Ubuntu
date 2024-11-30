@@ -385,7 +385,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         deleteText.setBackground(new java.awt.Color(242, 242, 242));
-        deleteText.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        deleteText.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         deleteText.setForeground(new java.awt.Color(153, 153, 153));
         deleteText.setText("VD: allow 80");
         deleteText.setToolTipText("");
@@ -429,6 +429,9 @@ public class Menu extends javax.swing.JFrame {
         ufwTable.setRowHeight(25);
         ufwTable.setShowGrid(true);
         ufwTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ufwTableMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ufwTableMousePressed(evt);
             }
@@ -436,7 +439,9 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(ufwTable);
         if (ufwTable.getColumnModel().getColumnCount() > 0) {
             ufwTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            ufwTable.getColumnModel().getColumn(1).setResizable(false);
             ufwTable.getColumnModel().getColumn(1).setPreferredWidth(50);
+            ufwTable.getColumnModel().getColumn(2).setResizable(false);
             ufwTable.getColumnModel().getColumn(2).setPreferredWidth(90);
             ufwTable.getColumnModel().getColumn(3).setPreferredWidth(150);
         }
@@ -559,7 +564,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(1, 1, 1)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -570,7 +575,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(optionDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnListApp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
 
@@ -639,7 +644,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void optionDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionDeleteActionPerformed
         String text = deleteText.getText();
+        int selected = ufwTable.getSelectedRow();
+        String action = ufwTable.getValueAt(selected, 2).toString().split("IN")[0].toLowerCase();
+        String app = ufwTable.getValueAt(selected, 1).toString();
         String delText = config_UFW.delete_UFW(host, port, username, password, text);
+        if(delText.isEmpty()){
+            delText = config_UFW.delete_App_UFW(host, port, username, password, action, app);
+        }
         JOptionPane.showMessageDialog(this, delText);
         btnReload.doClick();
     }//GEN-LAST:event_optionDeleteActionPerformed
@@ -731,6 +742,14 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         deleteText.setText("");  
     }//GEN-LAST:event_deleteTextFocusGained
+
+    private void ufwTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ufwTableMouseClicked
+        int selected = ufwTable.getSelectedRow();
+        if(selected != -1){
+            deleteText.setText(ufwTable.getValueAt(selected, 2).toString().split("IN")[0].toLowerCase() + " " 
+                   + ufwTable.getValueAt(selected, 1).toString());
+       }
+    }//GEN-LAST:event_ufwTableMouseClicked
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UFWin4v4;
