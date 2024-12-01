@@ -326,7 +326,6 @@ public class Logging extends javax.swing.JFrame {
                 levelLogUpdate = logging_UFW.logging_level(host, port, username, password);
             }
             DefaultTableModel setLogTable = (DefaultTableModel) logTable.getModel();
-            setLogTable.setRowCount(0);
             
         }else{
             String enable = logging_UFW.logUFW_enable(host, port, username, password);
