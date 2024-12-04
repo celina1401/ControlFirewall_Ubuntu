@@ -60,7 +60,7 @@ public class TableUFW {
                         String to = parts[0];
                         String v6 = parts[1];
                         String action = parts[2]+" "+parts[3];
-                        String from = parts[4].replace("IN  ","");
+                        String from = parts[4];
                         if(v6.contains("(v6)")){
                             ufwTable.addRow(new Object[]{id,to,action,from});
                         }
@@ -68,7 +68,7 @@ public class TableUFW {
                             to = parts[0] + " " + parts[1];
                             v6 = parts[2];
                             action = parts[3]+" "+parts[4];
-                            from = parts[5].replace("IN  ","");
+                            from = parts[5];
                         }
                         if(v6.contains("(v6)")){
                             ufwTable.addRow(new Object[]{id,to,action,from});
@@ -120,9 +120,10 @@ public class TableUFW {
                         String action = parts[1]+" "+ parts[2];
                         String from = parts[3].replace("IN  ","");
                         if(parts.length > 4){
-                            from = parts[parts.length-1];
-                            to = parts[0]+" "+ parts [1];
-                            action = parts[2] + " " + parts[3];
+//                            from = parts[parts.length-1];
+                            to = parts[0];
+                            action = parts[1] + " " + parts[2];
+                            from = parts[3];
                             if(parts[4] == "(v6)"){
                                 continue;
                             }

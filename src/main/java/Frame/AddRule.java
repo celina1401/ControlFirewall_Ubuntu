@@ -163,6 +163,7 @@ public class AddRule extends javax.swing.JFrame {
         addActionLabel = new javax.swing.JLabel();
         addAction = new javax.swing.JComboBox<>();
         btnView = new javax.swing.JButton();
+        cbInOut = new javax.swing.JCheckBox();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -375,21 +376,19 @@ public class AddRule extends javax.swing.JFrame {
             }
         });
 
+        cbInOut.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbInOut.setText("out");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
-                .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(53, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(addActionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(378, 378, 378))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addToLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,40 +409,50 @@ public class AddRule extends javax.swing.JFrame {
                                             .addComponent(addProtocol)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(fromIP, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(cbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(addAppLabel)
-                                                    .addComponent(addRangeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))))
+                                            .addComponent(cbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(addAppLabel)
+                                            .addComponent(addRangeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(addAction, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(rangePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cbAnywhere, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                        .addContainerGap(49, Short.MAX_VALUE))
+                                            .addComponent(rangePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(cbInOut, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(fromIP, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(11, 11, 11)))))
+                        .addContainerGap(46, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addFromLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addActionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(addFromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbAnywhere, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(182, 182, 182)
+                                .addComponent(addAction, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(addTitle)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(addTitle))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -471,34 +480,34 @@ public class AddRule extends javax.swing.JFrame {
                         .addComponent(rangePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addRangeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addAppLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(addApp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addAction, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(addActionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addFromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbAnywhere, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addAction)
+                        .addComponent(cbInOut, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addActionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbAnywhere, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addFromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(fromIP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(addFromText)
-                        .addGap(3, 3, 3)))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addFromText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69))
+                .addGap(151, 151, 151))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -509,9 +518,7 @@ public class AddRule extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -529,7 +536,7 @@ public class AddRule extends javax.swing.JFrame {
         String add_protocol = addProtocol.isEnabled() ? addProtocol.getText() : "";
         String add_action = (String) addAction.getSelectedItem();
         String add_app = cbApp.isSelected() ? (String) addApp.getSelectedItem() : "";
-        
+        String result = "";        
         String range1Text = range1.getText();
         String range2Text = range2.getText();
         int intRange1 = 0;
@@ -564,8 +571,13 @@ public class AddRule extends javax.swing.JFrame {
         
         Config_UFW add = new Config_UFW();
 //        add.addRule(host, port, username, password, add_port, add_from, add_protocol, add_action, add_app, intRange1, intRange2);
-
-        String result = add.addRule(host, port, username, password, add_port, add_from, add_protocol, add_action, add_app, intRange1, intRange2);
+        if(cbInOut.isSelected()){
+            result = add.addRule_out(host, port, username, password, add_port, add_from, add_protocol, add_action, add_app, intRange1, intRange2);
+        }else{
+            result = add.addRule(host, port, username, password, add_port, add_from, add_protocol, add_action, add_app, intRange1, intRange2);
+            
+        }
+        
         System.out.println("Result from addrule: " + result);
         if (result.contains("successfull")) {
             JOptionPane.showMessageDialog(this, "Add rule successfully!");
@@ -628,14 +640,89 @@ public class AddRule extends javax.swing.JFrame {
         DefaultTableModel tableSample = (DefaultTableModel) ufwTableSample.getModel();
         if(tableSample.getRowCount() != -1){
             tableSample.setRowCount(0);
-        }
-        if(addPortText.isEnabled() && addProtocol.isEnabled() 
+        }if(cbInOut.isSelected()){
+            if(addPortText.isEnabled() && addProtocol.isEnabled() 
+                    && !addFromText.isEnabled() && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+                //port,proto
+                tableSample.addRow(new Object[]{
+                    1,
+                    addPortText.getText() + "/"+ addProtocol.getText(),
+                    addAction.getSelectedItem() + " " + "out",
+                    "Anywhere"
+                });            
+            }else if(range1.isEnabled() && range2.isEnabled() && addProtocol.isEnabled()
+                    && !addPortText.isEnabled() && !addFromText.isEnabled() && !addApp.isEnabled()){
+                //range, proto
+                tableSample.addRow(new Object[]{
+                    1,
+                    range1.getText()+ ":" + range2.getText() + "/"+ addProtocol.getText(),
+                    addAction.getSelectedItem() + " " + "out",
+                    "Anywhere"
+                }); 
+            }else if(addPortText.isEnabled()
+                    && !addProtocol.isEnabled() && !addFromText.isEnabled() && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+                //port
+                tableSample.addRow(new Object[]{
+                    1,
+                    addPortText.getText(),
+                    addAction.getSelectedItem() + " " + "out",
+                    "Anywhere"
+                }); 
+            }else if(addApp.isEnabled()
+                    && !addProtocol.isEnabled() && !addFromText.isEnabled() && !addPortText.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+                //app
+                tableSample.addRow(new Object[]{
+                    1,
+                    addApp.getSelectedItem(),
+                    addAction.getSelectedItem() + " " + "out",
+                    "Anywhere"
+                }); 
+            }else if(addPortText.isEnabled() && addProtocol.isEnabled()  && addFromText.isEnabled()
+                    && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+                //port,proto,from
+                tableSample.addRow(new Object[]{
+                    1,
+                    addPortText.getText() + "/"+ addProtocol.getText(),
+                    addAction.getSelectedItem() + " " + "out",
+                    addFromText.getText()
+                });            
+            }else if(range1.isEnabled() && range2.isEnabled() && addProtocol.isEnabled()  && addFromText.isEnabled()
+                    && !addPortText.isEnabled() && !addApp.isEnabled()){
+                //range, proto,from
+                tableSample.addRow(new Object[]{
+                    1,
+                    range1.getText()+ ":" + range2.getText() + "/"+ addProtocol.getText(),
+                    addAction.getSelectedItem() + " " + "out",
+                    addFromText.getText()
+                }); 
+            }else if(addPortText.isEnabled()  && addFromText.isEnabled()
+                    && !addProtocol.isEnabled() && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+                //port,from
+                tableSample.addRow(new Object[]{
+                    1,
+                    addPortText.getText(),
+                    addAction.getSelectedItem() + " " + "out",
+                    addFromText.getText()
+                }); 
+            }else if(addFromText.isEnabled()
+                    && !addApp.isEnabled()  && !addProtocol.isEnabled() && !addPortText.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
+                //from
+                tableSample.addRow(new Object[]{
+                    1,
+                    "Anywhere",
+                    addAction.getSelectedItem() + " " + "out",
+                    addFromText.getText()
+                }); 
+            }else{
+                JOptionPane.showMessageDialog(this, "This rule is invalid!");
+            }
+        }else if(addPortText.isEnabled() && addProtocol.isEnabled() 
                 && !addFromText.isEnabled() && !addApp.isEnabled() && !range1.isEnabled()&& !range2.isEnabled()){
             //port,proto
             tableSample.addRow(new Object[]{
                 1,
                 addPortText.getText() + "/"+ addProtocol.getText(),
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 "Anywhere"
             });            
         }else if(range1.isEnabled() && range2.isEnabled() && addProtocol.isEnabled()
@@ -644,7 +731,7 @@ public class AddRule extends javax.swing.JFrame {
             tableSample.addRow(new Object[]{
                 1,
                 range1.getText()+ ":" + range2.getText() + "/"+ addProtocol.getText(),
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 "Anywhere"
             }); 
         }else if(addPortText.isEnabled()
@@ -653,7 +740,7 @@ public class AddRule extends javax.swing.JFrame {
             tableSample.addRow(new Object[]{
                 1,
                 addPortText.getText(),
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 "Anywhere"
             }); 
         }else if(addApp.isEnabled()
@@ -662,7 +749,7 @@ public class AddRule extends javax.swing.JFrame {
             tableSample.addRow(new Object[]{
                 1,
                 addApp.getSelectedItem(),
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 "Anywhere"
             }); 
         }else if(addPortText.isEnabled() && addProtocol.isEnabled()  && addFromText.isEnabled()
@@ -671,7 +758,7 @@ public class AddRule extends javax.swing.JFrame {
             tableSample.addRow(new Object[]{
                 1,
                 addPortText.getText() + "/"+ addProtocol.getText(),
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 addFromText.getText()
             });            
         }else if(range1.isEnabled() && range2.isEnabled() && addProtocol.isEnabled()  && addFromText.isEnabled()
@@ -680,7 +767,7 @@ public class AddRule extends javax.swing.JFrame {
             tableSample.addRow(new Object[]{
                 1,
                 range1.getText()+ ":" + range2.getText() + "/"+ addProtocol.getText(),
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 addFromText.getText()
             }); 
         }else if(addPortText.isEnabled()  && addFromText.isEnabled()
@@ -689,7 +776,7 @@ public class AddRule extends javax.swing.JFrame {
             tableSample.addRow(new Object[]{
                 1,
                 addPortText.getText(),
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 addFromText.getText()
             }); 
         }else if(addFromText.isEnabled()
@@ -698,7 +785,7 @@ public class AddRule extends javax.swing.JFrame {
             tableSample.addRow(new Object[]{
                 1,
                 "Anywhere",
-                addAction.getSelectedItem(),
+                addAction.getSelectedItem() + " " + "in",
                 addFromText.getText()
             }); 
         }else{
@@ -726,6 +813,7 @@ public class AddRule extends javax.swing.JFrame {
     private javax.swing.JButton btnView;
     private javax.swing.JCheckBox cbAnywhere;
     private javax.swing.JCheckBox cbApp;
+    private javax.swing.JCheckBox cbInOut;
     private javax.swing.JCheckBox cbPort;
     private javax.swing.JCheckBox cbProtocol;
     private javax.swing.JCheckBox cbRange;

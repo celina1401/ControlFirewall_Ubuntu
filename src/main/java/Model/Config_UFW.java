@@ -270,6 +270,144 @@ public class Config_UFW {
         }
         return result;
     }
+    
+        public String addRule_out(String host, int port, String username, String password, 
+        String addPort, String addFrom, String addProtocol, String action, String addApp,
+        int range1, int range2) {
+        String result = "";
+        StringBuilder outBuilder = new StringBuilder();
+        String command = "";
+        String strRange1 = range1 > 0 ? String.valueOf(range1) : "";
+        String strRange2 = range2 > 0 ? String.valueOf(range2) : "";
+
+        try {
+            Session session = LogIn.establishSSH(host, port, username, password);
+            ChannelExec channel = (ChannelExec) session.openChannel("exec");
+            if(action.equals("Allow")){
+                if(!addProtocol.isEmpty() && !addPort.isEmpty() 
+                        && addFrom.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //proto, port
+                    command = "echo '" + password + "' | sudo -S ufw allow out " + addPort + "/" + addProtocol;
+                    result = "successfull";
+                }else if(!addApp.isEmpty()
+                         && addFrom.isEmpty()&& strRange1.isEmpty() && strRange2.isEmpty() && addProtocol.isEmpty() && addPort.isEmpty()){
+                    //app
+                    command = "echo '" + password + "' | sudo -S ufw allow out \"" + addApp + "\""; 
+                    result = "successfull";
+                }else if(!strRange1.isEmpty() && !strRange2.isEmpty() && !addProtocol.isEmpty()
+                        && addFrom.isEmpty() && addPort.isEmpty() && addApp.isEmpty()){
+                    //range,proto
+                    command = "echo '" + password + "' | sudo -S ufw allow out " + strRange1 + ":" + strRange2 + "/" + addProtocol;
+                    result = "successfull";
+                }else if(!strRange1.isEmpty() && !strRange2.isEmpty() && !addProtocol.isEmpty()&& !addFrom.isEmpty() 
+                        && addPort.isEmpty() && addApp.isEmpty()){
+                    //range,proto,from
+                    command = "echo '" + password + "' | sudo -S ufw allow out proto " + addProtocol + " from " + addFrom + " to any port " + strRange1 + ":" + strRange2;
+                    result = "successfull";
+                }else if (!addPort.isEmpty() && !addFrom.isEmpty() && !addProtocol.isEmpty() 
+                        && strRange1.isEmpty() && strRange2.isEmpty() && addApp.isEmpty()){
+                    //proto, port, from
+                     command = "echo '" + password + "' | sudo -S ufw allow out proto " + addProtocol + " from " + addFrom
+                            + " to any port " + addPort;
+                     result = "successfull";
+                }else if (!addPort.isEmpty() && !addFrom.isEmpty() 
+                        && addProtocol.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //port, from
+                     command = "echo '" + password + "' | sudo -S ufw allow from " + addFrom + " to any port " + addPort;
+                     result = "successfull";
+                }else if (!addFrom.isEmpty() 
+                        && addProtocol.isEmpty()&& addPort.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //from
+                     command = "echo '" + password + "' | sudo -S ufw allow out from " + addFrom;
+                     result = "successfull";
+                }else if (!addPort.isEmpty() 
+                        && addFrom.isEmpty() && addProtocol.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //port
+                     command = "echo '" + password + "' | sudo -S ufw allow out " + addPort;
+                     result = "successfull";
+                }else{
+                    result = "This rule is invalid!";
+                }
+            }else{
+                if(!addProtocol.isEmpty() && !addPort.isEmpty() 
+                        && addFrom.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //proto, port
+                    command = "echo '" + password + "' | sudo -S ufw deny out " + addPort + "/" + addProtocol;
+                    result = "successfull";
+                }else if(!addApp.isEmpty()
+                         && addFrom.isEmpty()&& strRange1.isEmpty() && strRange2.isEmpty() && addProtocol.isEmpty() && addPort.isEmpty()){
+                    //app
+                    command = "echo '" + password + "' | sudo -S ufw deny out \"" + addApp + "\""; 
+                    result = "successfull";
+                }else if(!strRange1.isEmpty() && !strRange2.isEmpty() && !addProtocol.isEmpty()
+                        && addFrom.isEmpty() && addPort.isEmpty() && addApp.isEmpty()){
+                    //range,proto
+                    command = "echo '" + password + "' | sudo -S ufw deny out " + strRange1 + ":" + strRange2 + "/" + addProtocol;
+                    result = "successfull";
+                }else if(!strRange1.isEmpty() && !strRange2.isEmpty() && !addProtocol.isEmpty()&& !addFrom.isEmpty() 
+                        && addPort.isEmpty() && addApp.isEmpty()){
+                    //range,proto,from
+                    command = "echo '" + password + "' | sudo -S ufw deny out proto " + addProtocol + " from " + addFrom + " to any port " + strRange1 + ":" + strRange2;
+                    result = "successfull";
+                }else if (!addPort.isEmpty() && !addFrom.isEmpty() && !addProtocol.isEmpty() 
+                        && strRange1.isEmpty() && strRange2.isEmpty() && addApp.isEmpty()){
+                    //proto, port, from
+                     command = "echo '" + password + "' | sudo -S ufw deny out proto " + addProtocol + " from " + addFrom
+                            + " to any port " + addPort;
+                     result = "successfull";
+                }else if (!addPort.isEmpty() && !addFrom.isEmpty() 
+                        && addProtocol.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //port, from
+                     command = "echo '" + password + "' | sudo -S ufw deny out from " + addFrom + " to any port " + addPort;
+                     result = "successfull";
+                }else if (!addFrom.isEmpty() 
+                        && addProtocol.isEmpty()&& addPort.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //from
+                     command = "echo '" + password + "' | sudo -S ufw deny out from " + addFrom;
+                     result = "successfull";
+                }else if (!addPort.isEmpty() 
+                        && addFrom.isEmpty() && addProtocol.isEmpty() && addApp.isEmpty() && strRange1.isEmpty() && strRange2.isEmpty()){
+                    //port
+                     command = "echo '" + password + "' | sudo -S ufw deny out " + addPort;
+                     result = "successfull";
+                }else{
+                    result = "This rule is invalid!";
+                }
+            }
+
+            channel.setCommand(command);
+            InputStream in = channel.getInputStream();
+            channel.connect();
+
+            byte[] tmp = new byte[1024];
+            while (true) {
+                while (in.available() > 0) {
+                    int i = in.read(tmp, 0, 1024);
+                    if (i < 0) {
+                        break;
+                    }
+                    outBuilder.append(new String(tmp, 0, i));
+                }
+                if (channel.isClosed()) {
+                    break;
+                }
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (Exception ie) {
+                ie.printStackTrace();
+            }
+
+            System.out.println("Generated command: " + command);
+            channel.disconnect();
+            session.disconnect();
+        } catch (IOException | JSchException e) {
+            e.printStackTrace();
+            result = "fault " + e.getMessage();
+        }
+        return result;
+    }
+
 
     public String status_UFW_display(String host, int port, String username, String password) {
 

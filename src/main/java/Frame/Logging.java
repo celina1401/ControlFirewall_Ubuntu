@@ -353,7 +353,7 @@ public class Logging extends javax.swing.JFrame {
         String level = (String) JOptionPane.showInputDialog(null, "Choose level", "Change log level",
                 JOptionPane.INFORMATION_MESSAGE,null,choices, choices[0]);
         logLevel.setText(logging_UFW.logLevel(host, port, username, password, level));    
-        
+        reloadLog.doClick();
     }//GEN-LAST:event_logLevelEditActionPerformed
 
     private void logTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logTableMouseClicked
