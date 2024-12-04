@@ -118,16 +118,27 @@ public class TableUFW {
                     if (parts.length >= 4){
                         String to = parts[0];
                         String action = parts[1]+" "+ parts[2];
-                        String from = parts[3].replace("IN  ","");
-                        if(parts.length > 4){
+                        String from = parts[3];
+                        
+                        if(parts.length > 5){
 //                            from = parts[parts.length-1];
-                            to = parts[0];
-                            action = parts[1] + " " + parts[2];
-                            from = parts[3];
-                            if(parts[4] == "(v6)"){
+                            if(parts[5].equals("(v6)")){
                                 continue;
+                            }else if(parts[parts.length-1].equals("(out)")){
+                                to = parts[0] + " " + parts[1];
+                                action = parts[2]+ " " + parts[3];
+                                from = parts[4];
                             }
+                        }else if(parts.length > 4 && parts[parts.length-1].equals("(out)")){
+                            to = parts[0];
+                            action = parts[1]+ " " + parts[2];
+                            from = parts[3];
+                        }else if(parts.length > 4){
+                            to = parts[0] + " " + parts[1];
+                            action = parts[2]+ " " + parts[3];
+                            from = parts[4];
                         }
+                        
                         
                         if(action.contains("(v6)") | from.contains("(v6)")){
                             continue;
