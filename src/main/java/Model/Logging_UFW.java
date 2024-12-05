@@ -220,7 +220,7 @@ public class Logging_UFW {
                 String line;
                 while((line = buff.readLine())!= null){                  
                     String[] parts = line.split("\\s+");
-                    if (parts.length >= 20){
+                    if (parts.length >= 24){
                         String time = parts[0].replace("T", "    ").split("\\.")[0];
                         String action = parts[4].split("\\]")[0];
                         String src = parts[8].split("=")[1];
@@ -228,11 +228,20 @@ public class Logging_UFW {
                         logModel.addRow(new Object[]{time,action,src,dst});
 
                     }else{
-                        String time = parts[0].replace("T", "    ").split("\\.")[0];
-                        String action = parts[4].split("\\]")[0];
-                        String src = parts[7].split("=")[1];
-                        String dst = parts[8].split("=")[1];
-                        logModel.addRow(new Object[]{time,action,src,dst});
+                        if(parts[7].split("=")[0].equals("MAC")){
+                            String time = parts[0].replace("T", "    ").split("\\.")[0];
+                            String action = parts[4].split("\\]")[0];
+                            String src = parts[8].split("=")[1];
+                            String dst = parts[9].split("=")[1];
+                            logModel.addRow(new Object[]{time,action,src,dst});
+                        }else{
+                            String time = parts[0].replace("T", "    ").split("\\.")[0];
+                            String action = parts[4].split("\\]")[0];
+                            String src = parts[7].split("=")[1];
+                            String dst = parts[8].split("=")[1];
+                            logModel.addRow(new Object[]{time,action,src,dst});
+                        }                        
+
                     }
                 channel.disconnect();
                 session.disconnect();
